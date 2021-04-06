@@ -1,0 +1,75 @@
+
+.container {
+    width: 800px;
+}
+
+.blogList {
+    width: 65%;
+    height: 270px;
+    float: left;
+}
+
+.listPhoto {
+    width: 30%;
+    height: 240px;
+    margin-left : 10px;
+    float: left;
+    overflow: hidden;
+}
+
+.photeImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+hr {
+    clear:both;
+
+}
+
+.listHeader {
+    width: 100%;
+    height: 52px;
+
+}
+
+.thumbnailImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.thumbnail {
+    width: 10%;
+    float: left;
+    margin-right: 10px;
+}
+
+.account {
+    float: left;
+    vertical-align: top;
+}
+
+.listMain {
+    text-align: left;
+    height: 100%;
+    clear: both;
+}
+
+p {
+    color: grey;
+    font-family: 'gulim';
+    font-size: 12px;
+}
+
+.nickParam {
+    margin-top: 8px;
+    margin-bottom: 0px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.timeParam {
+    margin-top: 5px;
+}
