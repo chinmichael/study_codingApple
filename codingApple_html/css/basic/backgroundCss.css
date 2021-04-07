@@ -1,0 +1,36 @@
+
+.main-background {
+    width: 100%;
+    height: 500px;
+    background-image: url(../../../resource/image/shoes.jpg) /*../은 상위폴더 이동*/
+                      /*, url()*/; /*요소 추가가능 background겹치기*/
+    background-size: cover; /*반응형에서 주로 씀 알아서 임의조정 사진 잘려도 영역 유지*/
+    /*background-size: 100%;*/ /*딱 상위요소 100%만큼 변경되면서 세팅됨*/
+    /*background-size: contain;*/ /*그림이 잘리지 않게 최대한 폭에 맞춰서*/
+    background-position: center; /*배경요소가 어디서부터 채워질지*/
+    background-repeat: no-repeat; /*배경세팅 반복 조정*/
+    /*background-attachment: fixed;*/ /*스크롤바에 대해 요소가 어떻게 처리되는지*/
+
+    padding-top: 150px; /*margin-collapsing effect*/
+
+}
+
+body {
+    margin: 0;
+}
+
+.main-title {
+    color: white;
+    text-align: center;
+    font-size: 30px;
+}
+
+.main-title-box {
+    text-align: center; /*부모 div에 넣어도 잘됨*/
+}
+
+.main-content {
+    padding: 20px;
+    color: white;
+    font-size: 18px;
+}

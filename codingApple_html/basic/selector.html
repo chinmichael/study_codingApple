@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+   <head>
+       <meta charset="UTF-8">
+       <title>Document</title>
+       <link rel="stylesheet" href="../css/basic/layoutHomework_answerCss.css">
+       <link rel="stylesheet" href="../css/basic/selectorCss.css">
+   </head>
+   <body>
+
+          <!--navbar-->
+          <nav class="navbar">
+              <ul class="li-inline text-center">
+                  <!--ctrl + click은 멀티커서 지원-->
+                  <li><a href="#">IT</a></li>
+                  <li><a href="#">맛집</a></li>
+                  <li><a href="#">동물</a></li>
+                  <li><a href="#">뷰티</a></li>
+              </ul>
+          </nav>
+
+          <!--저번 블로그 레이아웃 과제 영역-->
+          <div class="container">
+           <div class="blog-content">
+               <div>
+                   <img class="blog-pic" src="../../resource/image/lion.png" width="40px;">
+                   <div class="blog-profile">
+                       <h4 style="margin: 0px;">김설용</h4>
+                       <p>1시간 전 발행</p>
+                   </div>
+               </div>
+               <div style="clear: both;"></div>
+               <div class="blog-title">
+                   <h4 style="margin-top: 0;">강남역 맛집 평양냉면 원조</h4>
+                   <p>
+                   대통령은 국회에 출석하여 발언하거나 서한으로 의견을 표시할 수 있다. 대법원에 대법관을 둔다. 다만, 법률이 정하는 바에 의하여 대법관이 아닌 법관을 둘 수 있다.
+                   </p>
+               </div>
+           </div>
+           <div class="blog-image">
+               <img class="post_image" src="../../resource/image/tv.jpg">
+           </div>
+       </div>
+   </body>
+</html>
+
+
+<!--강의 주석
+
+저번 블로그 과제설명에 간단한 navbar만들기
+navbar에서 임의로 p태그보단 li같은 태그 이용 이유 >> 구조화로 js, css적용이 후에 편해짐
+
+selector를 잘쓰면 il에 일일히 같은 클래스 입력하지 않아도 됨
+
+selector에는 몇가지 기억할 기능들이 있음
+셀렉트 문법
+1. .클래스명(공백)자손 > 공백은 안에 있는 '모든' 자손을 선택할 때 씀
+2. >는 바로 아래 직계자손(?)만 선택가능 즉 .ul클래스 자손li안의 span은 >로 선택 안됨
+3. 클래스를 두개를 동시에 적용시키고 싶을 때 : class=""에 클래스 명을 spacebar로 구분해서 입력
+
+href임시세팅은 #(관습적)
+
+HTML5부터 nav, footer, section div태그 사용 가능 (명시적 표현, 웹표준 위해 기능은 div랑 똑같음)
+웹표준(웹접근성) 예를 들어 시각장애인들이 사이트에 접근할때도 알아서 음성무시가 됨
+직관적임
+HTML5이전(IE8)은 사용하면 안됨
+-->

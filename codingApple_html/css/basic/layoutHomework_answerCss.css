@@ -1,0 +1,47 @@
+
+.container {
+    width: 800px;
+}
+
+.blog-content {
+    width: 80%;
+    height: 200px;
+    float: left;
+}
+
+.blog-image {
+    width: 20%;
+    height: 200px;
+    float: left;
+}
+
+.post_image {
+    width: 100%;
+}
+
+.blog-profile {
+    float: left;
+    margin-left: 10px;
+}
+
+.blog-pic {
+    float: left;
+}
+
+p {
+
+}
+
+p {
+    font-size: 10pt;
+    margin: 3px;
+}
+
+.blog-title {
+    margin-top: 10px;
+}
+
+.container {
+    width: 800px;
+    margin: auto;
+}
