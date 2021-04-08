@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>폼 html</title>
+        <link rel="stylesheet" href="../css/basic/formCss.css">
+        <link rel="stylesheet" href="../css/basic/positionHomework_explainCss.css">
+    </head>
+    <body>
+        <div class="main-background">
+            <div class="main-title-box">
+                <h3 class="main-title">Buy your shoes!</h3>
+                <p class="main-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum animi perferendis aperiam recusandae a, molestias, enim et!</p> <!--lorem치고 tab-->
+            </div>
+            <button class="main-button position">Buy Now</button>
+        </div>
+
+        <div class="explain-box">
+            <h4>How we design our shoes</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed cupiditate rem commodi quasi itaque, harum quos.</p>
+        </div>
+
+        <div>
+            <form>
+                <input type="email" > <!--이메일 폼 검사가능-->
+                <select>
+                    <option>aaa</option>
+                    <option>bbb</option>
+                    <option>ccc</option>
+                </select>
+                <textarea></textarea>
+                <input type="submit" value="보내기">
+            </form>
+        </div>
+
+    </body>
+</html>
+
+
+<!--
+원페이지 : 하나의 페이지에 모든걸 다 설명
+form속성 : 모두 form태그 안에 담는다.
+        >> action : 서버,백엔드쪽 어느쪽으로 전송할지
+        주로 쓰는 input : text, email, password, file, radio, checkbox,submit(버튼도 됨)
+                 select와 option
+                 textarea(드래그로 영역 확장가능, rows로 보여줄 행의 개수 설정)
+
+        value=이미채워진값 placeholder=입력값이 아닌 배경, 암시값 입력시 지워짐
+        name=태그의 이름(js,백엔드 전송,기능개발용)
+-->

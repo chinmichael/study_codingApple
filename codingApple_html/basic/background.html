@@ -11,6 +11,14 @@
                 <h3 class="main-title">Buy your shoes!</h3>
                 <p class="main-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum animi perferendis aperiam recusandae a, molestias, enim et!</p> <!--lorem치고 tab-->
             </div>
+            <button class="main-button position">Buy Now</button>
+
+            <div class="box">
+            <h4 class="box-title">How to design our shoes</h4>
+            <p class="box-content">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis explicabo libero adipisci minus magnam quos, cumque aspernatur harum, atque voluptate voluptatum error distinctio.
+            </p>
+        </div>
         </div>
     </body>
 </html>
@@ -25,4 +33,19 @@ div class : main-title-box에 그냥 margin-top을 주면 배경까지 같이 �
 >>margin-collapsing effect때문에 그러함 : main-back과 main-title-box처럼 마진이 겹쳐있음
                                         >> margin을 합쳐서 적용해버림(위위, 위아래 등)
                                         >> 상위 div에 padding같은걸 줘버림(1PX라도 있음 됨)
+
+position속성 : 좌표속성(top/bottom/left/right)을 이용하기 위한 속성
+              position으로 기준점을 미리 위에 지정해놔야함(.position참조)
+              position속성을 쓰면 독립적으로 붕뜸(글씨 겹치거나 없이 완전히)
+              static(기본 : 적용 안되는 디폴트)
+              relative 기준이 본인
+              fixed : 화면(viewpoint)를 기준으로 삼을때, 스크롤시도 위치가 고정, 고정메뉴등 만듦
+              absolute : 기준점이 부모 div박스 거기서부터 기준점
+
+              예를 들어 위
+              버튼에 position absolute 기준점 삼을 부모에 position relative하면
+              relative가 있는 부모를 기준점으로 삼음
+              >> 근처 다른 박스랑 겹치던가 상관없이 위치 유지할때
+              >> 가운데 정렬 위해서는
+              right 0; left 0; margin right, left auto; 임의 width필요
 -->

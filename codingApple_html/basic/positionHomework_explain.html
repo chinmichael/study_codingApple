@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>사이트 대문</title>
+        <link rel="stylesheet" href="../css/basic/positionHomework_explainCss.css">
+    </head>
+    <body>
+        <div class="main-background">
+            <div class="main-title-box">
+                <h3 class="main-title">Buy your shoes!</h3>
+                <p class="main-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum animi perferendis aperiam recusandae a, molestias, enim et!</p> <!--lorem치고 tab-->
+            </div>
+            <button class="main-button position">Buy Now</button>
+        </div>
+
+        <div class="explain-box">
+            <h4>How we design our shoes</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed cupiditate rem commodi quasi itaque, harum quos.</p>
+        </div>
+
+        <br/><!--좋지 않은 방법 margin이 좋음-->
+
+        <div class="explain-box" style="padding: 50px;">
+            <h4>How we design our shoes</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed cupiditate rem commodi quasi itaque, harum quos.</p>
+        </div>
+
+    </body>
+</html>
+
+
+<!--
+explain-box에 반응형 주기
+1.가장 쉬운 방법 : width를 %로 max-width 사용
+
+box-sizing : 아래 박스 padding만 변경했는데 박스 사이즈가 커짐
+>>브라우저 환경에서 박스 사이즈는 padding에 영향 큼
+>>박스의 폭은 content만 고려, padding을 고려하지 않음
+>>웹사이트 정확한 재단시 매우 고려해야할 부분
+>>  content-box : 기본 세팅(브라우저기준)
+    border-box : 실제박스 폭이 padding, border고려 > 정확한 재단시 부여
+-->

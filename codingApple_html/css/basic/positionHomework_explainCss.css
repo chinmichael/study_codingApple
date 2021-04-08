@@ -57,17 +57,17 @@ body {
     /*position: relative;*/
 }
 
-.box {
-    width: 60%;
-    padding: 20px;
-    background-color:beige;
-    text-align: center;
-    font-family:sans-serif;
 
-    position: absolute;
-    bottom: -150px;
-    right: 0;
-    left: 0;
+.explain-box {
+    width: 80%;
+    max-width: 600px; /*보통 max-height를 그닥 쓸일이 없다*/
     margin: auto;
-}
+    padding: 20px;
+    text-align: center;
+    background-color: #eee;
 
+    position: relative;
+    top: -30px;
+
+    box-sizing: border-box; /*일명 CSS reset, nomalize 속성들 브라우저간 일관디자인을 위함*/
+}
