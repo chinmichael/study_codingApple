@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>사이트 대문</title>
+        <link rel="stylesheet" href="../css/basic/positionHomework_explainCss.css">
+        <link rel="stylesheet" href="../css/basic/formHomework_explain.css">
+    </head>
+    <body>
+        <div class="main-background">
+            <div class="main-title-box">
+                <h3 class="main-title">Buy your shoes!</h3>
+                <p class="main-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum animi perferendis aperiam recusandae a, molestias, enim et!</p> <!--lorem치고 tab-->
+            </div>
+            <button class="main-button position">Buy Now</button>
+        </div>
+
+        <div class="explain-box">
+            <h4>How we design our shoes</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed cupiditate rem commodi quasi itaque, harum quos.</p>
+        </div>
+
+        <div class="form-background">
+            <div class="form-white">
+               <h3>Contact Us</h3>
+                <form>
+                   <div class="form-full">
+                       <p>Your Email</p>
+                    <input class="form-input" type="email">
+                   </div>
+                   <div class="form-half">
+                       <p>First Name</p>
+                    <input class="form-input" type="text">
+                   </div>
+                   <div class="form-half">
+                       <p>Last Name</p>
+                    <input class="form-input" type="text">
+                   </div>
+                   <div style="clear: both;"/>
+                   <div class="form-full">
+                       <p>message</p>
+                    <textarea class="form-input" rows="5"></textarea>
+                   </div>
+                   <div class="form-full">
+                       <input type="checkbox" id="check">
+                       <label for="check">Subscribe</label>
+                   </div>
+                   <button class="form-submit" type="submit">SEND</button>
+                </form>
+            </div>
+        </div>
+
+    </body>
+</html>
+
+
+<!--
+rgba(r,g,b,투명도)는 투명도도 줄 수 있어 검정,회색 배경등 좋음 css파일에서 crtl e는 픽커
+
+form 100%했는데 박스 넘어가던 이유 : input에 적용했던 padding때문
+div, input, textarea {
+    box-sizing: border-box;로 세팅해서 태그 전체에 적용해놓자
+}
+
+class 제1원칙 : 재사용을 잘 할 수 있도록 구조적으로 짜야함
+
+checkbox 옆에 글씨는 <span>써서 inline상태로 이쁘게 적용하거나 label사용
+label 태그 역할 : 글씨를 눌러도 해당 영역 클릭됨
+
+
+-->
