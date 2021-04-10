@@ -1,0 +1,19 @@
+
+td, th {
+    border: 1px solid grey;
+    padding: 10px;
+    text-align: center;
+}
+
+table {
+    border-collapse: collapse; /*선이 겹치면 선2배 두께가 아닌 1개두께*/
+}
+
+div {
+
+}
+
+.table-cell {
+    border: 1px solid grey;
+    padding: 10px;
+}

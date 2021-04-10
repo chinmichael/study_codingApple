@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>talbe homework</title>
+        <link rel="stylesheet" href="../css/basic/tableHomework_explainCss.css">
+    </head>
+    <body>
+
+        <div class="cart-background">
+            <h3>Your Shopping Cart</h3>
+
+            <div class="cart-form-container">
+                <table class="cart-table">
+                    <thead>
+                        <tr>
+                            <th class="cart-img"></th>
+                            <th class="cart-item">ITEM</th>
+                            <th class="cart-amount">AMOUNT</th>
+                            <th class="cart-price">PRICE</th>
+                            <th class="cart-total">TOTAL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img src="../../resource/image/item1.png" width="100px"></td>
+                            <td><p>Sony Camera</p></td>
+                            <td>1</td>
+                            <td>$70000</td>
+                            <td>$70000</td>
+                        </tr>
+                        <tr>
+                            <td><img src="../../resource/image/item1.png" width="100px"></td>
+                            <td><p>Sony Camera</p></td>
+                            <td>1</td>
+                            <td>$70000</td>
+                            <td>$70000</td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" style="text-align: right"> TOTAL $140000</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <button class="btn btn-brown">Purchase</button>
+
+            <a role="button" class="btn">anchor</a>
+
+            <a href="https://naver.com" class="custom-link">link</a>
+            </div>
+        </div>
+
+    </body>
+</html>
+
+<!-- 강의 주석
+
+cart-form-container : 상위요소에서 폭을 결정하는게 매우 중요
+
+클래스 내 태그 요소 전체 지정 시는 콤마를 사용한다면 각각 지정할 태그마다 앞에 .클래스명 지정
+
+border-bottom : 테두리 넣는 방향 지정 가능
+
+table cell 너비 지정 : th 맨 위쪽 클래스에 지정해주면 됨 /
+td의 width는 노력형 > 최대한 거기 맞추려고만 함, max-width정도로 생각 (다른 영역 침범 안함)
+
+colspan : 컬럼을 몇개 차지하는지
+
+border-collaspe랑 border-radius 동시 적용시 브라우저 환경따라 안되는 경우
+해결책1
+table { border-collapse: collapse; border-spacing:0;}
+왼쪽 위 td {border-top-left-radius :5px;} 이렇게 각각 적용
+
+해결책2
+table { border-collapse: collapse; border-radius:5px;
+        border-style:hidden; box-shadow : 0 0 0 1px #666; } box쉐도우(그림자속성)으로 테두리 거짓 생성
+
+
+button디자인 중요한 점 : 누르고 싶게 만들어야함
+cursor:pointer랑
+Pseudo-class 버튼에 대한 마우스 상태 (:로 세팅) 1,2,3 순서여야 오류 없이 작동
+1. :hover(마우스를 올릴떄)
+2. :focus(클릭 후 커서가 찍혀있는 상태) (다른데 클릭하면 날아감)
+3. :active(클릭중)
+
+4. :link a의 방문 전 상태
+5. :visited a 방문 후 상태
+
+a role="button"으로도 버튼 생성 가능
+
+
+css 설계(아키텍처) >> 이런거 나중에 찾아보기
+클래스명 두개로 나눠 버튼 만들기 (btn에는 기본 뼈대 btn-brown에는 색상등 요소)
+(html에선 띄어쓰기로 클래스 추가 가능)
+>>이런식으로 해야 나중에 css확장이 쉬워짐
+-->

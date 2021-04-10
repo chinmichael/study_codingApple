@@ -1,0 +1,93 @@
+
+.cart-background {
+    width: 100%;
+    padding: 20px;
+    background-color: #c2d3de;
+}
+
+body {
+    margin: 0;
+}
+
+.cart-form-container {
+    width: 100%;
+    max-width: 700px;
+    margin: auto;
+}
+
+.cart-table {
+    background-color: white;
+    width: 100%;
+    border-radius: 5px;
+    border-collapse: collapse;
+}
+
+.cart-table td, .cart-table th {
+    padding: 8px;
+    border-bottom: 1px solid #c2d3de;
+}
+
+.cart-img {
+    width: 20%;
+}
+
+.cart-item {
+    width: 50%;
+    text-align: left;
+}
+
+.cart-amount {
+    width: 10%;
+}
+
+.cart-total {
+    width: 10%;
+}
+
+.cart-price {
+
+}
+
+.btn {
+    padding: 10px;
+    font-size: 20px;
+    border: none;
+    border-radius: 5px;
+
+    cursor: pointer; /*올릴때 손가락 모양*/
+}
+
+
+.custom-link {
+    text-decoration: none;
+}
+
+.custom-link:link {
+    color: black;
+}
+
+.custom-link:visited {
+    color: red;
+}
+
+.btn-brown {
+    background-color: coral;
+    color: white;
+}
+
+.btn-brown:hover, .btn-red:hover {
+    background-color: chocolate;
+}
+
+.btn-brown:focus {
+    background-color: red;
+}
+
+.btn-brown:active, .btn-red:active {
+    background-color: brown;
+}
+
+.btn-red {
+    background-color: red;
+    color: white;
+}

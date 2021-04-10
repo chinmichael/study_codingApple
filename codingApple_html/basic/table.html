@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Table Study-Cart Page</title>
+        <link rel="stylesheet" href="../css/basic/tableCss.css">
+    </head>
+    <body>
+        <div>
+            <table>
+               <thead>
+                   <tr>
+                       <th>1</th>
+                       <th>2</th>
+                       <th>3</th>
+                   </tr>
+               </thead>
+               <tbody>
+                   <tr>
+                       <td><p>1</p><p>1</p></td>
+                       <td>2</td>
+                       <td>3</td>
+                   </tr>
+                   <tr>
+                       <td>1</td>
+                       <td>2</td>
+                       <td>3</td>
+                   </tr>
+               </tbody>
+            </table>
+        </div>
+
+        <div> <img src="https://mdn.mozillademos.org/files/12245/frame_image.svg" width="32" height="32" style="vertical-align: middle;"> image with a default alignment.</div>
+
+        <div style="display: table">
+            <div style="display: table-row">
+                <div style="display: table-cell" class="table-cell">1</div>
+                <div style="display: table-cell" class="table-cell">2</div>
+            </div>
+        </div>
+
+    </body>
+</html>
+
+
+<!--강의 메모
+
+table도 물론 div 안에 담으면 좋다
+thead : 테이블 제목
+tbody : 테이블 내용
+tr : 한 행(row) > tr안에 td(열 column) 생성
+th : 제목을 달고 싶을때 쓰는 열 / td 그냥 딱히 그런거 없을 떄 쓰는 열
+th : 개발을 편히 하기 위해 헤더부분을 구분하기 위해 사용 (폰트두께나 가운데 정렬 기본 되어있기도 함)
+
+table 필수 속성
+border사이 간격 삭제 border-collapse : collapse;
+열에다가 padding 많이 줌
+
+vertical-align : 세로 정렬 가능
+주로 top, middle, bottom, px, baseline씀 (여러 태그서 자주 쓰는 속성)
+이미지랑 글씨를 같이 쓸 경우 > 보통 이미지 밑에 글씨 있음
+display : inline인 글씨나 그림 등의 y축 기준점을 잡고 싶을 때 사용한다.
+
+display:table / display:table-row / display:table-cell
+div태그만으로 table을 만들고 싶을 때 사용한다. (table, tr, td 역할들 )
+
+-->
