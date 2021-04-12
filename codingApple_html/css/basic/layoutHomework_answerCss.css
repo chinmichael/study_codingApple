@@ -45,3 +45,7 @@ p {
     width: 800px;
     margin: auto;
 }
+
+.cart-price {
+    width: 10%;
+}

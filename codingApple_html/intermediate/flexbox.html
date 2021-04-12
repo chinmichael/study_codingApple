@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>사이트 대문</title>
+        <link rel="stylesheet" href="../css/intermediate/flexboxCss.css">
+
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+   <!--이런 주소로 들어가서 파일 참조 첨부, CDN 방식-->
+   <!--구글폰트는 많은 사이트에서 사용, 자주 사용한 폰트는 브라우저에서 미리 저장해놓기에 속도 빠름-->
+    </head>
+    <body>
+
+        <!--<div class="flex-container">
+            <div class="flex-box"></div>
+            <div class="flex-box"></div>
+            <div class="flex-box"></div>
+        </div> -->
+
+        <nav class="nav-flex-container">
+            <!--<div class="nav-flex-box nav-logo"></div>
+            <div class="nav-flex-box" style="flex-grow: 2;"></div>-->
+            <!--flex의 정렬 약점인 가운데 띄우기를 위한 편법, flex-grow는 상대적 크기 배수 결정-->
+            <!--<div class="nav-flex-box nav-menu"></div>
+            <div class="nav-flex-box nav-menu"></div>-->
+            <p class="menu-logo">ShoesShose</p>
+            <span style="flex-grow: 10"></span>
+            <span class="menu-item">Product</span>
+            <span class="menu-item">Services</span>
+            <span class="menu-item">Log-in</span>
+        </nav>
+
+        <div class="main-background">
+            <div class="main-title-box">
+                <h3 class="main-title">Buy your shoes!</h3>
+                <p class="main-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum animi perferendis aperiam recusandae a, molestias, enim et!</p> <!--lorem치고 tab-->
+            </div>
+            <button class="main-button position">Buy Now</button>
+        </div>
+
+        <div class="explain-box">
+            <h4>How we design our shoes</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed cupiditate rem commodi quasi itaque, harum quos.</p>
+        </div>
+
+    </body>
+</html>
+
+
+<!--강의 주석
+
+모던 웹에서 flexbox사용 이유 : 레이아웃 짜기가 매우 쉬워짐, 특히 가로배치에서
+
+-->
