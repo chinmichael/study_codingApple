@@ -1,0 +1,40 @@
+body {
+    margin: 0;
+}
+
+p {
+    font-size: 14px;
+}
+
+.flex-box-container {
+    display: flex;
+    align-items: center;
+}
+
+.flex-box {
+    background-color: gainsboro;
+    text-align: center;
+    width: 100%;
+    vertical-align: middle;
+    height: 120px;
+    padding: 10px;
+}
+
+@media screen and (max-width: 992px) {
+    .flex-box-container {
+        flex-wrap: wrap;
+    }
+
+    .flex-box {
+        max-width: 400px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .flex-box-container {
+        flex-direction: column;
+    }
+    .flex-box {
+        max-width: 100%;
+    }
+}

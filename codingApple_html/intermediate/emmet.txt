@@ -26,6 +26,8 @@ div#header>p.title*3 (#은 css에서 아이디였고 마지막 *n은 해당 태�
     <p class="title></p>
 <div>
 
+div#header>p.title*3>h4+p 하면 동일 태그 내 h4와 p 넣을 수 있음
+
 
 >>> 이런 자동완성을 통해 레이아웃을 미리 전체적으로 생각할 수 있는 습관을 들여야해서 매우 중요
 

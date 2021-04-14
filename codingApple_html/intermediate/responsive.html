@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>사이트 대문</title>
+        <link rel="stylesheet" href="../css/intermediate/responsiveCss.css">
+    </head>
+    <body>
+       <nav class="nav-flex-container">
+        <!--<div class="nav-flex-box nav-logo"></div>
+            <div class="nav-flex-box" style="flex-grow: 2;"></div>-->
+        <!--flex의 정렬 약점인 가운데 띄우기를 위한 편법, flex-grow는 상대적 크기 배수 결정-->
+        <!--<div class="nav-flex-box nav-menu"></div>
+            <div class="nav-flex-box nav-menu"></div>-->
+        <p class="menu-logo">ShoesShose</p>
+        <span style="flex-grow: 10"></span>
+        <span class="menu-item">Product</span>
+        <span class="menu-item">Services</span>
+        <span class="menu-item">Log-in</span>
+    </nav>
+
+        <div class="main-background">
+            <div class="main-title-box">
+                <h3 class="main-title">Buy our excellent shoes!</h3>
+                <p class="main-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum animi perferendis aperiam recusandae a, molestias, enim et!</p>
+            </div>
+        </div>
+
+        <div class="explain-box">
+            <h4>How we design our shoes</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed cupiditate rem commodi quasi itaque, harum quos.</p>
+        </div>
+
+        <div class="form-background">
+            <div class="form-white">
+               <h3>Contact Us</h3>
+                <form>
+                   <div class="form-full">
+                       <p>Your Email</p>
+                    <input class="form-input" type="email">
+                   </div>
+                   <div class="form-half">
+                       <p>First Name</p>
+                    <input class="form-input" type="text">
+                   </div>
+                   <div class="form-half">
+                       <p>Last Name</p>
+                    <input class="form-input" type="text">
+                   </div>
+                   <div style="clear: both;"/>
+                   <div class="form-full">
+                       <p>message</p>
+                    <textarea class="form-input" rows="5"></textarea>
+                   </div>
+                   <div class="form-full">
+                       <input type="checkbox" id="check">
+                       <label for="check">Subscribe</label>
+                   </div>
+                   <button class="form-submit" type="submit">SEND</button>
+                </form>
+            </div>
+        </div>
+
+    </body>
+</html>
+
+
+
+<!--
+반응형 웹에서 많이 쓰는 단위
+
+폰트, 이미지 등 : rem : 최상위요소 <html>의 폰트 등의 사이즈 기준 배율 (xrem은 x배)
+                    : 상대적사이즈 재단, 균일한 디자인에 좋음
+                em  : 상위요소의 해당 파트의 배율 (r은 루트인가봄)
+
+vw : viewport(브라우저 폭)의 width로부터의 %값 xvw는 x%
+vh : viewport의 height %
+
+@media 관련 몇가지
+screen : 화면
+print : 프린트 시 화면
+and : 동시 적용
+screen and (max-width: 768px) : 화면 최대폭이 768이하일때 적용해라 >> 반응웹의 알파이자 오메가
+
+media로 이렇게 화면 분할하는 기준점 : breakpoint >> 2~3개 많아봤자 4개
+부트스트랩 라이브러리 기준점이 가장 좋음
+1200px : pc
+992px : 태블릿
+768px : 태블릿 혹은 모바일
+576px : 가장 작은 모바일
+
+
+
+-->
