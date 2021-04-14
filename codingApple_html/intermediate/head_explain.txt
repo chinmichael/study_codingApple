@@ -1,0 +1,33 @@
+HTML파일은 반드시 head와 body태그를 필요로 함
+
+head에는 사이트에 가시적으로 드러나지 않은 중요정보 들어감
+
+기본 태그 리스트
+
+1.  <link rel="stylesheet" href="">
+    CSS 파일 첨부 태그
+
+    <style type="text/css"></style> 태그 내 바로 박기 가능
+
+// 참고로 맨 앞에 '/'가 붙으면 현재 사이트 메인경로(루트)에서 시작하는 절대경로
+   없을 경우 현재 파일과 같은 경로의 폴더 혹은 파일 (../은 상위 디렉토리)
+
+2.  <script type="text/javascript" src="">
+    JS 파일 첨부 태그
+
+    <script type="text/javascript"></script> 태그 사이 바로 박기 가능
+    
+3.  <title></title> 사이트 제목 설정(브라우저 탭에 표시)
+
+4.  중요 meta 태그
+    <meta charset=""> 사이트 인코딩 형식 지정
+    
+    <meta name="description" content=""> 검색 결과 화면에 뜨는 글귀를 수정하기 위함
+    
+    <meta name="keywords" content=""> 검색에 도움을 주는 키워드(,로 구분)
+    
+    <meta name="viewport" content="width=device width, initial-scale=1.0">
+    사이트 초기 zoom레벨, 폭 지정
+    width=device width = 모바일 기기 실제 폭으로 렌더링하라는 세팅(해상도가 아닌 실제 폭)
+    initial-scale=1.0 이건 줌레벨 지정
+    
