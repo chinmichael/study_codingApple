@@ -1,0 +1,29 @@
+<크롬 개발자 도구 : 버그픽스가 수월해짐>
+
+우클릭 + 검사 or F12 Elements >> HTML렌더링(상단) + 적용된 CSS(하단)
+                            >> ctrl shift c or 셀렉트 아이콘으로 해당 요소 검사
+                            >> 적용 스타일 나열 (맨 위가 가장 우선 적용 (css하단에 있을수록 순위 높음))
+                            
+                            + 주황색(margin) 초록색(padding) 파란색(실제 width, height)
+                            
+                            
+                            
+<인터넷 익스플로러의 경우>
+F12해서 에뮬로,,, 특히 8한번 해보면
+
+flex부터 온갖게 안됨
+>>호환성 잡기
+1. 옛 css속성으로 적용(flex 말고 float로)
+
+2.호환성을 주기 위한 css추가
+따로 css파일을 만들어 ie8에 적용시키고픈걸 세팅한 뒤
+
+조건 첨부된 link rel
+<!--[if lt IE 9]>
+  <link rel="stylesheet" type="text/css" href="css/ie8.css" />
+<![endif]-->
+
+를 이용하여 첨부
+첨부 우선순위가 높으므로 순서상 되도록 하단에 첨부
+
+무엇을 고칠지는 DOM탐색기의 ctrl b 통해 적용 안되는 파트 찾아서

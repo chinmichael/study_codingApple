@@ -1,0 +1,223 @@
+
+.main-background {
+    width: 100%;
+    height: 500px;
+    background-image: url(../../../resource/image/shoes.jpg) /*../은 상위폴더 이동*/
+                      /*, url()*/; /*요소 추가가능 background겹치기*/
+    background-size: cover; /*반응형에서 주로 씀 알아서 임의조정 사진 잘려도 영역 유지*/
+    /*background-size: 100%;*/ /*딱 상위요소 100%만큼 변경되면서 세팅됨*/
+    /*background-size: contain;*/ /*그림이 잘리지 않게 최대한 폭에 맞춰서*/
+    background-position: center; /*배경요소가 어디서부터 채워질지*/
+    background-repeat: no-repeat; /*배경세팅 반복 조정*/
+    /*background-attachment: fixed;*/ /*스크롤바에 대해 요소가 어떻게 처리되는지*/
+
+    padding-top: 150px; /*margin-collapsing effect*/
+
+    position: relative;
+
+}
+
+body {
+    margin: 0;
+}
+
+.main-title {
+    color: white;
+    text-align: center;
+    font-size: 50px;
+}
+
+.main-title-box {
+    text-align: center; /*부모 div에 넣어도 잘됨*/
+}
+
+.main-content {
+    padding: 20px;
+    color: white;
+    font-size: 18px;
+}
+
+.main-button {
+    padding: 10px;
+    font-size: 18px;
+    font-family: "gothic";
+    background-color: white;
+    border: none;
+    display: block;
+    margin: auto;
+}
+
+.position {
+    position: absolute;
+    bottom: 200px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 150px;
+    /*position: relative;*/
+}
+
+
+.explain-box {
+    width: 80%;
+    max-width: 600px; /*보통 max-height를 그닥 쓸일이 없다*/
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+    background-color: #eee;
+
+    position: relative;
+    top: -30px;
+
+    box-sizing: border-box; /*일명 CSS reset, nomalize 속성들 브라우저간 일관디자인을 위함*/
+}
+
+.form-background {
+    width: 100%;
+    margin-top: 150px;
+    margin-bottom: 400px;
+    padding: 30px;
+    background-color: rgba(0,0,0,0.8); /*rgba는 투명도도 줄 수 있어 검정,회색 배경등 좋음*/
+}
+
+.form-white {
+    width: 90%;
+    max-width: 700px;
+    padding: 20px;
+    margin: auto;
+    background-color: white;
+}
+
+
+.form-input {
+    padding: 15px;
+    font-size: 18px;
+    border-radius: 4px;
+    border: 1px solid lightgrey;
+    width: 100%;
+}
+
+.form-half {
+    width: 50%;
+    float: left;
+    padding: 10px;
+}
+
+.form-full {
+    padding: 10px; /*아래 half사이 여백때문에 padding을 줬으므로 같이 준다*/
+}
+
+.form-submit {
+    width: 200px;
+    border-radius: 4px;
+    border: none;
+    padding: 10px;
+    background-color: darkorange;
+    color: white;
+    font-size: 18px;
+    margin-left: auto; /*왼쪽 정렬*/
+    margin-right: 10px;
+    display: block;
+}
+
+
+.nav-flex-container {
+    display: flex;
+    background-color: bisque;
+    align-items: center;
+    height: 60px;
+}
+
+.nav-flex-box {
+
+}
+
+.menu-logo {
+    font-size: 20px;
+    padding-left: 20px;
+    font-weight: 600;
+}
+
+.menu-item {
+    padding-right: 20px;
+    cursor:pointer;
+}
+
+body {
+    margin: 0;
+}
+p {
+    font-size: 14px;
+}
+
+body, div, p, input, textarea {
+    box-sizing: border-box;
+}
+
+
+
+.flex-box-container {
+    display: flex;
+    align-items: center;
+}
+
+.flex-box {
+    background-color: gainsboro;
+    text-align: center;
+    width: 100%;
+    vertical-align: middle;
+    height: 180px;
+    padding: 10px;
+}
+
+.flex-box i {
+    margin: 10px;
+    background-color: burlywood;
+    width: 60px;
+    height: 60px;
+    border-radius: 50px;
+    padding: 10px;
+    padding-top: 14px;
+    box-sizing: border-box;
+    color: white;
+}
+
+
+
+@media screen and (max-width: 992px) {
+    .main-title {
+        font-size: 40px;
+    }
+    .flex-box-container {
+        /*flex-flow : row wrap;*/
+        flex-wrap: wrap;
+    }
+    .flex-box {
+        width: 50%;
+        min-width: 350px;
+/*        padding-left: 0;
+        padding-right: 0;*/
+    }
+}
+
+@media screen and (max-width: 768px) {
+    /*CSS에 조건을 줄 때 쓰는 media쿼리*/
+    /*또 하나 css클래스를 지정할 저장공간을 세팅했다 생각*/
+    /*변동되는 사항만 세팅*/
+
+    .main-title {
+        font-size: 30px;
+    }
+    .flex-box-container {
+        flex-direction: column;
+        float: none;
+
+    }
+    .flex-box {
+        width: 100%;
+    }
+
+}
+h4 {
+    margin: 0;
+}
