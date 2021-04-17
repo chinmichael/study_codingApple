@@ -1,0 +1,334 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+div {
+    font-family: 'Roboto', sans-serif;
+}
+
+div, p, img, i {
+    box-sizing: border-box;
+}
+
+.top-container {
+    width: 100%;
+    height: 400px;
+    background: linear-gradient(to bottom, skyblue, navy);
+    /*그라데이션, 방향, 색, 색*/
+    overflow: hidden;
+}
+
+.top-explain {
+    color: white;
+    padding-top: 70px;
+    padding-left: 120px;
+    float: left;
+    width: 60%;
+}
+
+.button-dark {
+    color: white;
+    background-color: dimgrey;
+    border: none;
+    font-size: 15px;
+    padding: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
+    border-radius: 4px;
+
+}
+
+.top-image {
+    margin-top: 1px;
+    float: left;
+    width: 40%;
+    height: 100%;
+    padding: 35px;
+    padding-left: 0;
+    position: relative;
+}
+
+.top-image img {
+    width: 320px;
+    height: 350px;
+    ;
+    position: absolute;
+    bottom: 1px;
+}
+
+.top-explain h2 {
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.top-explain p {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-weight: lighter;
+}
+
+.middle-container {
+    width: 100%;
+    height: 250px;
+    margin: 0;
+    background-color: #F6F6F6;
+    text-align: center;
+
+    padding: 25px;
+}
+
+.middle-container h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.middle-container p {
+    color: grey;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+.main-container {
+    width: 100%;
+}
+
+.bottom-container {
+    width: 100%;
+    background-color: darkslateblue;
+    height: 320px;
+    margin: 0;
+    color: white;
+    text-align: center;
+    padding: 40px;
+    padding-left: 80px;
+    padding-right: 80px;
+}
+
+.bottom-container h3 {
+    margin-top: 5px;
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+.point-p {
+    margin: 3px;
+    font-size: 14px;
+    color: yellow;
+}
+
+.bottom-flex-container {
+    width: 100%;
+    display: flex;
+}
+
+.bottom-content {
+    width: 100%;
+}
+
+.bottom-content h5 {
+    font-size: 15px;
+    margin: 10px;
+}
+
+.bottom-content p {
+    font-size: 12px;
+    margin: 0;
+    margin-bottom: 15px;
+}
+
+.bottom-content i {
+    background-color: white;
+    color: darkslateblue;
+    font-size: 50px;
+    border-radius: 50px;
+    width: 90px;
+    height: 90px;
+    padding: 10px;
+    padding-top: 18px;
+}
+
+.pofol-container h3 {
+    margin-top: 5px;
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 30px;
+}
+
+.pofol-container {
+    width: 100%;
+    height: 850px;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
+
+.pofol-product {
+    float:left;
+    width: 50%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.pofol-product img {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.pofol-product-box {
+    max-width: 800px;
+    width: 80%;
+    height: 36%;
+    display: block;
+    margin: 0;
+    padding: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.overlay-wrap {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    color: white;
+    text-align: left;
+}
+
+.overlay-wrap:hover .pofol-overlay {
+    border: 20px white solid;
+}
+
+.pofol-overlay {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    vertical-align: bottom;
+    padding-top: 1px;
+
+    transition: border 1s;
+}
+
+.overlay-text {
+    position: absolute;
+    bottom: 50px;
+    left: 30px;
+}
+
+.overlay-text p {
+    font-size: 12px;
+}
+
+footer {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 200px;
+}
+
+.sns-box {
+    width: 300px;
+    height: 100px;
+    margin: 0;
+    margin-top: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.sns-box i {
+    background-color: darkcyan;
+    font-size: 30px;
+    color: white;
+    padding: 20px;
+    border-radius: 50px;
+    margin: 10px;
+}
+
+.copyright {
+    text-align: center;
+    color: grey;
+}
+
+.copyright p {
+    font-size: 14px;
+    margin: 5px;;
+}
+
+@media screen and (min-width: 1200px) {
+    .top-explain {
+        padding-left: 250px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .top-container {
+        height: 600px;
+        overflow: hidden;
+    }
+
+    .top-explain {
+        width: 100%;
+        height: 50%;
+        float: none;
+        text-align: center;
+        padding: 20px;
+        padding-left: 100px;
+        padding-right: 100px;
+    }
+
+    .top-explain p {
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+
+    .top-image {
+        width: 100%;
+        height: 50%;
+        float: none;
+    }
+
+    .top-image img {
+        width: 300px;
+        height: 320px;
+        bottom: -40px;
+        left: 50%;
+        transform: translate(-50%);
+        /*포지션 x축 가운데 정렬*/
+    }
+
+    .bottom-container {
+        height: 870px;
+    }
+
+    .bottom-flex-container {
+        flex-direction: column;
+    }
+
+    .bottom-content p {
+        margin-bottom: 40px;
+    }
+
+    .pofol-container {
+        height: 1300px;
+    }
+
+    .pofol-product-box {
+        width: 80%;
+        height: 42%;
+
+    }
+
+    .pofol-product {
+        max-width: 400px;
+        width: 100%;
+        height: 50%;
+        float: none;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+
+    }
+}
