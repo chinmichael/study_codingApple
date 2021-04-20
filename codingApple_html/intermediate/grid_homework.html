@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
+    <!--Custom CSS-->
+    <link rel="stylesheet" href="../css/intermediate/grid_homework.css">
+
+    <title>Bootstrap Grid Homework</title>
+</head>
+
+<body>
+<!--Emmet ()로 세부 항목 묶어서 +하기 가능-->
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-3 col-md-6 product-container">
+            <div class="image-head">
+                <img src="../../resource/image/person.png" alt="">
+                <h2>Single</h2>
+                <div class="color-line"></div>
+            </div>
+            <div class="menu-box">
+                <p class="font-dark">Free e-Books</p>
+                <p class="font-grey">Free Lecture</p>
+                <p class="font-grey">Free Service</p>
+                <p class="font-grey">Free Update</p>
+            </div>
+            <div class="price-button-box">
+                <h3>$60</h3>
+                <button class="btn btn-secondary bth-round">Order Now</button>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 product-container">
+            <div class="image-head">
+                <img src="../../resource/image/person2.png" alt="">
+                <h2>Double</h2>
+                <div class="color-line box-blue"></div>
+            </div>
+            <div class="menu-box">
+                <p class="font-blue">Free e-Books</p>
+                <p class="font-blue">Free Lecture</p>
+                <p class="font-grey">Free Service</p>
+                <p class="font-grey">Free Update</p>
+            </div>
+            <div class="price-button-box">
+                <h3>$60</h3>
+                <button class="btn btn-primary bth-round">Order Now</button>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 product-container">
+            <div class="image-head">
+                <img src="../../resource/image/person3.png" alt="">
+                <h2>Tripple</h2>
+                <div class="color-line box-green"></div>
+            </div>
+            <div class="menu-box">
+                <p class="font-green">Free e-Books</p>
+                <p class="font-green">Free Lecture</p>
+                <p class="font-green">Free Service</p>
+                <p class="font-grey">Free Update</p>
+            </div>
+            <div class="price-button-box">
+                <h3>$60</h3>
+                <button class="btn btn-success bth-round">Order Now</button>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 product-container">
+            <div class="image-head">
+                <img src="../../resource/image/person4.png" alt="">
+                <h2>Lovers</h2>
+                <div class="color-line box-red"></div>
+            </div>
+            <div class="menu-box">
+                <p class="font-red">Free e-Books</p>
+                <p class="font-red">Free Lecture</p>
+                <p class="font-red">Free Service</p>
+                <p class="font-red">Free Update</p>
+            </div>
+            <div class="price-button-box">
+                <h3>$60</h3>
+                <button class="btn btn-danger bth-round">Order Now</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+</body></html>
+
+<!--
+
+부트스트랩 용어
+container : 적절한 여백을 주는 박스를 줌
+mt : margin-top (mb는 margin-bottom이겠지? 란 느낌 m은 전체)
+pt : padding-top 얘들 단계는 1~5까지 가능
+이런 설명은 utility를 참조해서 설정
+
+text-center : text align center 들어가있음 이런 생산성 높이는 클래스 만들어도 좋음
+
+
+grid : 반응형으로 요소배치를 위함
+     : 사이트를 균일하게 재단하기 위함
+
+     : div class="row" : 내부를 가로 12개의 column으로 균일하게 쪼갬
+     : div class="col-n" : n개의 column을 차지함 (n을 안쓰면 적당히 나눔 대신 쓰면 불균일하게도 일부러 처리 가능 / 총 12만 만들면 된다)
+                         : 12를 넘기면 적당히 아래로 넘어간다
+                         : col-md-n : 사이 값은 반응형으로 flex를 준다고 생각 : sm(576), md(768), lg(992), xl(1200) 기준
+                                                                         : 각각의 breakpoint에서 n만큼 col을 차지하란 뜻(그 이하는 세로정렬)
+                                                                         : flexbox기에 당빠 explorer ie11+
+     : order-반응형-서수 : div의 순서도 세팅 가능
+
+-->
