@@ -1,0 +1,27 @@
+
+div {
+    box-sizing: border-box;
+}
+
+.profile-box {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 1px 1px 5px 1px lightgrey; /*x축(음수면 왼) y축(음수면 위) blur spread(음수면 축소)*/
+}
+
+.profile-image {
+
+}
+
+.profile-image img {
+    width: 150px;
+    height: 140px;
+}
+
+.profile-head {
+    height: 200px;
+}
+
+.profile-body {
+    padding: 0;
+}

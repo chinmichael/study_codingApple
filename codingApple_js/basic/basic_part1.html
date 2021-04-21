@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h2 id="hello">안녕하세요</h2>
+    <h2 id="hi">올때메로나</h2>
+
+    <script type="text/javascript">
+        document.getElementById('hello').innerHTML = '안녕';
+        //브라우저 새로고침시 변경
+        document.getElementById('hi').innerHTML = '올때바밤바';
+
+        document.getElementById('hello').style.fontSize = '30px'; // 5분 숙제
+    </script>
+</body>
+</html>
+
+
+<!-- 4/21강의 : JS 목적과 Selector
+
+javascript 사용목적 : 요즘에 쓰임새가 많아졌지만 가장 원초적인 이유
+>> 웹환경에서 HTML의 조작과 변경을 위함
+>> 결국 이쁜 UI를 만드려고...
+
+첫번째 단계 : Alert창 만들기
+
+기본 HTML 조작법
+/---------셀렉터파트------------/ 머가됐든 코딩은 컴터한테 언제나 매우매우 구체적으로 전달해야함
+document.getElementById('hello').innerHTML = '안녕'; /문자 자료형으로 적는다
+문서(웹문서=HTML파일).(내부요소)HTML요소를ID로가져와라(HTML요소=element).내부내용
+
+>> 바꾸고 싶은 HTML요소의 id를 따와서 + . + 어떤 부분을 바꿀지 세팅(innerHTML, style.color 등) = 바꿀(대입할)내용 // 대입연산자의 뜻은 모든 프로그래밍언어 해당
+
+
+
+-->
