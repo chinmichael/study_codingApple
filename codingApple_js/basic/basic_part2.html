@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="basic_part2.css">
+
+    <!-- FontAwesome CDN -->
+    <script src="https://kit.fontawesome.com/f395ec79ea.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <div class="alert-box" id="alert1">
+        Alert1
+        <button class="alert-close-btn" onclick="alert_close()">
+        <i class="fas fa-times"></i></button>
+        <div style="clear: both;"></div>
+    </div>
+    <button onclick="alert_open()">
+        경고버튼
+    </button>
+
+    <script>
+        function alert_open() {
+            document.getElementById('alert1').style.display='block';
+        }
+        function alert_close() {
+            document.getElementById('alert1').style.display = 'none';
+        }
+    </script>
+</body></html>
+
+
+<!-- 4/23(1) : Alert창 만들기 / function 문법 사용법
+
+숨김 UI(modal, alert, tab, tooltip, submenu 등) 만드는 법칙
+1. 미리 디자인을 만들어놓고 숨김 (display : block 혹은 visibility : hidden)
+2. 버튼 등을 눌렀을 때 보여줌 >> vue도 이 기능을 위해 state를 만드는거다
+
+onclick : 클릭시 해당 자바스크립트를 실행해라
+
+function 사용이유1 (2,3은 나중에)
+onclick="~" 등 js코드를 HTML 이벤트 프로퍼티에 죄다 때려박으면 너무 코드가 지저분해짐
+이를 함수명을 축약시키기 위함
+
+JS 주의사항
+스크립트는 항상 가장 밑에 적용시키자 : 상단에 할 경우 JS를 찾아오지 못하는 버그 발생
+(HTML조작은 항상 스크립트가 그 HTML요소 밑에 : HTML은 위에서부터 읽기에)
+버그 문제는 개발자도구의 console에서 확인
+innerHTML of null >> (이 부분).innerHTML을 찾지 못했다는 뜻(아이디나 스크립트 위치 문제)
+
+is not function : 보통 메서드(함수)나 함수 명 실수해서 씀
+
+JS는 보통 카멜표기를 쓴다
+
+
+-->

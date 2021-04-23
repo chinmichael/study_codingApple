@@ -1,0 +1,25 @@
+div, button {
+    box-sizing: border-box;
+}
+
+.alert-box {
+    background-color: #c4c4eb; /*ctrl e : 컬러픽커*/
+    color: #3535b7;
+    padding: 20px;
+    border-radius: 5px;
+
+    display: none; /*CSS로 숨길때 쓰는 방법중 하나*/
+}
+
+.alert-close-btn {
+    background-color: #c4c4eb;
+    color: #3535b7;
+    border: none;
+    font-size: 20px;
+    float: right;
+}
+
+.alert-close-btn : hover {
+    color: #090960;
+    cursor: pointer;
+}

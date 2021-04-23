@@ -3,10 +3,26 @@ div {
     box-sizing: border-box;
 }
 
+h3 {
+    font-size: 25px;
+}
+
+h4 {
+
+}
+
+h5 {
+
+}
+
 .profile-box {
     background-color: white;
     border-radius: 10px;
     box-shadow: 1px 1px 5px 1px lightgrey; /*x축(음수면 왼) y축(음수면 위) blur spread(음수면 축소)*/
+}
+
+.profile-head {
+    height: 200px;
 }
 
 .profile-image {
@@ -18,10 +34,49 @@ div {
     height: 140px;
 }
 
-.profile-head {
-    height: 200px;
+.profile-head table {
+    height: 115px;
+    margin: auto;
+    vertical-align: middle;
+    font-size: 15px;
+}
+
+.profile-head th {
+    width: 50%;
+}
+
+.profile-head td {
+
+}
+
+.profile-intro {
+
+}
+
+.profile-inform {
+    border-left: 3px solid lightgrey;
 }
 
 .profile-body {
-    padding: 0;
+}
+
+.tag-box {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tag {
+    padding: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border: 2px solid grey;
+    border-radius: 50px;
+    font-size: 12px;
+    margin-right: 5px;
+}
+
+@media screen and (max-width: 992px) {
+    .profile-head {
+        height: 400px;
+    }
 }
