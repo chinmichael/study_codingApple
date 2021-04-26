@@ -12,22 +12,41 @@
 <body>
 
     <div class="alert-box" id="alert1">
-        Alert1
-        <button class="alert-close-btn" onclick="alert_close()">
-        <i class="fas fa-times"></i></button>
+        <p id="alertMessage1">Alert1</p>
+        <!--<button class="alert-close-btn" onclick="alert_close()">-->
+        <!--<button class="alert-close-btn" onclick="alert_display('none')">-->
+        <button class="alert-close-btn" id="closeBtn"> <!--이벤트 리스터로 처리-->
+            <i class="fas fa-times"></i></button>
         <div style="clear: both;"></div>
     </div>
-    <button onclick="alert_open()">
-        경고버튼
+    <!--<button onclick="alert_open()">-->
+    <button onclick="alert_display('block', '아이디를 입력하세요')">
+        ID경고버튼
+    </button>
+    <button onclick="alert_display('block', '비밀번호를 입력하세요')">
+        PW경고버튼
     </button>
 
     <script>
-        function alert_open() {
-            document.getElementById('alert1').style.display='block';
+        //        function alert_open() {
+        //            document.getElementById('alert1').style.display='block';
+        //        }
+        //        function alert_close() {
+        //            document.getElementById('alert1').style.display = 'none';
+        //        }
+
+        function alert_display(state, message) {
+            if (message != '') {
+                document.getElementById('alertMessage1').innerHTML = 'Alert : ' + message;
+            }
+            document.getElementById('alert1').style.display = state;
         }
-        function alert_close() {
+
+
+        //EventListner 문법 : 해당 요소에 이벤트 발생시 다음 함수를 실행하라
+        document.getElementById('closeBtn').addEventListener('click', function() {
             document.getElementById('alert1').style.display = 'none';
-        }
+        });
     </script>
 </body></html>
 
@@ -54,5 +73,24 @@ is not function : 보통 메서드(함수)나 함수 명 실수해서 씀
 
 JS는 보통 카멜표기를 쓴다
 
+-->
+
+<!-- 4/24 : Parameter, EventListener
+    function 파라미터(인자,매개변수,Argument) >> 함수 하나로 다양한 기능 수행 가능 >> 함수 개수 단축가능
+    예를 들어 위 alert_open에 'block', 'none'을 파라미터로 받아
+    document.getElementById('alert1').style.display = 파라미터; 처리를 하면 function개수를 단축시킬 수 있음
+
+    console.log(args); >> 콘솔에 파라미터 띄워줌
+
+    getElementsBy series : Id, ClassName, Name, TagName 등 셀렉터 종류는 많음 보통 Id랑 ClassName 많이 씀
+                         : ClassName의 경우 해당 Class셀렉터를 다 찾음 >> getElementsByClassName()[]로 인덱스를 걸어준다(0부터)
+
+
+    EventListener : HTML의 onclick영역 부분도 그냥 JS에서 처리 가능하게 함 >> HTML을 더 간략화 or HTML직접수정이 되지 않을때
+    document.getElementBy~(~).addEventListener(event, function () {
+
+    });
+
+    event 종류 : click, keydown(딱봐도 키보드입력), scroll, mouseover 등 굉장히 다양한 종류가 있음
 
 -->

@@ -1,4 +1,4 @@
-div, button {
+div, button, p {
     box-sizing: border-box;
 }
 
@@ -9,6 +9,13 @@ div, button {
     border-radius: 5px;
 
     display: none; /*CSS로 숨길때 쓰는 방법중 하나*/
+}
+
+.alert-box p {
+    padding: 0;
+    margin: 0;
+    float: left;
+    font-weight: bold;
 }
 
 .alert-close-btn {
