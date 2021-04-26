@@ -3,16 +3,38 @@ div {
     box-sizing: border-box;
 }
 
+.text-center {
+    text-align: center;
+}
+
+.back-sky {
+    background-color: #6fbaf8;
+    color: white;
+}
+
+.font-sky {
+    color: #6fbaf8;
+}
+
+p {
+    margin-top: 5px;
+    margin-bottom: 7px;
+    font-size: 15px;
+}
+
 h3 {
     font-size: 25px;
+    margin-bottom: 7px;
 }
 
 h4 {
-
+    font-size: 22px;
+    margin-bottom: 15px;
 }
 
 h5 {
-
+    font-size: 18px;
+    margin-bottom: 5px;
 }
 
 .profile-box {
@@ -21,12 +43,8 @@ h5 {
     box-shadow: 1px 1px 5px 1px lightgrey; /*x축(음수면 왼) y축(음수면 위) blur spread(음수면 축소)*/
 }
 
-.profile-head {
-    height: 200px;
-}
-
 .profile-image {
-
+    text-align: right;
 }
 
 .profile-image img {
@@ -35,29 +53,18 @@ h5 {
 }
 
 .profile-head table {
-    height: 115px;
+    height: 120px;
     margin: auto;
     vertical-align: middle;
     font-size: 15px;
 }
 
 .profile-head th {
-    width: 50%;
-}
-
-.profile-head td {
-
-}
-
-.profile-intro {
-
+    width: 45%;
 }
 
 .profile-inform {
     border-left: 3px solid lightgrey;
-}
-
-.profile-body {
 }
 
 .tag-box {
@@ -69,14 +76,67 @@ h5 {
     padding: 5px;
     padding-left: 15px;
     padding-right: 15px;
-    border: 2px solid grey;
+    border: 1px solid gray;
     border-radius: 50px;
     font-size: 12px;
+    font-weight: 500;
     margin-right: 5px;
+}
+
+.about-box {
+    border-bottom: 3px solid lightgrey;
+}
+
+.profile-center {
+    height: 100%;
+}
+
+.nav-menu {
+    border-bottom: 3px solid #6fbaf8;
+}
+
+.default-line {
+    border-bottom: 3px solid lightgray;
+}
+
+.profile-btn {
+    background-color: #6fbaf8;
+    color: white;
+    padding: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 5px;
+    border: none;
+}
+
+.contact-box {
+    display: flex;
+}
+
+.contact-img img {
+    width: 75px;
+    height: 70px;
+}
+
+.contact-inform h5, p {
+    margin-bottom: 3px;
+    margin-top: 3px;
+}
+
+.contact-head {
+    border-bottom: 2px solid lightgray;
 }
 
 @media screen and (max-width: 992px) {
     .profile-head {
-        height: 400px;
+        height: 350px;
+    }
+
+    .profile-inform{
+        border: none;
+    }
+
+    .none-box {
+        display: none;
     }
 }
