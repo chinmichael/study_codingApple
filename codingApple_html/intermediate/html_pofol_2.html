@@ -22,6 +22,26 @@
 
     <div class="container mt-5">
 
+        <!-- 강의에서는 아예 프로필을 2분해서 오른쪽을 테이블로 함
+
+        <div class="row">
+          <div class="col-md-7"> 이미지, 이름, 버튼</div> >> 이 부분은 부트스트랩 media문법으로 이미지 배치함
+          <div class="col-md-5"> 지역, 나이 등 소개영역 </div> >> 이쪽은 강의에선 테이블 말고 새로운 row div로 해서 col을 6씩 배치
+        </div>
+
+        -- bootstrap media --
+
+        <div class="media">
+          <img src="..." class="align-self-center mr-3" alt="...">
+            <div class="media-body">
+                <h5 class="mt-0">Center-aligned media</h5>
+                <p>She'll turn cold as a freezer. At the eh-end of it all..</p>
+            </div>
+        </div>
+
+
+        -->
+
         <div class="row profile-head profile-box p-4">
             <div class="col-lg-2 col-sm-6 ml-lg-5 profile-image">
                 <img src="../../resource/image/profile-pic.png">
@@ -56,51 +76,53 @@
 
         <div class="row profile-nav mt-4 pl-3 pr-3">
             <div class="col-md-2 col-sm-3 nav-menu text-center">
-            <h4 class="font-sky mb-2">Profile</h4></div>
+                <h4 class="font-sky mb-2">Profile</h4>
+            </div>
             <div class="col-md-10 col-sm-9 default-line"></div>
         </div>
 
         <div class="row profile-body mt-3 p-0">
 
-              <div class="col-lg-3 p-0 pr-lg-3 ">
-               <div class="profile-box p-4 pb-lg-5 pb-sm-5">
-                <h4 class="pl-1">WORKS</h4>
-                <p>Landing page design</p>
-                <p>Flyer design</p>
-                <p>Vue.js To-do app</p>
-                <p>Shopping page design</p>
+            <div class="col-lg-3 p-0 pr-lg-3 ">
+                <div class="profile-box p-4 pb-lg-5 pb-sm-5">
+                    <h4 class="pl-1">WORKS</h4>
+                    <p>Landing page design</p>
+                    <p>Flyer design</p>
+                    <p>Vue.js To-do app</p>
+                    <p>Shopping page design</p>
+                </div>
             </div>
-           </div>
 
             <div class="col-lg-6 p-0 mt-lg-0 mt-sm-3">
                 <div class="profile-box profile-center p-4">
-                <div class="about-box pb-5">
-                    <h4 class="pl-1">ABOUT</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime facere ipsam vitae corporis, at reiciendis deleniti minima, placeat repellat, officia iusto vel consectetur. Quae iusto praesentium, velit tempora, nisi reiciendis.</p>
-                </div>
+                    <div class="about-box pb-5">
+                        <h4 class="pl-1">ABOUT</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime facere ipsam vitae corporis, at reiciendis deleniti minima, placeat repellat, officia iusto vel consectetur. Quae iusto praesentium, velit tempora, nisi reiciendis.</p>
+                    </div>
 
-                <div class="skill-box mt-4">
-                    <h4 class="pl-1">SKILLS</h4>
-                <div class="tag-box">
-                    <p class="tag">HTML5</p>
-                    <p class="tag">Javascript</p>
-                    <p class="tag">CSS3</p>
-                    <p class="tag">Illustrator</p>
-                    <p class="tag">Photoshop</p>
+                    <div class="skill-box mt-4">
+                        <h4 class="pl-1">SKILLS</h4>
+                        <div class="tag-box">
+                           <!--강의 경우 이 해시태그를 flex가 아니라 span에(span은 기본적으로 display:inline) inline-block로 함-->
+                            <p class="tag">HTML5</p>
+                            <p class="tag">Javascript</p>
+                            <p class="tag">CSS3</p>
+                            <p class="tag">Illustrator</p>
+                            <p class="tag">Photoshop</p>
+                        </div>
+                    </div>
                 </div>
-                </div>
-            </div>
             </div>
 
             <div class="col-lg-3 p-0 pl-lg-3 mt-lg-0 mt-sm-3 mb-sm-5">
                 <div class="profile-box text-center p-4">
-                   <i class="fas fa-tint fa-4x font-sky mt-3"></i>
+                    <i class="fas fa-tint fa-4x font-sky mt-3"></i>
                     <p class="mt-4 mb-4">Find me at Linkedout.com</p>
                     <button class="btn btn-primary profile-btn mb-2">Sign Up</button>
                     <br>
                     <a class="font-sky">Aleady a member?</a>
                 </div>
-                <div class="none-box p-2 pl-3 pr-3 mt-3">
+                <div class="none-box p-2 pl-3 pr-3 mt-3"> <!--강의에선 bootstrap media object로 처리-->
                     <p class="contact-head pb-2 pl-2">People You Might Know</p>
                     <div class="contact-box mt-3">
                         <div class="contact-img p-0">
@@ -129,6 +151,8 @@
         </div>
 
     </div>
+
+    <!--추가 팁 : 부트스트랩은 많은 요소가 rem, em으로 선언됨 : 부모요소의 font-size처리로 축소 확대 조절이 됨-->
 
 
 
