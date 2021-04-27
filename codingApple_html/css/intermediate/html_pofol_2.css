@@ -43,6 +43,15 @@ h5 {
     box-shadow: 1px 1px 5px 1px lightgrey; /*x축(음수면 왼) y축(음수면 위) blur spread(음수면 축소)*/
 }
 
+/*
+.white-box {
+	background: white;
+	padding: 20px; //아예 패딩을 줘버림
+	border-radius: 5px;
+	box-shadow: 0.5px 0.5px 2px 1px #eee; //x,y축과 블루어 참조
+}
+*/
+
 .profile-image {
     text-align: right;
 }
