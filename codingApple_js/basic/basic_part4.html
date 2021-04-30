@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="./basic_part4.css">
+
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="black-bg">
+        <div class="white-bg">
+            <p>로그인 하세요</p>
+            <button type="button" class="btn btn-primary btn-sm" id="login-close">Close</button>
+        </div>
+    </div>
+
+    <div class="nav-menu">
+        <h4>Shirts Studio</h4>
+        <a id="nav-sub-btn">Products</a>
+    </div>
+
+    <ul class="list-group nav-sub">
+        <!--서브메뉴는 부트스트랩 list-group이용-->
+        <li class="list-group-item">Outer</li>
+        <li class="list-group-item">Innerwear</li>
+        <li class="list-group-item">Shirts</li>
+    </ul>
+
+    <div class="jumbotron main-background">
+        <h1 class="display-4">Shirts Studio</h1>
+        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+        <hr class="my-4">
+        <a class="btn btn-primary btn-lg" id="btn-login" href="#" role="button">Log-in</a>
+    </div>
+
+
+    <!--jQuery CDN-->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <!--slim버전이라 제낌 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+    <script>
+        $('#btn-login').click(function() {
+            //$('.black-bg').show();
+            $('.black-bg').fadeIn();
+        });
+        //$('#btn-login').on('click', function(){$('.black-bg').css('display','block')});
+        //위아래는 같은 기능을 갖는다. on click은 click으로 쉽게 표현가능
+        //저저번 시간에 했던 jquery 애니메이션 함수 show(), hide(), fadeIn(), fadeOut(), slideDown(), slideIn() 적극 사용하자
+
+        //toggle()함수 : 이벤트 실행시 마다 UI를 껐다키는걸 번갈아 적용해준다 : toggle(), fadeToggle(), slideToggle() >> if 안써도 되서 편함
+
+        $('#login-close').click(function() {
+            $('.black-bg').fadeOut();
+        });
+
+        $('#nav-sub-btn').click(function() {
+            $('.nav-sub').slideToggle();
+        });
+
+        //$('.white-bg').on('click', function(){$('.black-bg').css('display','block')});
+        //$('.black-bg').on('click', function(){$('.black-bg').css('display','none')});
+    </script>
+</body></html>
+
+
+<!--4/30: Bootstrap 적용과 모달UI
+
+    Bootstrap : 프론트엔드 컴포넌트 라이브러리
+    점보트론 : 사이트대문 템플릿
+    모달창 : 팝업같은 느낌의 html요소 / 보통 맨 위에(body태그 바로 뒤) 작성함 (띄었을때 맨 위에 위치)
+
+    애니메이션 제작은 항상 미리 만들고 / 숨기고 / 띄운다 순서
+
+    toggle()함수 : 이벤트 실행시 마다 UI를 껐다키는걸 번갈아 적용해준다 : toggle(), fadeToggle(), slideToggle() >> if 안써도 되서 편함 개꿀
+-->
