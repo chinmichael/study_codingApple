@@ -18,7 +18,18 @@
     <div class="black-bg">
         <div class="white-bg">
             <p>로그인 하세요</p>
-            <button type="button" class="btn btn-primary btn-sm" id="login-close">Close</button>
+            <form>
+                <div class="form-group">
+                    <input type="email" class="form-control" id="login_email" placeholder="Email">
+                </div>
+                <div>
+                    <input type="password" class="form-control" id="login_pw" placeholder="Password">
+                </div>
+                <div class="mt-3" style="display:inline-block;">
+                    <button type="submit" class="btn btn-primary btn-sm">Login</button>&nbsp;
+                    <button type="button" class="btn btn-danger btn-sm" id="login-close">Close</button>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -41,6 +52,8 @@
         <a class="btn btn-primary btn-lg" id="btn-login" href="#" role="button">Log-in</a>
     </div>
 
+    <!--<input id="test-input"/>-->
+
 
     <!--jQuery CDN-->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
@@ -48,6 +61,36 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 
     <script>
+        if (1 === '1') {
+            console.log("안녕1"); //console.log() >> 콘솔에 로그 띄우는 함수
+        } else if (1 == '1') {
+            console.log("안녕2");
+        } else {
+            console.log("안녕3");
+        } // 위에서부터 읽어서 조건에 맞는 '하나ornot'만 실행 (맞는게 있음 확인이 거기서 끝남)
+
+        //if 간단 과제 : input value가 '안녕'일 때만 열리기
+        /*$("#btn-login").on('click', function() {
+            if($("#test-input").val() == '안녕') {
+                $('.black-bg').fadeIn();
+            }
+        })*/
+
+        $("form").on('submit', function(e) { //이벤트 중 submit >> 제출이 정상 실행되면 페이지 이동이나 새로고침이 일어남
+            if($("#login_email").val() == '') {
+                alert("이메일을 입력하세요");
+                e.preventDefault();
+            }
+            if($("#login_pw").val() == '') {
+                alert("비밀번호를 입력하세요");
+                e.preventDefault();
+            }
+        });
+
+        /*$("form").on('submit', function(e) { //이벤트 중 submit >> 제출이 정상 실행되면 페이지 이동이나 새로고침이 일어남
+            e.preventDefault(); // 폼의 전송을 막을 수 있음
+        });*/
+
         $('#btn-login').click(function() {
             //$('.black-bg').show();
             $('.black-bg').fadeIn();
@@ -81,4 +124,18 @@
     애니메이션 제작은 항상 미리 만들고 / 숨기고 / 띄운다 순서
 
     toggle()함수 : 이벤트 실행시 마다 UI를 껐다키는걸 번갈아 적용해준다 : toggle(), fadeToggle(), slideToggle() >> if 안써도 되서 편함 개꿀
+-->
+
+<!--5/4: if(조건식){조건 맞을때 적용 코드}> 조건에 맞을때만 코드 실행
+         조건식의 ==(느슨한 비교:1=='1'참 알아서 타입변환해 내용을 비교), ===(엄격한 비교:1==='1'거짓 >> 자료의 타입까지 검사)
+
+         참고로 콘솔에 조건식을 입력하면 true false를 확인할 수도 있다
+
+         조건식에 false와 마찬가지로 실행 안되는 값들 : null, undefined, NaN
+         조건식에 and, or표현 >> &&(전부 참이어야), ||(적어도 하나가 참이어야)
+
+         .value는 jQuery에서 .val() >> 콘솔창에 $().val() 등을 입력하면 반환값으로 디버깅 가능
+
+         오늘의 Tip : 프로그래밍은 레고조립 같은 류의 논리게임이다
+
 -->
