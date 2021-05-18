@@ -9,7 +9,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="./basic_part4.css">
+    <link rel="stylesheet" href="./intermediate_part1.css">
 
     <title>Document</title>
 </head>
@@ -76,16 +76,8 @@
             console.log("안녕2");
         } else {
             console.log("안녕3");
-        } // 위에서부터 읽어서 조건에 맞는 '하나ornot'만 실행 (맞는게 있음 확인이 거기서 끝남)
+        }
 
-        //if 간단 과제 : input value가 '안녕'일 때만 열리기
-        /*$("#btn-login").on('click', function() {
-            if($("#test-input").val() == '안녕') {
-                $('.black-bg').fadeIn();
-            }
-        })*/
-
-        //$("form").on('submit', function(e) { //이벤트 중 submit >> 제출이 정상 실행되면 페이지 이동이나 새로고침이 일어남
         $("#login-form").on('submit', function(e) {
             if ($("#login_email").val() == '') { // 실제로 console.log()로 빈 input을 출력해보면 ""로 나온다
                 //alert("이메일을 입력하세요");
@@ -99,19 +91,10 @@
             }
         });
 
-        /*$("form").on('submit', function(e) { //이벤트 중 submit >> 제출이 정상 실행되면 페이지 이동이나 새로고침이 일어남
-            e.preventDefault(); // 폼의 전송을 막을 수 있음
-        });*/
-
         $('#btn-login').click(function() {
             //$('.black-bg').show();
             $('.black-bg').fadeIn();
         });
-        //$('#btn-login').on('click', function(){$('.black-bg').css('display','block')});
-        //위아래는 같은 기능을 갖는다. on click은 click으로 쉽게 표현가능
-        //저저번 시간에 했던 jquery 애니메이션 함수 show(), hide(), fadeIn(), fadeOut(), slideDown(), slideIn() 적극 사용하자
-
-        //toggle()함수 : 이벤트 실행시 마다 UI를 껐다키는걸 번갈아 적용해준다 : toggle(), fadeToggle(), slideToggle() >> if 안써도 되서 편함
 
         $('#login-close').click(function() {
             $('.black-bg').fadeOut();
@@ -123,27 +106,6 @@
             $('.nav-sub').slideToggle();
         });
 
-        //$('.white-bg').on('click', function(){$('.black-bg').css('display','block')});
-        //$('.black-bg').on('click', function(){$('.black-bg').css('display','none')});
-
-        $("#homework-click").on('click', function(e) {
-            let check = $("#homework-if").val();
-            let check2 = check.substr(check.length - 1, 1); // (start index, 범위 length)
-            let check3 = check.substring(check.length - 1, check.length); // (start index, end index(포함안됨))
-            if (check % 9 == 0) {
-                alert("박수박수");
-            } else if (check % 3 == 0) {
-                alert("박수");
-            } else {
-                alert("통과");
-            }
-            if (check2 == '3' || check2 == '6' || check2 == '9') {
-                alert("기존 369 박수");
-            } else {
-                alert("기존 369 통과");
-            }
-        });
-
         $("#login_email").on("change", function() {
             console.log("change됨");
         });
@@ -151,37 +113,89 @@
             console.log("input중")
         });
     </script>
-</body></html>
+</body>
+</html>
 
 
-<!--4/30: Bootstrap 적용과 모달UI
+<!-- 5/18 : 변수 var / let / const (es6 신문법)
 
-    Bootstrap : 프론트엔드 컴포넌트 라이브러리
-    점보트론 : 사이트대문 템플릿
-    모달창 : 팝업같은 느낌의 html요소 / 보통 맨 위에(body태그 바로 뒤) 작성함 (띄었을때 맨 위에 위치)
+     변수 : var 변수명 = 대입할 데이터 값; >> 자료 저장 or 참조 주소
 
-    애니메이션 제작은 항상 미리 만들고 / 숨기고 / 띄운다 순서
+     변수에 넣는 데이터는 참조값도 되므로 $("#login_email") 같은 것도 가능
+     >> 특히 이런 셀렉터를 변수에 담는 습관은 매우 좋다
+     >> 셀렉터를 쓸 때마다 HTML을 탐색하기에 참조값을 성능상 변수에 저장하여 사용하면 성능이 매우 향상
 
-    toggle()함수 : 이벤트 실행시 마다 UI를 껐다키는걸 번갈아 적용해준다 : toggle(), fadeToggle(), slideToggle() >> if 안써도 되서 편함 개꿀
--->
+     변수 활용 이유 : 가장 큰 이유는 코드의 간략화
 
-<!--5/4: if(조건식){조건 맞을때 적용 코드}> 조건에 맞을때만 코드 실행
-         조건식의 ==(느슨한 비교:1=='1'참 알아서 타입변환해 내용을 비교), ===(엄격한 비교:1==='1'거짓 >> 자료의 타입까지 검사)
+     변수 활용 개념 : 선언 / 할당 / 범위
 
-         참고로 콘솔에 조건식을 입력하면 true false를 확인할 수도 있다
+     > 선언 : var 변수명; (해당 변수명을 말그대로 선언 / Typescript Java같은 컴파일언어처럼 데이터 타입이 크게 없으므로...)
 
-         조건식에 false와 마찬가지로 실행 안되는 값들 : null, undefined, NaN
-         조건식에 and, or표현 >> &&(전부 참이어야), ||(적어도 하나가 참이어야)
+     > 할당 : 변수명 = 대입할 값; (선언된 변수에 값을 넣음)
 
-         .value는 jQuery에서 .val() >> 콘솔창에 $().val() 등을 입력하면 반환값으로 디버깅 가능
+     var 나이 = 18; >> 선언과 할당을 동시에 쌉가능
 
-         오늘의 Tip : 프로그래밍은 레고조립 같은 류의 논리게임이다
--->
+     > 범위 : 선언한 변수가 유효한 영역(지역 : 일반적으로 전역변수 아니면 지역(함수 등 안)으로 생각 / 상위요소의 변수는 하위요소에서 통함)
 
-<!-- 5/18 : 자주 쓰는 form 이벤트
 
-    form >> submit
 
-    input>> change : input의 value가 바뀜 + focus를 잃었을때 실행 >> form submit이외 input 자체에 이벤트 리스너를 붙여 체크도 된다.
-            input : input의 value가 변경되었을때 실행
+     es6 신문법 : let / const 추가
+
+     >> let : 재선언이 불가능한 변수 (읭?할수가 있는데 js에서는 같은 이름으로 선언이 가능함....ㄷㄷㄷ let을 가능한 브라우저면 쓰자)
+
+     >> const : 재선언 + 재할당(값 바꿔 대입) 불가 (final) / 근데 프론트환경에서는 그닥 쓸일이 많이 없음
+
+     >> 범위 문제 : var가 function이면 나머지는 {} ... 먼가 범위가 좀 더 작음 / 변수 범위가 작아 겹치는 확률이 적음
+
+
+     변수 Hoisting : 위 범위문제에 대해 function 범위와 {} 범위 무엇차이인지 좀 더 알 수 있음
+
+     > 일반적인 프로그래밍의 지역변수는 당연히 선언되 {}에서만 유효 (let과 const도 그러하다)
+     > 하지만 JS의 var는 아니다 (?????)
+
+     > if(true) { var name = "chin"; } console.log(name); 하면 콘솔에 이름이 뜸(???!!!)
+     > for(var i = 0; i < 100; i++) { //do something } console.log(i); 심지어 얘도 뜬다(???!!!)
+
+     >> 이런 현상이 발생하는게 var 변수가 호이스팅 되기 때문
+     >> Hoisting : var를 통해 정의된 변수의 선언문을 유효범위의 최상단으로 끌어올리는 행위 (선언과 할당의 분리)
+
+     >> var는 위에서 유효범위가 function이라고 했는데,
+        이는 let과 const가 선언된 {}에 유효하다면, var는 선언된 {}가 아니라 선언된 곳의 function영역이란 것
+
+        즉 간단히 위에서 했던
+        function ex1() {
+            if(true) { var name = "chin"; }
+            console.log(name);
+        }
+        이런 코드를 개발자가 짰다면
+
+        실제 JS는 호이스팅에 의해 var의 유효범위 최상단으로 선언과 할당을 분리시켜 올려주기 때문에
+        function ex1() {
+            var name;
+            if(true) { name = "chin"; }
+            console.log(name);
+        }
+        으로 처리되게 된다.
+
+        global scope도 하나의 function scope처럼 이뤄지기 때문에 마찬가지다
+
+
+        cf) 함수 선언의 호이스팅
+        ex1();
+        ex2();
+
+        var ex1 = function() {}
+        function ex2() {}
+
+        의 경우 함수 호이스팅이 발생하기에 문제없이 실행된다.
+
+        하지만
+        var ex1;
+
+        ex1();
+
+        ex1 = function() {}
+
+        의 경우 문제가 터지는데 호이스팅은 '선언과 할당을 분리'해 '선언을 유효범위 상단'으로 올려주는것
+        따라서 할당이 호출 뒤에 일어나므로 저리됨
 -->
