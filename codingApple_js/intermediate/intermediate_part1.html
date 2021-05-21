@@ -47,11 +47,16 @@
         <li class="list-group-item">Shirts</li>
     </ul>
 
+    <div class="left-menu">
+        <p>Menu-title</p>
+    </div>
+
     <div class="jumbotron main-background">
         <h1 class="display-4">Shirts Studio</h1>
         <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
         <hr class="my-4">
         <a class="btn btn-primary btn-lg" id="btn-login" href="#" role="button">Log-in</a>
+        <a class="btn btn-danger btn-lg ml-2" id="show-menu" href="#" role="button">Show Menu</a>
     </div>
 
     <div style="margin-top: 20px">
@@ -93,11 +98,22 @@
 
         $('#btn-login').click(function() {
             //$('.black-bg').show();
-            $('.black-bg').fadeIn();
+            //$('.black-bg').fadeIn();
+            //$('.black-bg').slideDown();
+            //$('.black-bg').show();
+            //$('.black-bg').css('margin-top', '0px');
+            //$(".black-bg").animate({marginTop:"0px"}, 1000);
+            //$(".black-bg").css('transform','translateY(0px)');
+            $(".black-bg").addClass("black-trans"); // addClass(), removeClass() 클래스명에는 셀렉터 안붙인다
         });
 
         $('#login-close').click(function() {
-            $('.black-bg').fadeOut();
+            //$('.black-bg').fadeOut();
+            //$(".black-bg").animate({marginTop:"-1200px"}, 1000).hide();
+            //$('black-bg').css('margin-top', '-1200px');
+            //$('.black-bg').hide();
+            //$(".black-bg").css('transform','translateY(-1200px)');
+            $(".black-bg").removeClass("black-trans");
             $("#email-alert").hide();
             $("#pw-alert").hide();
         });
@@ -112,9 +128,47 @@
         $("#login_email").on("input", function() {
             console.log("input중")
         });
+
+        let menuOn = true;
+
+        $("#show-menu").click(() => {
+            if (this.menuOn) {
+                $(".left-menu").animate({
+                    marginLeft: "0px"
+                }, 1000);
+                this.menuOn = false;
+            } else {
+                $(".left-menu").animate({
+                    marginLeft: "-150px"
+                }, 1000);
+                this.menuOn = true;
+            }
+        });
     </script>
-</body>
-</html>
+
+    <script>
+        // 과제파트
+
+        let 예금액 = 60000;
+        let 미래예금액 = 0;
+
+        if (예금액 >= 50000) {
+            미래예금액 = (예금액 * 1.2) * 1.2;
+        } else {
+            미래예금액 = (예금액 * 1.15) * 1.15;
+        }
+
+        console.log("미래예금액 : " + 미래예금액);
+
+
+        let 첫커피 = 360;
+        let 마신커피 = 0;
+
+        마신커피 = 첫커피 + (첫커피 * 2 / 3) + (첫커피 * 4 / 9);
+
+        console.log("마신커피 : " + 마신커피);
+    </script>
+</body></html>
 
 
 <!-- 5/18 : 변수 var / let / const (es6 신문법)
@@ -198,4 +252,66 @@
 
         의 경우 문제가 터지는데 호이스팅은 '선언과 할당을 분리'해 '선언을 유효범위 상단'으로 올려주는것
         따라서 할당이 호출 뒤에 일어나므로 저리됨
+
+    5/21 : JS 사칙연산
+    별거 없음 Java때처럼 +, -, /, *사용하면 됨
+
+    단지 + 는 문자열이 하나라도 끼면 문자열을 합치는 연산을 자동으로 해줌 (숫자파트를 문자화 시키지 않아도)
+
+    더 주의할 점은 나머지 연산자의 경우 문자열이 꼈을때 문자열 내부가 숫자면 알아서 숫자연산으로 해줌
+
+-->
+
+<!-- 5/21 : jQuery Animate => 특정 css요소 변경을 지정시간동안 천천히 시킬 수 있음
+
+     기존 CSS 애니메이션 적용은 비교적 제약사항이 존재
+     따라서 JS나 jQuery로 보강하면 매우 편리하게 애니메이션 적용이 가능함
+
+     키입력, 클릭했을때나 스크롤 했을때 이럴경우 애니메이션 적용 좋음 >> 구현 영역이 넓어짐 (CSS는 마우스를 올렸을때 경우등)
+
+     오른쪽으로 이동시킬 경우
+     $("").animate({ marginLeft : '100px'}, 1000);
+
+     >> 첫번째 파라미터는 CSS속성을 Object 타입(js Object타입은 {key:value})으로 지정
+        이때 JS에서 '-'는 연산자이므로 CamelCase로 바꾼다
+
+     >> 2번째 파라미터의 시간은 밀리초 기준
+
+     애니메이션은 UI만들고 감추고 보여주는 단계에 시간을 늘리는것일뿐
+
+
+     애니메이션2
+
+     login slide() 직접 처리 : margin-top을 -1200로 하고 animate를 줌
+     +
+     show(), hide() 등 순서적용
+     jQuery에서 함수를 순서대로 적용하려면 콜백함수로 연결이 된다 (시간문제로 순서적용이 안될수 있기에 Event Queue, Stack, Evnet Loop 참조)
+     animate(~).hide()가 가능
+     +
+     animate를 추가로 작성하고 싶으면 animate()의 세번째 파라미터로 콜백함수를 추가해준다
+     animate(~,1000,function(){
+         animate(~)
+     })
+
+
+     애니메이션 작성 추천
+     1. basic 애니메이션 작성 순서 : 시작화면+최종화면 만들기 >> JS로 트리거하기 >> 스무스한 동작은 animate()적용
+
+     2. 근데 요즘엔 animate 잘 안씀 >> CSS 속성을 사용한다 (transaction 속성 이용) | 물론 트리거는 JS 계속 씀
+
+     CSS 속성 선호 이유
+     1) transition은 JS와 독립적으로 동작 : JS로 애니메이션까지 주면 성능상의 부담이 감
+     >> 특히 SPA만들때는 하면 안됨 (transition쓰거나 velocity.js같은 애니메이션 전용 라이브러리 사용)
+
+     2) transition이 적용 및 조정에 쉬움
+
+     3. 애니메이션을 margin, width, position, left, right, height 등에 주면 안된다. >> transform 속성을 사용
+     transform
+     >> translate() 위치이동; rotate() 회전; scale() 사이즈변경; 등
+
+     레이아웃 변경 속성(margin width 등)을 쓰지 않은 이유 : 레이아웃 속성등은 변경시 랜더링 시간이 오래걸림
+     이에 비해 transform, opacity같은 속성들은 페이지 레이아웃과 관련이 없기에 빠르게 처리가 된다 (브라우저 css 랜더링 단계 공부)
+
+     4. 애니메이션용 클래스 제작 + addClass() + removeClass()를 활용하여 클래스 단위로 애니메이션을 만든다 (애니메이션을 최대한 Css에 맡김)
+     >> 코드 유지관리, 재사용성과 간결성에 좋아진다.
 -->

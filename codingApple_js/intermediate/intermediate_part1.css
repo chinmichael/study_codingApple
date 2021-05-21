@@ -15,9 +15,18 @@
     width: 100%;
     height: 100%;
 
-    display: none; /*나중에 js를 통해 변경*/
+    /*margin-top: -1200px;*/
+
+    display: block; /*나중에 js를 통해 변경*/
     /*visibility: hidden;*/ /*UI 자국이 남으므로 다른 때 씀*/
     /*opacity: 0;*/ /*투명도만 바꾸므로 겹치는 요소가 있을 때는 별로*/
+
+    transition: all 1s;
+    transform: translateY(-1200px);
+}
+
+.black-trans {
+    transform: translateY(0px);
 }
 
 .white-bg {
@@ -39,4 +48,14 @@
 
 .nav-sub {
     display: none;
+}
+
+.left-menu {
+    width: 150px;
+    height: 100%;
+    background: black;
+    position: fixed; /*스크롤을 해도 화면에 고정 + 요소가 붕 뜨게 됨*/
+    color: white;
+
+    margin-left: -150px;
 }
