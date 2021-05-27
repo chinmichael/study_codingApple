@@ -20,7 +20,7 @@
             <p>로그인 하세요</p>
             <form id="login-form">
                 <div class="form-group">
-                    <input type="email" class="form-control" id="login_email" placeholder="Email">
+                    <input type="text" class="form-control" id="login_email" placeholder="Email">
                     <p id="email-alert" style="color: red; display: none;">이메일을 입력해주세요</p>
                 </div>
                 <div>
@@ -83,18 +83,72 @@
             console.log("안녕3");
         }
 
+        //        $("#login-form").on('submit', function(e) {
+        //            if ($("#login_email").val() == '') { // 실제로 console.log()로 빈 input을 출력해보면 ""로 나온다
+        //                //alert("이메일을 입력하세요");
+        //                $("#email-alert").show();
+        //                e.preventDefault();
+        //            }
+        //            if ($("#login_pw").val() == '') {
+        //                //alert("비밀번호를 입력하세요");
+        //                $("#pw-alert").show();
+        //                e.preventDefault();
+        //            }
+        //        }); // 정규식 대체
+
+        //HTML5부터는 input type에 email도 생겼지만
+
+        const emailRex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+        const emailRex2 = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/; // 특수문자만 거르는 케이스 요즘에는 이쪽을 더 선호
+
+        /*
+        //i 정규식 패턴이 대소문자 구분을 사용하지 않음
+        ^는 문자열의 시작을 표현
+        *는 0회 이상 그 이상의 문자가 대응(+은 1회이상)
+        $는 입력의 끝부분과 대응 문자열 종료가 무엇으로 되는지
+        {n,m} 앞 문자가 최소 0개 최대 1개 {n} n번반복 {n,} n번이상 반복
+        ? {0,1}과 같은 의미 존재할수도 안할수도
+        ()그룹표현
+        [^a-z] 등 의 ^는 not을 의미
+
+        */
+
+        const pwRex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/;
+
+        //이런식으로 그룹화한 조건들이 포함되어 있는지를 pw에서 사용
+        //?= 전방탐색 (후방탐색은 ?<=\$) 작성한 패턴이 일치하는 영역이 존재해도 그 값이 소비되지 않음(일치하는 영역을 반환하지 않음)
+        // http:// 에서 .+(?=:)라고 하면 :를 찾은건 체크하고 이제 다시 전방부터 탐색하되 :은 소비되지 않음
+        //.*는 모든 문자열 따라서 (?=.*[a-z])는 소문자체크
+
         $("#login-form").on('submit', function(e) {
-            if ($("#login_email").val() == '') { // 실제로 console.log()로 빈 input을 출력해보면 ""로 나온다
-                //alert("이메일을 입력하세요");
+            let email = $("#login_email").val();
+            let pw = $("#login_pw").val();
+
+            console.log(email);
+            console.log(emailRex);
+
+            if (email == "") {
+                alert("이메일이 공백입니다.");
+                e.preventDefault();
+
+            } else if (!emailRex.test(email)) {
                 $("#email-alert").show();
                 e.preventDefault();
+            } else {
+                $("#email-alert").hide();
             }
-            if ($("#login_pw").val() == '') {
-                //alert("비밀번호를 입력하세요");
+
+            if (!/[A-Z]{1,}/.test(pw)) {
                 $("#pw-alert").show();
                 e.preventDefault();
+            } else {
+                $("#pw-alert").hide();
             }
+
+
         });
+
+
 
         $('#btn-login').click(function() {
             //$('.black-bg').show();
@@ -314,4 +368,26 @@
 
      4. 애니메이션용 클래스 제작 + addClass() + removeClass()를 활용하여 클래스 단위로 애니메이션을 만든다 (애니메이션을 최대한 Css에 맡김)
      >> 코드 유지관리, 재사용성과 간결성에 좋아진다.
+-->
+
+<!--5/27 : 정규식 >> 문자형식 체크할 때 쓰는 문법
+
+    ex 문자열에 'abc'가 들어갔는가? /abc/ '동일한가가 아니라 들어가 있는가임'
+       검사할 문자열 'abcde' >> /abc/.test('abcde') >> boolean형으로 반환
+
+    간단한 JS정규식 핵심 문법 몇가지 (대부분 필요할 때마다 찾아봄 email regular expression 등)
+    일단 //안에 넣음
+    [] : 찾을 문자의 범위 /[A-z]/ 모든 A~z까지의 문자 포함하나
+    \S (혹은 원화) : 특수문자 포함 모든 문자 (정확히는 공백이 아님을 표현 \s는 공백문자) >> 응용 모든 문자다음에 @ >> /\S@/
+    \w word를 의미 알파벳, 숫자, _ 중 하나
+    \W non word 위의 역
+    \d digit 숫자
+    \D non digit
+    \b word boundary 문자와 공백 사이 문자
+
+    + : 뒤에도 위 조건이 맞는지 확인 >> \S+@ 하면 됨
+
+    간단한 이메일 정규식 /\S+@\S+.\S/ 에서 '.'은 이스케이프 문자(\)랑 같이 써줘야함 /\S+@\S+\.\S/ (물론 실제로 이거 쓰면 안됨)
+
+
 -->
