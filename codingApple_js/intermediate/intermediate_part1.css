@@ -59,3 +59,53 @@
 
     margin-left: -150px;
 }
+
+.slide-box {
+    width: 100vw; /*vw단위 : viewport(브라우저) width의 몇 퍼센트 / 호환성은 좀 떨어지나 편리함 */
+    float: left;
+}
+
+.slide-container {
+    width: 300vw; /*3개의 100vw 들을 감싸므로*/
+/*    transform: translateX(-100vw);*/
+    transition: transform 1s;
+}
+
+.slide-trans2 {
+    transform: translateX(-100vw);
+}
+
+.slide-trans3 {
+    transform: translateX(-200vw);
+}
+
+.slide-trans1 {
+    transform: translateX(0vw);
+}
+
+.slide-box img {
+    width: 100%;
+
+}
+
+.slide-btn-next {
+    position: absolute;
+
+    top: 45%;
+    right: 0;
+
+    color: white;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.slide-btn-prev {
+    position: absolute; /*relative는 부모에*/
+
+    top: 45%;
+    left: 0;
+
+    color: white;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.5);
+}
