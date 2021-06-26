@@ -1,0 +1,36 @@
+@import './_reset_ex';
+
+$main-color: #ebb774;
+$sub-color: #eee;
+
+.text {
+    color: $main-color;
+}
+
+.box {
+    background: $sub-color;
+}
+
+%btn {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.btn-green {
+    @extend %btn;
+    color: orange;
+    background-color: green;
+}
+
+@mixin basic-title($fontSize) {
+    font-size: $fontSize;
+    letter-spacing: -1px;
+}
+
+h1 {
+    @include basic-title(30px);
+}
+h2 {
+    @include basic-title(20px);
+}

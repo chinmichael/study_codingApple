@@ -210,7 +210,7 @@ body, div, p, input, textarea {
     }
     .flex-box-container {
         flex-direction: column;
-        float: none;
+/*        float: none;*/
 
     }
     .flex-box {
@@ -220,4 +220,45 @@ body, div, p, input, textarea {
 }
 h4 {
     margin: 0;
+}
+
+.test-pseudo {
+    text-align: center;
+}
+
+.test-pseudo::first-letter {
+    color: blue;
+    font-size: 20px;
+}
+
+.test-pseudo::after {
+    content: '  님도 홧팅요';
+    color: red;
+}
+
+.shadow-test::-webkit-input-placeholder {
+    color: red;
+}
+
+.test-progress {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: white;
+
+    color: red;
+}
+
+.test-progress::-webkit-progress-bar {
+    background-color: #eee;
+    border-radius: 5px;
+}
+
+.test-progress::-webkit-progress-value {
+    background: linear-gradient(to bottom, skyblue, navy);
+    border-radius: 5px;
+}
+
+.test-progress::-moz-progress-bar {
+    background: linear-gradient(to bottom, skyblue, navy);
+    border-radius: 5px;
 }

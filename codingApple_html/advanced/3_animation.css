@@ -1,0 +1,122 @@
+body {
+  margin: 0; }
+
+div {
+  box-sizing: border-box; }
+
+.flex-container {
+  display: flex; }
+
+.content {
+  float: left;
+  width: 80%; }
+
+.sidebar {
+  width: 300px;
+  background: black;
+  color: white;
+  height: 100vh;
+  padding: 25px;
+  position: fixed;
+  z-index: 5;
+  text-align: center;
+  transform: translateX(-220px);
+  transition: all 1s; }
+  .sidebar h4 {
+    transform: translate(105px);
+    transition: all 1s; }
+  .sidebar p {
+    transform: translate(-105px);
+    transition: all 1s; }
+  .sidebar:hover {
+    transform: translate(0px); }
+    .sidebar:hover h4 {
+      transform: translate(0px); }
+    .sidebar:hover p {
+      transform: translate(0px); }
+
+.ani-test-box, .ani-test-box2 {
+  text-align: center;
+  font-size: 20px;
+  margin: auto;
+  margin-top: 30px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: skyblue;
+  color: white;
+  width: 100px; }
+  .ani-test-box p, .ani-test-box2 p {
+    padding: 0;
+    margin: 0; }
+  .ani-test-box:hover, .ani-test-box2:hover {
+    animation: ani-test;
+    animation-duration: 1s; }
+
+@keyframes ani-test {
+  0% {
+    transform: translateX(0px); }
+  33% {
+    transform: translateX(-50px); }
+  66% {
+    transform: translateX(50px); }
+  99% {
+    transform: translateX(0px); } }
+
+.ani-test-box2 {
+  background-color: orange; }
+  .ani-test-box2:hover {
+    animation-name: ani-test2;
+    animation-duration: 1s; }
+
+@keyframes ani-test2 {
+  0% {
+    transform: rotate(0deg); }
+  25% {
+    transform: rotate(-10deg); }
+  75% {
+    transform: rotate(10deg); }
+  100% {
+    transform: rotate(0deg); } }
+
+.ani-test-box3 {
+  margin: auto;
+  padding: 0;
+  text-align: center;
+  width: 10px; }
+  .ani-test-box3 p {
+    margin: 0;
+    padding: 0;
+    font-size: 50px;
+    font-weight: bold; }
+  .ani-test-box3 p:hover {
+    animation-name: ani-test3;
+    animation-duration: 2s;
+    animation-fill-mode: forwards; }
+
+@keyframes ani-test3 {
+  0% { }
+  20% {
+    transform: rotate(-10deg); }
+  100% {
+    transform: rotate(45deg) scale(1.5); } }
+
+.ani-x {
+  margin: 0px auto;
+  text-align: center;
+  font-size: 70px;
+  width: 84px;
+  cursor: pointer;
+  padding: 0px;
+  transform-origin: 35px 60px; }
+  .ani-x:hover {
+    animation-name: ani-x-test;
+    animation-duration: 1s;
+    animation-fill-mode: forwards; }
+
+@keyframes ani-x-test {
+  0% {
+    transform: rotate(0deg); }
+  25% {
+    transform: rotate(-15deg); }
+  100% {
+    transform: rotate(45deg) scale(2); } }

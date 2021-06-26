@@ -1,0 +1,556 @@
+1. Pseudo-element
+
+CSS에서 특수한 HTML요소를 스타일링 할 수 있게 도와줌
+
+>> 선택될 요소(element)의 특별한 상태를 지정하는 셀렉터에 붙는 가상 클래스 = :hover, :active, :focus 등의 Pseudo-class라면
+>> 마찬가지로 셀렉터에 문서에 붙어 특정 부분(element)을 스타일링 할 수 있는 것이 Pseudo-element
+
+ex)
+html :
+<p class="pseudo-test">모두들 개발공부 화이팅!</p>
+
+css :
+.pseudo-test {
+    text-align: center;
+}
+
+.pseudo-test::first-letter {
+    color: red;
+    font-size: 30px;
+}
+
+로 한다면 첫 글자인 '모'에만 해당 스타일이 적용됨
+
+~::after {
+    content: '  님도 홧팅'
+    color: red;
+}
+
+이런식으로 해당 HTML요소 뒤에 추가할 내용을 붙일 수 있음
+
+<ul>
+    <li>
+</ul>
+에서 앞에 글머리 기호를 제거한다거나 (참고로 ul의 글머리기호 삭제는 list-style-type: none;을 이용한다 / 이런 CSS는 구글링 하거나 개발자모드 go!)
+
+::after, ::before 는 해당 태그 내부에 내용을 추가해줌 (::말고 :만 넣어도 됨 e8 호환성 때문에... css3부터 :와 구분하기 위해 ::로 한것)
+
+<div class="float-container"
+    <div class="set-float"></div> >> float 적용된 div들
+    <div class="set-float"></div>  
+    <div style="float:none;  clear: both;"></div>
+</div> 
+
+이런 상황에서 .float-container::after을 이용하면 (요소 태그 내부에 적용되므로 .set-float면 안된다.)
+<div style="float:none;  clear: both;"></div> 없이도 같은 효과를 낼 수 있다.
+
+.float-container::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+이렇게 적용하면 유사하게 내부 태그가 생긴다고 볼 수 있음
+
+>> <span> 태그로 내용의 일부를 감싸기에는 동적으로 바뀌는 데이터에는 적용하기 힘들므로(JS가 좀 빡세짐) 훨씬 간단하게 처리 가능
+
+
+2.Shadow DOM
+
+input태그의 placeholder와 같은 속성으로 출력되는 것도 경우도 당연히
+이론적으로 내부 <div>태그의 HTML요소로서 브라우저가 랜더링하지만,
+개발자는 그냥 input 태그만 쓰고 속성만 지정하면 알아서 해당 div가 세팅됨
+
+이런 눈에 보이지 않는 영역에 존재하는 HTML 영역이 Shadow DOM(Document Object Model, JS가 HTML을 DOM을 만들어 인식함)
+
+크롬 개발자 도구 기준 setting 아이콘의 preference에서 show user agent shadow DOM을 체크하면 개발자 도구 영역에서 볼 수 있음
+이후 해당 input 등의 태그를 까보면 이런 기존에 볼 수는 없지만 랜더링 가능한 영역까지 확인할 수 있음 (개발자를 배려한 도구)
+
+이를 보고 커스터마이징이 가능
+예를 들어 해당 input에 보이는
+input의 클래스가 .test-shadow일 경우
+
+.test-shadow::placeholder {
+
+}
+혹은 개발자 도구 style영역에 보이는 ::-webkit-input-placeholder를 그대로 가져와
+(혹은 element에서 pseudo 속성에 -webkit-input-placeholder를 확인하여)
+.test-shadow::-webkit-input-placeholder {
+
+}
+Pseudo-element을 수정함으로서 세밀한 디자인이 가능함
+
+Prefix
+-webkit- 이것은 옛 크롬에서도 호환됨
+-moz- 옛 파이어폭스
+-ms- 옛 인터넷 익스플로러
+
+
+tip) <progress class="test-progress" value="20" max="100"></progress> value와 max props를 줄 수 있음
+이 <progress>의 경우도 shadow DOM에 숨겨진 요소가 많다.
+
+이때 잘 pseudo가 잘 안먹히면
+.test-progress {
+    background-color: white;
+}
+이런식으로 기본 셀렉터에 무언가 css를 준 다음 설정해보면 됨
+
+강의에서 첨부한 잘 써먹는 progress css 설정
+
+progress {
+  -webkit-appearance: none; /*배경 제거*/
+  -moz-appearance : none;
+  appearance: none;
+  background: white; /*ie10때문에*/
+  color: red;
+}
+
+progress::-webkit-progress-bar {
+  background-color: #eee;
+  border-radius: 2px;
+}
+progress::-webkit-progress-value {
+  background-color: red;
+  border-radius: 2px;
+}
+
+/*파이어폭스 호환성을 위해*/
+progress::-moz-progress-bar {
+  background-color: red;
+  border-radius: 2px;
+}
+
+만약 그라데이션을 준다면 background: linear-gradient(to bottom, skyblue, navy); /*그라데이션: 방향, 색, 색*/
+
+당연히 Vue때 해봤지만 scrollbar들도 다 shadow DOM으로 숨겨진 pseudo를 찾아 수정 가능, highlight 같은것도
+
+===========================================================================================================================
+===========================================================================================================================
+
+1. SCSS, SASS 기초
+
+SCSS, SASS : 전처리엔진(Preprocessor : 프리컴파일러, 말그대로 입력데이터를 다른 프로그램에 대한 입력으로 사용되는 출력물로 만듦)
+>> CSS가 너무 커지면 관리가 너무 힘드므로 이를 좀더 프로그래밍 언어스럽게 짤 수 있도록 하는 전처리기
+>> 변수($~), 연산자, 함수(@mixin 함수명(), @include 함수명()), 상속(@extend) 같은 것들을 사용할 수 있게 해준다
+>> 필수는 아니지만 코드의 개발과 유지보수성 향상된다
+
+>> 브라우저가 읽을 수 있는건 .html, .css, .js이므로 다시 이 파일들로 컴파일해야함
+
+(cf: HTML 전처리엔진 : Pug, Haml | JS 전처리엔진 : TypeScript // TypeScript는 또 배워야하는데...)
+
+>> .scss 혹은 .sass 파일을 알아서 .css 파일로 자동컴파일 해줄 수 있도록 SCSS, SASS를 설치하려면
+    http://koala-app.com/  https://scout-app.io/ 와 같은 설치 프로그램도 있고
+>> 어차피 쓰니까 node.js가 설치된 상태에서 해당 프로젝트에 npm install node-sass로 설치
+
+>> 이후 확장자를 .sass 혹은 .scss로 하여 스타일 코드를 짠다
+>> 둘다 똑같으나 .sass의 경우 .css, .scss에서 적는 ;와 {}를 생략할 수 있다. 대신 indent(tab)으로 내부구분을 잘 해야함 (나는 그냥 .scss쓸래여)
+
+https://heropy.blog/2018/01/31/sass/ 참조
+
+-g (혹은 --global)로 전역 설치를 한 뒤 $node-sass 명령어로 컴파일 가능
+npm install -g node-sass
+
+node-sass [옵션] 입력파일경로 출력파일경로
+로 하여 컴파일된 css 파일의 경로를 지정할 수 있다
+
+node-sass 1_sass_ex.scss 1_sass_ex.css
+node-sass 1_sass_ex.scss dist/style.css 등
+
+-w (--watch) 옵션으로 런타임 중 자동으로 변경사항을 컴파일 시킬 수 있다.
+
+node-sass -w 1_sass_ex.scss 1_sass_ex.css
+
+>> 이 .css파일을 .html에 첨부시킴
+
+
+혹은 수동으로 컴파일하는 방법
+sassmeister.com 사이트에 sass, scss문법을 써서 변환된걸 가져와 저장함
+
+
+2. SCSS, SASS 기초문법
+
+1) 변수 작성
+$변수명 = ;로 선언하고 초기화하여 사용 ($은 변수임을 알게 하는 관용표현 RxJS의 Observable 변수에 붙이는 $ 같다고 생각)
+
+ex)
+$backColor: #eee;
+
+.container {
+    background: $backColor;
+}
+
+이런식으로 사용이 가능
+
+자주 사용하지만 기억하기 힘든 컬러 코드 같은걸 주로 저장
+
+2) Nesting
+<div class="container>
+    <h4></h4>
+    <p></p>
+</div>
+에 대해
+
+.container h4 p {
+
+}
+이렇게 짜는 것이 아니라
+
+.container {
+    h4 {
+    
+    }
+    p {
+    
+    }
+}
+
+이런식으로 더 {}와 indent로 직관적으로 짤 수 있음 + 묶어서 관리가능
+
+Pseudo Class의 경우는
+
+.container {
+    &:hover {
+    
+    }
+}
+이렇게 &을 붙인다. :hover만 하면 .container :hover로 공백이 들어간 셀렉터가 됨
+근데 Nesting의 depth가 3~4개를 넘어가면 차라리 class를 선언하는게 낫다(그냥 CSS에서도)
+
+마찬가지 원리로 li.active 이런걸 Nesting하려면
+li {
+    &.active {
+    
+    }
+}
+로 해야 공백이 들어가지 않아 정상작동함
+
+
+3) @import
+이건 기존 css에도 있던 것으로 다른 .css파일 등을 첨부할 수 있는 것이지만 ()
+SASS는 당연 .scss나 .sass도 가능 그리고 파일명 앞에 _을 붙여 @import './_reset.scss'; 같이 주는 경우
+언더바는 단독으로 컴파일을 안한다는 것으로 기본 설정을 넣은 _reset.scss 과 같은 파일을 @import만 시켜서 사용할 때 붙인다 (안에서 같이 코드가 컴파일되므로)
+
+4) @extend
+
+.btn {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+}
+에서 색상을 바꾼 버튼을 만든다고 한다면
+
+.green {
+    color: orange;
+    background: green;
+}
+이렇게해서 class="btn green" 해도 되지만 클래스를 만드는 경우
+
+%btn {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+%로 기본 스타일을 묶고 (sass에서 %를 붙이면 css의 셀렉터로 컴파일 되지 않음)
+
+.btn-green {
+    @extend %btn;
+    color: orange;
+    background: green;
+}
+이렇게 공통되는 요소를 상속시킬 수 있음
+
+물론 그냥 셀렉터의 요소를 아래처럼 상속시킬 수도 있음
+.btn-green {
+    @extend .btn;
+    color: orange;
+    background: green;
+}
+
+5) @mixin + @include
+함수에 가까운 요소
+
+h1 {
+    font-size:30px;
+    letter-spacing: -1px;
+}
+
+h2 {
+    font-size:20px;
+    letter-spacing: -1px;
+}
+
+이런 반복요소들을 한번에 축약시킬 수 있음
+
+@mixin basic-title($fontSize) {
+    font-size: $fontSize;
+    letter-spacing: -1px;
+}
+
+h1 {
+    @include basic-title(30px);
+}
+h2 {
+    @include basic-title(20px);
+}
+이런식으로 묶음으로 적용시킬수 있으며
+파라미터변수를 이용하여 세부조정을 할 수 있음
+
+@mixin basic-title($fontSize, $spacing) {
+    font-size: $fontSize;
+    letter-spacing: $spacing;
+}
+이렇게 파라미터를 여러개 처리 가능
+
+
+===========================================================================================================================
+===========================================================================================================================
+
+1. Video 배경 넣기
+
+ie9 이상에서는 <video> 태그를 사용해 영상을 삽입할 수 있음 (물론 유행이 지나긴 함...)
+
+<div>
+    <video>
+        <source src="" type=""> // 여기에 경로를 입력한다, content-type을 반드시 넣어줘야 원활히 재생된다(예전에 JPA공부할때 정리했던 파일 확인)
+        <source src="./daolVideo.webm" type="video/webm">
+        // 비디오 컨테이너에 소스를 보통 .mp4와 .webm(용량절감됨)으로 해서 두개를 준비한다(물론 파일도 저렇게 두개) >> 이를 통해 webm이 지원되는 브라우저는 webm 아니면 mp4를 재생
+    </video>
+</div>
+
+<video>는 비디오를 담는 컨테이너
+<source>는 경로를 넣는다. 여러 파일형식을 준비하면 브라우저에 최적화된 파일을 우선으로 넣는다
+
+<video>의 autoplay 어트리뷰트로 랜더링 후 자동재생이 가능하게 함 + muted 어트리뷰트로 소리가 있는 영상의 음성을 제거할 수 있다
+참고로 muted는 소리가 없는 영상에도 넣어야 할 수 있는데 Chrome은 정책상 muted 어트리뷰트가 함께 있어야 autoplay가 먹힌다.
+
+autoplay과 함께 loop 어트리뷰트를 쓰면 무한반복 재생이 된다.
+
+참고로 video와 source에 주면 좋은 scss의 경우
+
+div.video-box { // <video 태그를 감싸는 div>
+    width: 적당히;
+    height: 적당히;
+
+    overflow: hidden; //흘러넘치는 부분 날림
+    position: relative; // 실제 영상이 나올 source 태그 부분을 가운데 정렬하기 위해
+
+    video.video-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 0; // overflow:hidden을 줬으므로 흘러넘친 부분이 아예 잘려나가도록
+    }
+}
+
+이때 확실한 상하좌우 가운데 정렬을 위한 Tip은
+상위 element에 position:relative;를 준 뒤, 정렬할 element에
+position: absolute; top: 50%; bottom: 50%; transform: translate(-50%, -50%);를 준다
+
+<video>의 문제 >> 첫 로딩에 시간이 걸림 >> webm으로 해도 3~4메가 수준에도 좀 버벅임
+
+>> 로딩 해결법
+1. video 태그에 background-image로 로딩전에 보여줄 섬네일 세팅하기
+2. video 태그의 poster="경로" 어트리뷰트로 위와 같은 효과 내기
+
+>> 모바일에서
+보통 모바일에서는 큰 사이즈의 비디오를 보여줄 필요는 없으므로 video를 display: none 한뒤 사진으로 대체한다 
+
+
+===========================================================================================================================
+===========================================================================================================================
+
+transform & animation
+
+transition은 시작화면에서 최종화면으로 서서히 변하게 처리하는 기능
+
+animation 속성을 이용하면 좀 더 복잡한 애니메이션 생성이 가능
+
+transform은 요소의 위치, 회전 등의 요소를 지정(margin, padding, position좌표 이런 요소들 보다 랜더링 효율이 좋다) animation 할 때 굉장히 많이 사용
+ex)
+transform: rotate(-30deg); //로 하면 30도만큼(각도 degree) 역시계방향(-이므로) '회전' | 참고로 rotateX, rotateY 등은 좌표축을 기준으로 회전하는거임 (가운데축이 아니라)
+transform: translate(30px, 50px); x축 y축 '이동' (translateX와 같은 단방향만 지정도 됨)
+trnasform: scale(1.5) // 말그대로 사이즈 조정 (2, 4) 이렇게 하면 각 x축 y축 만큼 얼마나 '사이즈'를 변동시킬지
+
+한번에 두개 이상을 변경시킬 때 : transform: rotate() scale(); 이런식으로 연달아 쓴다
+
+transform 속성을 이유
+1. 레이아웃과 상관없이 독립적으로 동작 마치 position: relative나 absolute로 띄우고 좌표로 이동시키는 것처럼 다른 레이어를 만들어냄
+
+2. margin, position 좌표는 브라우저 재랜더링에 부하를 많이 준다.
+   브라우저가 HTML을 랜더링하는 단계는 JS > Style > Layout > Paint > Composite 단계를 거치게 된다.
+   이때 Layout 단계에서 결정되는 CSS요소들이 margin, 좌표, width, padding 등의 요소이고
+   Paint에서 결정되는 CSS요소들이 background, color 등이며
+   거의 마지막인 Composite 부분이 transform과 opacity 등이다.
+
+   따라서 animation이라는 재랜더링이 자주 일어나는 처리를 할 때,
+   Layout 단계의 변경을 주면 그만큼 재랜더링 단계를 많이 거치고 부하를 늘리기에 보통 Animation은 transform이나 opacity를 변경하는 처리를 위주로 한다. 
+
+
+animation by @keyframes
+
+@keyframes 애니메이션명 {
+    0% {
+        transform: translateX(0px);
+    }
+    50% {
+        transform: translateX(-100px);
+    }
+    100% { // animation 진행상황에 따른 각 animation 상태 지정을 가능
+        transform: translateX(100px);
+    }
+}
+로 애니메이션을 지정한 후
+
+.ani-box:hover {
+    animation-name: 애니메이션명; // @keyframes로 정의된 사용할 애니메이션명
+    animation-duration: 1s; // 해당 애니메이션 동작 시간
+}
+
+위 animation-name과 animation-duration 속성은 반드시 필요한 속성이며 그밖에
+animation-timing-function: linear; // 동작속도완급(transition 생각)
+animation-delay: 1s; // 시작 전 딜레이
+animation-iteration-count: infinite; // 반복횟수
+animation-play-state: paused; // 애니메이션을 멈추고 싶은 경우 이 속성을 JS로 세팅한다
+animation-fill-mode: forward; // 애니메이션 끝난 뒤 상태 설정 (foward를 하면 최종변경사항 유지)
+
+그냥 단순히 클래스를 추가하고 transition을 넣어도 되지만,
+이건 이런 애니메이션 요소 단계가 한단계여야만 가능, 진행단계에 따라 변환이 필요한(반복해서 왔다갔다하기) 등은 안됨
+
+참고로 +기호 x로 rotate시키는거 머리싸매다가 알게 된거지만
+transform-origin: x축 y축; 혹은 transform-origin: center, top, bottom 등을 이용하여 기준점을 잡을 수 있따.
+
+.sidebar {
+    width: 300px;
+    background: black;
+    color: white;
+    height: 100vh;
+    padding: 25px;
+    position: fixed;
+    text-align: center;
+    z-index: 5;
+}
+
+sidebar 팁 : position: fixed와 z-index를 이용하자 물론 포지션을 굳이 이용할 필요없이도 가능
+
+.sidebar {
+    ...
+
+    transform: translateX(-220px);
+    transition: all 1s;
+
+    h4 {
+        transform: translate(105px);
+        transition: all 1s;
+    }
+
+    &:hover {
+        transform: translate(0px);
+        h4{
+            transform: translate(0px);
+        }
+    }
+}
+
+이런식으로 각각 element마다 적용할 애니메이션이 단순하면 transition을 이용하면 됨
++
+해당 클래스 div 내부 요소들까지hover한번에 적용시키려면 저렇게 hover한 pseudo class에도 다시 변경요소를 적용하고 해당 부분에도 transition을 주면 된다.
+
+
+>> 애니메이션 구성이 복잡해보이면 1. 하나씩 우선 해보기 2. 논리적으로 우선 순서를 정리하고 코드를 쳐보기
+
+===========================================================================================================================
+===========================================================================================================================
+
+1. Grid 레이아웃
+
+>> IE에서는 적용되지 않는 호환성...
+
+<div class="grid-container">
+    <div></div> << 헤더용
+    <div></div> << 사이드용
+    <div></div> << 콘텐츠용
+</div>
+
+이런식으로 레이아웃을 잡을 때 배치가 힘듦
+>> Grid는 이를 격자형태로 잡아 영역을 배정하는 방법으로 처리해준다.
+(대신 Grid들은 꺾은 ㄱ자 모양 배치는 불가능하다.)
+
+>> display:flex와 달리 display:grid가 배정되는 상위요소가 내부 레이아웃 사이징(폭, 너비)을 거의 결정한다
+
+.grid-container {
+    display: grid;
+    
+    grid-template-columns: 100px 100px 100px; // 열의 폭 + 갯수 
+    grid-template-rows: 100px 100px 100px; // 행의 폭 + 갯수
+
+    div {
+        border: 1px solid black;
+    }
+}
+
+위에 grid-template-columns와 grid-template-rows로 설정한 박스로 생성한 div들이 배치된다.
+맞춘건 6인데 내부 div가 4개면 '순서대로' 4개만 보임 >> 그래서 grid-template-rows: atuo;로 해두는 경우도 많다 (이경우는 div에 내용물이 있어야함)
+
+grid-template-columns: 1fr 1fr 1fr;
+
+이런식으로 fr 속성으로 배치도 된다. fr(fraction 수학 분수) >> fr을 주면 전체 폭에서 수치를 준만큼 분자로 할당 2fr 1fr 3fr을 하면 전체 2/6 1/6 3/6을 배정
+grid-template-columns: 33.3% 33.3% 33.3%;
+물론 그냥 %을 이용해 배정해도 된다.
+
+grid-gap: 10px; >> 이는 Grid 간에 간격을 주는 속성이다
+
+
+>> 본격적인 Grid Layout 잡는방법
+
+1. 내부 div 박스
+내부 div박스에  다음과 같이
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    ...
+
+    div {
+        ...
+    }
+
+    .grid-nav {
+        grid-column: 1/4;
+    }
+}
+
+위와 같이 내부 div에 grid-column: 1/4;을 설정하면 나눠진 열의 폭을 1~4만큼 차지하게 된다.
+여기서 1~4는 1~4칸이 아니라 격자의 라인을 세기 때문에 | | | | 4줄이면 3칸을 차지하게 된다.
+
+2. grid-container가 내부 배치까지 잡는 방법
+배치할 내부 div에 grid-area: 배치명; 으로 이름을 붙인 뒤에
+grid-container에 grid-template-areas: 로 모양을 잡아준다 (참고로 지정을 안하는 건 '.'으로 표현) 밑에 직접 보기로 하면 편하다
+
+.grid-container2 {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-row: auto;
+    grid-gap: 10px;
+
+    grid-template-areas:
+        "head head head head"
+        "side . . ."
+        "side . . ."; //이렇게 그림을 그려준다.
+
+    div {
+        ...
+        height: 100px; // height를 줬으니 사이드바에는 그만큼 고려해서 height를 다시 정해줘야함
+    }
+
+    .grid-nav {
+        grid-area: head; // 상위 div grid-template-areas:에서 사용
+    }
+
+    .grid-sidebar {
+        grid-area: side; // 상위 div grid-template-areas:에서 사용
+        height: 210px;
+    }
+}

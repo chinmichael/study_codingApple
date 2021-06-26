@@ -1,0 +1,99 @@
+body {
+  margin: 0; }
+
+div {
+  box-sizing: border-box; }
+
+ul {
+  list-style-type: none;
+  margin: auto;
+  margin-top: 30px;
+  padding: 0px;
+  width: 300px;
+  border: 1px solid #eee;
+  border-radius: 5px; }
+
+li {
+  color: #0067a3;
+  background-color: white;
+  padding: 10px;
+  margin: 0;
+  border-bottom: 1px solid #eee; }
+  li.active {
+    color: white;
+    background-color: #0067a3; }
+
+.alert-green {
+  border-radius: 5px;
+  background-color: #badbcc;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 80%;
+  padding: 20px; }
+  .alert-green p {
+    color: #0f5132;
+    margin: 0; }
+  .alert-green p::before {
+    content: "Well done! ";
+    font-weight: bold; }
+
+.alert-blue {
+  border-radius: 5px;
+  background-color: #cff4fc;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 80%;
+  padding: 20px; }
+  .alert-blue p {
+    color: #055160;
+    margin: 0; }
+  .alert-blue p::before {
+    content: "Heads up! ";
+    font-weight: bold; }
+
+.alert-yellow {
+  border-radius: 5px;
+  background-color: #fff3cd;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 80%;
+  padding: 20px; }
+  .alert-yellow p {
+    color: #664d03;
+    margin: 0; }
+  .alert-yellow p::before {
+    content: "Warning! ";
+    font-weight: bold; }
+
+div.row {
+  display: flex;
+  width: 80%;
+  margin: auto;
+  margin-top: 20px; }
+  div.row div.col-6 {
+    width: 50%;
+    height: 40px;
+    padding: 10px;
+    font-size: 15px;
+    color: #0f5132;
+    border: 1px solid #0f5132;
+    background-color: #badbcc; }
+  div.row div.col-4 {
+    width: 33.3%;
+    height: 40px;
+    padding: 10px;
+    font-size: 15px;
+    color: #0f5132;
+    border: 1px solid #0f5132;
+    background-color: #badbcc; }
+  div.row div.col-3 {
+    width: 25%;
+    height: 40px;
+    padding: 10px;
+    font-size: 15px;
+    color: #0f5132;
+    border: 1px solid #0f5132;
+    background-color: #badbcc; }

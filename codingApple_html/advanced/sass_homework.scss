@@ -1,0 +1,108 @@
+@import './reset_ex';
+
+$primary: #0067a3;
+
+ul {
+    list-style-type: none;
+    margin: auto;
+    margin-top: 30px;
+    padding: 0px;
+
+    width: 300px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+}
+
+li {
+    color: $primary;
+    background-color: white;
+
+    padding: 10px;
+    margin: 0;
+    border-bottom: 1px solid #eee;
+
+    &.active {
+        color: white;
+        background-color: $primary;
+    }
+}
+
+// .test-list {
+//     li {
+//         &.active {
+
+//         }
+//     }
+// } 위의 것은 이런식으로 Nesting해도 됨
+
+@mixin alert($backColor, $fontColor, $content) {
+    //border: 1px solid $fontColor;
+    border-radius: 5px;
+    background-color: $backColor;
+
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    width: 80%;
+    padding: 20px;
+
+    p {
+        color: $fontColor;
+        margin: 0;
+    }
+
+    p::before {
+        content: $content;
+        font-weight: bold;
+    }
+} // 이렇게 하면 alert 하나만 수정하면 전체적인 alert 레이아웃 수정이 가능함 >> 유지보수가 용이
+
+$greenText : #0f5132;
+$greenBack : #badbcc;
+
+$blueText : #055160;
+$blueBack: #cff4fc;
+
+$yellowText: #664d03;
+$yellowBack: #fff3cd;
+
+.alert-green {
+    @include alert($greenBack, $greenText, 'Well done! ');
+}
+
+.alert-blue {
+    @include alert($blueBack, $blueText, 'Heads up! ');
+}
+
+.alert-yellow {
+    @include alert($yellowBack, $yellowText, 'Warning! ');
+}
+
+@mixin col($width) {
+    width: $width;
+    height: 40px;
+    padding: 10px;
+    font-size: 15px;
+    color: $greenText;
+    border: 1px solid $greenText;
+    background-color: $greenBack;
+}
+
+div.row {
+    display: flex;
+    width: 80%;
+
+    margin: auto;
+    margin-top: 20px;
+
+    div.col-6 {
+        @include col(50%);
+    }
+    div.col-4 {
+        @include col(33.3%);
+    }
+    div.col-3 {
+        @include col(25%);
+    }
+}

@@ -1,0 +1,19 @@
+div.video-box {
+  height: 500px;
+  width: 100%;
+  overflow: hidden;
+  background-color: #eee;
+  position: relative; }
+  div.video-box video.video-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0; }
+  div.video-box .video-title {
+    color: white;
+    position: absolute;
+    font-size: 30px;
+    width: 100%;
+    text-align: center;
+    top: 20%; }
