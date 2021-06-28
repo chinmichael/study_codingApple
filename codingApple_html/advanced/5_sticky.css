@@ -1,0 +1,26 @@
+body {
+  margin: 0;
+  background: black; }
+
+div {
+  box-sizing: border-box; }
+
+.grey {
+  background: grey;
+  height: 2000px;
+  margin-top: 600px;
+  margin-bottom: 1600px; }
+  .grey .sticky-param {
+    position: sticky;
+    top: 100px;
+    font-size: 40px;
+    color: white; }
+  .grey .scroll-text {
+    color: white;
+    padding: 40px;
+    max-width: 300px;
+    float: left; }
+  .grey .sticky-img {
+    float: right;
+    position: sticky;
+    top: 200px; }

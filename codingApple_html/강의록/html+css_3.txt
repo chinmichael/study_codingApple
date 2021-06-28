@@ -498,6 +498,8 @@ grid-template-columns: 1fr 1fr 1fr;
 grid-template-columns: 33.3% 33.3% 33.3%;
 물론 그냥 %을 이용해 배정해도 된다.
 
+만약 고정값과 나머지 처리를 하려면 100px 1fr; 이런식으로 주면 알아서 나머지는 배율 처리가 된다.
+
 grid-gap: 10px; >> 이는 Grid 간에 간격을 주는 속성이다
 
 
@@ -523,6 +525,8 @@ grid-gap: 10px; >> 이는 Grid 간에 간격을 주는 속성이다
 
 위와 같이 내부 div에 grid-column: 1/4;을 설정하면 나눠진 열의 폭을 1~4만큼 차지하게 된다.
 여기서 1~4는 1~4칸이 아니라 격자의 라인을 세기 때문에 | | | | 4줄이면 3칸을 차지하게 된다.
+
+>> 중요한점은 1/4이 비율이 아니라 번호기 때문에 만약 2개의 컬럼을 나누려면 각 grid가 1/2와 2/3 값을 가져야 한다.
 
 2. grid-container가 내부 배치까지 잡는 방법
 배치할 내부 div에 grid-area: 배치명; 으로 이름을 붙인 뒤에
@@ -554,3 +558,74 @@ grid-container에 grid-template-areas: 로 모양을 잡아준다 (참고로 지
         height: 210px;
     }
 }
+
+
+++ 개인적으로 찾은 Tip) 위 nav를 100px 주고 아래 height를 지정할 때 height: calc(100vh - 100px); 이런식으로 css로 계산을 넣을 수 있다.
+>> 근데 calc() 안에는 변수 못 넣는듯
+
+
+참고로 반응형을 줄 때
+
+@media screen and (max-width: 768px) {
+    .grid-container1 {
+        .grid-side {
+            grid-column: 1/3;
+            height: $nav-height;
+        }
+        .grid-content {
+            grid-column: 1/3;
+            height: $content-height-responsive;
+        }
+    }
+
+    .grid-container2 {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        .main-photo {
+            grid-column: 1/2;
+            grid-row: 1/2;
+        }
+    }
+}
+
+위에서처럼 각 내부 요소의 비율을 다시 줘도 되고
+아래에서처럼 전체 컨테이너의 분할을 조정해도 된다. 물론 내부분할비 세팅은 다시 필요
+
+
+++ 사이트 Tip) placeimg.com >> 프로젝트 때 임시 이미지 가져오기 좋은 사이트 (링크줌) https://placeimg.com/500/500/any 이런식으로 구성
+
+
+>> 미리 부트스트랩의 원칙에 12column으로 Grid를 미리 나눠놓고 짜기 현재 미국에서 유행이니 곧 우리나라에도 들어오지 않을까
+
+===========================================================================================================================
+===========================================================================================================================
+
+position: sticky (fixed가 아니라 sticky) >> Scroll Animation에서 중요한 속성
+
+웹사이트에서 특히 아이폰 광고 등을 보면 스크롤을 내리다 일정 시점에서 특정 이미지만 특정 시점에 위치가 고정되는 경우가 있음
+
+.grey {
+    background: grey;
+    height: 2000px;
+    margin-top: 600px;
+    margin-bottom: 1600px;
+
+    .sticky-param {
+        position: sticky;
+        top: 100px; // viewport에서 기준
+
+        font-size: 40px;
+        color: white;
+    }
+}
+
+위에서처럼 sticky를 주면 fixed와 달리 해당 상위 div 요소 상단에 배치되다가 해당 div 요소가 끝날때까지 스크롤 시 위치가 고정된다.
+(fixed는 첨부터 끝까지 유지 vs sticky는 해당 요소가 등장할때부터 ~ 해당 상위요소가 끝날때까지 )
+
+문제는 overflow: hidden 속성과 함께하지 못함
+
+문제는 IE는 또 호환성을 위한 라이브러리 필요
+
+근데 세부적인 스크롤 애니메이션은 결국 자바스크립트를 공부해야함
+
+그리고 상위 요소가 충분한 사이즈가 되야 잘 먹힌다!

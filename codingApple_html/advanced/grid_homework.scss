@@ -1,0 +1,99 @@
+body {
+    margin: 0;
+}
+div {
+    box-sizing: border-box;
+}
+
+$nav-height: 70px;
+$content-height: calc(100vh - 70px);
+$content-height-responsive: calc(100vh - 140px);
+
+.grid-container1 {
+    display: grid;
+
+    grid-template-columns: 150px 1fr;
+    grid-template-rows: auto;
+
+    text-align: center;
+    font-weight: bold;
+    color: white;
+    font-size: 30px;
+
+    div {
+        margin: 0;
+        padding: 12px;
+    }
+
+    .grid-nav {
+        grid-column: 1/3;
+        height: $nav-height;
+
+        background: skyblue;
+    }
+
+    .grid-side {
+        grid-column: 1/2;
+        height: $content-height;
+        
+        background: darkkhaki;
+    }
+
+    .grid-content {
+        grid-column: 2/3;
+        height: $content-height;
+
+        background: grey;
+    }
+}
+
+.grid-container2 {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    //grid-template-rows: 33.3vh 33.3vh 33.3vh; // 사진 빈공간 없이 꽉채우기 위해, 아래가 나은거 같기도 하고...
+    //grid-template-rows: 1fr 1fr 1fr;
+
+    margin: auto;
+    margin-top: 50px;
+    max-width: 750px;
+
+    div {
+        margin: 0;
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .main-photo {
+        grid-column: 1/3;
+        grid-row: 1/3;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+    .grid-container1 {
+        .grid-side {
+            grid-column: 1/3;
+            height: $nav-height;
+        }
+        .grid-content {
+            grid-column: 1/3;
+            height: $content-height-responsive;
+        }
+    }
+
+    .grid-container2 {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+
+        .main-photo {
+            grid-column: 1/2;
+            grid-row: 1/2;
+        }
+    }
+}
