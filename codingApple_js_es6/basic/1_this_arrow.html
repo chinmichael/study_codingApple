@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <button id="btn">testBtn1</button>
+
+    <button id="testBtn">testBtn2</button>
+
+    <script>
+        //'use strict';
+
+        console.log(this);
+
+        function winTest() {
+            console.log(this);
+        }
+
+        winTest();
+
+        ///////////////////////////////////
+
+        const obj = {
+            name: 'kim',
+
+            func: function () {
+                console.log(this);
+            }
+        }
+
+        obj.name; obj.func(); // 실행할 때는 항상 ()이 있어야함
+
+        const obj2 = {
+            name: 'cho',
+
+            obj3: {
+                func: function () {
+                    console.log(this);
+                }
+            }
+        }
+
+        obj2.obj3.func();
+
+        const obj4 = {
+            name: 'chin',
+
+            obj5: {
+                func: () => {
+                    console.log(this);
+                }
+            }
+        }
+
+        obj4.obj5.func();
+
+        const obj6 = {
+            name: 'adam',
+
+            obj7: {
+                func: function () {
+                    const test = () => {
+                        console.log(this);
+                    }
+                    test();
+                }
+            }
+        }
+
+        obj6.obj7.func();
+
+        ///////////////////////////////////
+
+        function constructorTest() {
+            this.name = "kim";
+
+            this.func = function () { // ★★주의할 점은 window.이 생략되는 것과 달리 여기서는 해당 object의 메서드임을 this. 지정해줘야한다.
+                console.log(this);
+            }
+
+            this.arrow = () => {
+                console.log(this);
+            }
+
+            console.log(this);
+        }
+
+        let conTest = new constructorTest();
+        conTest.name = "chin";
+        conTest.func();
+        conTest.arrow();
+
+
+        ///////////////////////////////////
+
+        document.getElementById("btn").addEventListener('click', function () {
+            console.log(this);
+            //console.log(e.currentTarget);
+        });
+
+        ///////////////////////////////////
+
+        document.getElementById("btn").addEventListener('click', function () {
+            let arr = [1, 2, 3];
+            arr.forEach(function (e) {
+                console.log(this);
+            });
+        });
+
+        document.getElementById("btn").addEventListener('click', function () {
+            let arr = [1, 2, 3];
+            arr.forEach((e) => {
+                console.log(this);
+            });
+        });
+
+        const testObj = {
+            names: ['kim', 'cho', 'chin'],
+            func: function () {
+                testObj.names.forEach(function () {
+                    console.log(this);
+                });
+            }
+        }
+
+        testObj.func();
+
+        ///////////////////////////////////
+
+        [1, 2, 3, 4].forEach(a => console.log(a));
+
+        document.getElementById('btn').addEventListener('click', e => {
+            e.currentTarget;
+        });
+
+        const testObj2 = {
+            func: () => {
+                console.log(this); // this가 재정의된 메서드 내부가 아니므로 걍 window
+            }
+        }
+
+        testObj2.func();
+
+        ///////////////////////////////////// Exercise
+
+        const person = {
+            name: '손흥민',
+            sayHi: function () {
+                console.log(`안녕 나는 ${this.name}`);
+            }
+        };
+
+        person.sayHi();
+
+        const refer = {
+            data: [1, 2, 3, 4, 5]
+        };
+
+        refer.name = "kim";
+
+        refer.addAll = function () {
+            let sum = 0;
+
+            this.data.forEach(e => {
+                sum += e;
+            });
+
+            console.log(sum);
+            console.log(this.name);
+        }
+
+        refer.addAll();
+
+        document.getElementById('testBtn').addEventListener('click', function () {
+            setTimeout(() => {
+                console.log(this.innerHTML); // 위 이벤트리스너 콜백에서 재정의된 this를 가져오므로
+            }, 1000);
+        });
+
+
+    </script>
+</body>
+
+</html>

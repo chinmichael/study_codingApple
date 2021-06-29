@@ -1,0 +1,105 @@
+1. Java 익명클래스, 람다식, JS Arrow Function this
+
+
+Java에서 익명클래스, 람다식이 여기서 좀 헷갈릴 수 있는데 (람다식은 익명클래스를 기반으로 만들어지지만)
+그리고 익명 클래스는 interface를 구현한 케이스면... super 못 쓰므로 추상 클래스를 구현한 케이스로 생각한다면
+
+abstract class Test {
+    String name = "Chin";
+    abstract public void printName();
+}
+
+public class study {
+    public static void main (String args[]) {
+        Test test = new Test() {
+            String name = "Cho";
+            public void printName() {
+                System.out.println(this.name);
+                System.out.println(super.name);
+            }
+        };
+    }
+}
+하면 당연히 위는 Cho가 아래는 Chin이 나온다. 즉 자기자신을 가리킨다
+
+@FunctionalInterface
+interface MyFunction2 {
+    int val = 4000;
+
+    void myMethod();
+}
+
+class Outer {
+    int val = 10; // Outer.this.val (Inner 안의 람다식 기준)
+
+    class Inner {
+        int val = 20;
+
+        Inner() {
+            f2_2.myMethod();
+        }
+
+        MyFunction2 f2_2 = () -> {
+            System.out.println("val = " + val);
+            System.out.println("this.val(Inner) = " + this.val);
+            System.out.println("Outer.this.val = " + Outer.this.val);
+        };
+
+        void method(int i) {
+            int val = 30;
+
+            // i = 10; val = 20; >> 하단 람다식에서 참조되기에 final처리되어 변경 불가
+
+            MyFunction2 f2_2 = () -> {
+                System.out.println("i = " + i);
+                System.out.println("val = " + val);
+                System.out.println("this.val(Inner) = " + this.val);
+                System.out.println("Outer.this.val = " + Outer.this.val);
+            };
+
+            f2_2.myMethod();
+        }
+    }
+}
+
+public class Test {
+    public static void main(String[] args) {
+        Outer outer = new Outer();
+        Outer.Inner inner = outer.new Inner();
+        inner.method(100);
+    }
+}
+
+람다식의 경우 val은 해당 람다식이 쓰인 메서드 지역변수 val을 / this.val은 해당 메서드를 감싼 클래스 객체를 가리킨다. (4000이 찍히지 않는다)
+
+Arrow Function은
+
+const obj = {
+    obj2: {
+        name: 'kim',
+
+        func: () => {
+            console.log(this);
+        }
+    }
+} 이 경우는 this가 더 생성된 곳이 없으므로 Window를 가리키지만
+
+const obj = {
+    obj2: {
+        name: 'kim',
+
+        func: function() {
+            const test = () => {
+                console.log(this)
+            }
+            test()
+        }
+    }
+} 이경우 this가 마찬가지로 obj2를 가리킨다.
+
+어떻게보면 이런점은 람다식과 Arrow Functino이 비슷하게 볼 수 있다.
+람다식은 자신을 감싼 클래스 객체를 바로 가리킨다고 책에서 그랬고, Arrow Function은 상위에 생성된 this이므로 object의 메서드로 this가 생성되야 이게 적용이 된다.
+근데 머 짜피 위에서도 해당 람다식을 실행하려면 해당 객체의 메서드나 생성자를 써야해서 결과적으로는 뭐... 함.
+
+그냥 이건 좀더 Arrow function 때 이야기함
+

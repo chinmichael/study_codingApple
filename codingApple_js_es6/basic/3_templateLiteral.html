@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        var lit1 = '문자열';
+        var lit2 = `문자열`;
+
+        var lit3 = `백틱문자열은 중간에
+        엔터를 쳐서 긴 문자열을 편히 쓸 수 있다.`
+
+        console.log(lit3);
+
+        var name = 'chin';
+        var age = 29;
+        var intro = `안녕하세요 ${name}입니다.`
+        console.log(intro);
+
+        function func() {
+            return 10;
+        }
+        //console.log(func`안녕하세요 ${name}입니다.`);
+
+        function analyze(params, vals, vals2) {
+            console.log(params);
+            console.log(vals);
+            console.log(vals2);
+        }
+
+        analyze`안녕하세요 ${name}입니다. 나이는 ${age}입니다.`;
+
+        function changeWord(params, vals1, vals2, vals3) {
+            let temp = `${params[0] + params[2] + vals3}를 추가`;
+            console.log(temp);
+        }
+
+        changeWord`안녕하세요 ${name}입니다.${""}나이는 ${age}입니다.`;
+
+
+        /////////////////////////////////// Exercise
+
+        var pants = 20;
+        var socks = 100;
+
+        //`바지 ${pants} 양말 ${socks}`;
+
+        function funcEx1(params, vals1, vals2) {
+            let tmp = params[1] + vals1 + " " + params[0] + vals2;
+            console.log(tmp);
+        }
+
+        funcEx1`바지 ${pants} 양말 ${socks}`;
+
+        pants = 0;
+        function funcEx2(params, vals1, vals2) {
+            let tmp = params[0] + vals1 + params[1] + vals2;
+
+            if (vals1 === 0) {
+                tmp = params[0] + "다 팔림" + params[1] + vals2;
+            }
+
+            console.log(tmp);
+        }
+        funcEx2`바지 ${pants} 양말 ${socks}`;
+
+    </script>
+</body>
+
+</html>

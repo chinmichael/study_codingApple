@@ -1,0 +1,636 @@
+ES6 버전 : 사실 2015년에 나온 구버전이지만 이때 대규모 업데이트가 되고 신문법이 생김
+
+전제 JS 기본문법 : >> codingApple JS 메모 + Nomad Vanila JS 쪽 참조 여기는 그냥 간략 브리핑
+
+JS 목적 : HTML 요소 조작
+
+document.getElementById('hello').innerHTML = '';
+document.querySelector('셀렉터').innerHTML = '';
+
+document.getElementById('btn').addEventListener('event', callback);
+
+var let const 변수 선언 할당 범위
+
+function 함수명(파라미터) {} >> 코드 축약 + 메모리 배정
+
+const 함수명 = () => {};
+
+조건문 if-else, switch-case은 자바와 사용법 유사
+
+반복문for문도 마찬가지 | Java처럼 향상된 for문은 없지만 배열에 대해 .forEach(callback)은 가능 
+
+연산자는 자동데이터 타입 변환 주의 / ==와 === 주의 / JS는 조건 && data 사용시 한쪽이 데이터면 조건이 true일 때 data가 남는다.
+
+Array( [데이터, 데이터, 참조변수] | 사용은 Array변수[index] )와 Object( {key:value} | 사용은 Object변수.key )
+
+
+'use strict'; 스트릭트 모드
+스크립트 최상단에 적어주면 엄격한 JS 작성이 가능하다 (머 let 등 선언타입 정해주지 않고 변수 설정이 안된다거나)
+
+===========================================================================================================================
+===========================================================================================================================
+
+this 문법
+
+Java의 경우 주로 getter/setter에서 자주 보이는 this는 클래스 객체를 가리킨다고 보면 된다.
+아님 어떤 클래스를 상속했을 때 상속요소 super와 본인요소 this를 구별할 때도 쓴다.
+
+public class person {
+    String name = "default name";
+
+    public void setName(String name) {
+        this.name = name; // 파라미터 name을 해당 클래스 객체의 name에 대입
+    }
+}
+
+
+JS에서는 우선 4가지 정도로 분류된다.
+
+1. Window 객체(전역객체, 모든 객체 조상) = 브라우저요소, JS엔진, 모든 전역변수, 함수, DOM을 담는 일종의 object 객체
+   >> DOM 객체는 HTML을 담은 JS 오브젝트 요소라 한다면 Window 객체는 브라우저 전체 정보를 담아 JS로 읽기 위한 객체
+
+   >> 참고로 이거 보면 사실 String, Boolean, Number 이런 자료형 기본적으로 다 있다 (하기사 있으니 ===로 체크가 되는 것) (parseInt같은게 있는걸 보면 알아서 이런걸로 형변환 가나보다)
+
+   >> 자주 보는 window. 함수 : close() | open() | setInterval(), setTimeout (setTimeout은 반드시 변수로 저장해서 clearTimeout(변수)로 끝날 시점을 저장해야 누수가 없다)
+   >> open(주소, 새탭(비움)or현재탭) 현재탭은 '_self' 새창에 여는 경우 open('','','width=,height= 등 css 지정')
+
+
+
+console.log(this);을 하면 Window 객체 Object가 뜨는걸 확인 가능
+
+function 함수() {
+    console.log(this);
+}
+도 마찬가지다. 하지만 "strict 모드에서 function의 this는 undefined된다."
+
+
+2. Object의 함수(정확히는 JS에서도 OBject는 객체기 때문에 Java처럼 메서드(객체행위)라고 부른다 (자바가 람다식을 함수라고도 표현하는 것처럼)) 안에서 this 
+
+const obj = {
+    func: function() {
+        console.log(this);
+    }
+}
+이런 메서드 안에서의 this는 해당 메서드를 가진 Object를 의미한다. 어떻게보면 Java의 this 개념이 이 2번째 this 개념이다.
+
+
+const obj = {
+    obj2: {
+        name: 'kim',
+
+        func: function() {
+            console.log(this);
+        }
+    }
+}
+이런 중첩 Object에서 this의 경우는? 마찬가지로 해당 메서드를 가진 obj2 오브젝트를 가리킨다. Java에서 상속 같은거 시킬 때 super랑 this랑 이리 구분되는 거라고 해야하나... 아나 내부클래스가 더 맞는듯
+
+
+근데 만약 Arrow Function을 이용한다면?
+
+const obj = {
+    obj2: {
+        name: 'kim',
+
+        func: () => {
+            console.log(this);
+        }
+    }
+}
+
+여기서의 this는 Window 객체가 뜬다. 왜냐하면 () => {} 은 this를 새롭게 만들지 않고 상위요소의 this를 그대로 가져오기 때문이다.
+
+
+cf) ==================================================================================================================
+
+es6_1_cf.txt의 1번 참조
+
+cf) ==================================================================================================================
+
+참고로 JS에서
+
+const obj = {
+    func : function() {
+
+    }
+} 이렇게 key로 함수명을 썼다면
+
+const obj = {
+    func() {
+
+    }
+}
+이렇게 바로 사용도 가능하다.
+
+
+참고로 1의 function(console.log(this)) 와 2의 {func: function(){console.log(this)}}는 같은 맥락이다.
+왜냐하면 Window는 일종의 object 전역 객체이고 1의 function은 이 전역공간에 생성된 것으로 해당 전역객체에 담긴 일종의 메서드로 볼 수 있기 때문이다.
+
+따라서 우리가 기존에 만드는 function 함수명(){}도 사실 window.함수명 = function(){}임 
+
+
+
+3. 생성자에서 this
+
+JS는 Object 인스턴스를 생성하는데 (Java처럼 클래스문법 말고도) coonstructor function를 이용할 수 있다 (그래서 리액트 신문법이 그리 나왔나보다)
+
+function constructorTest() {
+    this.key = value;
+}
+
+const obj = new constructorTest(); // 이렇게 인스턴스를 생성한다.
+
+이런식으로 함수를 구성하면 생성자로서 사용할 수 있으며 이때 this는 해당 '인스턴스'를 가리킨다.
+
+function constructorTest() {
+    this.name = "kim";
+
+    this.func = function () { // ★★주의할 점은 window.이 생략되는 것과 달리 여기서는 해당 object의 메서드임을 this. 지정해줘야한다.
+        console.log(this);
+    }
+
+    console.log(this);
+}
+
+let conTest = new constructorTest();
+conTest.name = "chin";
+conTest.func();
+
+
+4. 이벤트리스너의 콜백함수의 this (여기서 주의할 점은 해당 콜백함수가 Arrow Function이 아니어야함)
+
+<button id="btn">test</button>
+
+document.getElementById().addEventListener('click', function(){ // callback함수는 JS에서 함수안에 파라미터로서 함수를 둬서 특정 함수 동작들을 순차적으로 시킬때 주로 사용함
+    console.log(this);
+});
+
+이벤트 리스너의 콜백functino에서의 this는 e.currentTarget을 의미한다 즉 이벤트가 일어난 HTML요소를 말한다.
+참고로 e.currentTarget을 이용하려면 당연히 콜백함수의 파라미터로 e(이벤트 객체)를 받아야 하지만
+this는 그냥 파라미터롤 받지 않아도 바로 이를 가리킨다.
+
+
+5. 특수 케이스
+
+예를 들어1
+
+document.getElementById().addEventListener('click', function(){
+    let arr = [1,2,3];
+    arr.forEach(function(e) {
+        console.log(this);
+    })
+});
+이렇게 this를 출력시키면 strict모드에선 undefined가 일반적으로 Window가 출력된다.
+여기서의 콜백함수는 3의 생성자 함수도 4의 이벤트리스너의 콜백함수도 아니다.
+
+4의 콜백함수를 제외한 Arrow Function이 아닌 콜백함수들은 대체로 this를 Window로 갖는다. (Window에 담기는 함수란 소리다)
+
+
+하지만 콜백함수를 Arrow Function을 이용하여
+
+document.getElementById().addEventListener('click', function(){
+    let arr = [1,2,3];
+    arr.forEach((e) => {
+        console.log(this);
+    });
+});
+을 하는 경우 Arrow Function에서 this는 상위요소의 this를 의미하므로 Window 이전 상위요소 addEventListener로 생긴 e.currentTarget을 가리키는 this를 그대로 가리킨다.
+
+
+예를 들어2
+
+const obj = {
+    names: ['kim','cho','chin'],
+    func: function() {
+        obj.names.forEach(function(){
+            console.log(this);
+        })
+    }
+}
+
+마찬가지로 여기서의 forEach내부 콜백도 this를 Window로 갖는다. (Window에 담기는 함수란 소리다)
+하지만 forEach의 콜백을 ()=>{}로 하는 경우는 상위 this를 가져오므로 해당 메서드의 오브젝트를 this를 가리키게 된다.
+
+
+Arrow Function은 this의 재설정을 하지 않고 상위 요소의 this를 그대로 물려 쓰지만,
+일반 함수들은 상황에 따라 1/2/3/4의 케이스에 맞춰 this를 설정한다.
+
+예전에는 call(), bind(this) 이런 함수들을 이용해 this를 가져왔지만 현재는 위의 4케이스와 Arrow Function을 이용해 적절히 this를 찾아오면 된다.
+
+
+===========================================================================================================================
+===========================================================================================================================
+
+Arrow Function
+
+1. JS에서 함수를 만드는 방법
+
+function 함수명 {
+
+}
+
+const 함수명 = function() {
+
+}
+
+함수 호출 실행 함수명()
+
+위가 기존 선언 및 사용법
+
+const 함수명 = () => {
+
+}
+
+마찬가지로 호출 및 실행은 함수명();
+
+2. 이런 function 키워드 대신 사용하는 Arrow Function 사용이유
+
+함수를 작성하는 이유는 : 코드를 기능으로 묶어 축약시키거나, 특정 입출력 기능을 정의할 때(별건 없고 파라미터에 따라 특정 값이 나오게 하는 것 말그대로 수학적으로 원초적 의미의 함수)
+
+1) Arrow Function은 이런 ()=>{} input output이 좀 더 직관적이고
+2) 파라미터가 하나일 때 좌측의 소괄호를 생략하거나 우측의 중괄호와 return을 함께 생략이 가능하다(물론 return이 없는 경우는 그냥 생략 가능). 굉장히 직관적이고 간략히 표현 가능 a => a + 10; 이렇게
+
+[1,2,3].forEach(a=>console.log(a););
+
+이런 콜백함수를 사용할 때도 훨씬 축약 및 직관적으로 사용 가능
+
+
+3) 하지만 위에 건 사실 그냥 편한대로 쓰는거고 가장 중요한 Arrow Function의 특징이자 사용 이유는
+   >> this 값을 함수에서 새로 정의하지 않음 = 상위요소의 this를 그대로 가져온다.
+   
+   >> 따라서 상위 메서드, 생성자, 이벤트 리스너의 콜백함수에서 this가 새롭게 정의되어 있으면 내부에서 bind() 같은거 없이도 함수로 이를 그대로 쓸 수 있고,
+   >> 그런 정의가 없다면 Window 걍 갖다쓰겠지
+
+   cf) 오브젝트 메서드(function)가 아닌 그냥 Arrow Function 정의도 당빠 그냥 Window가 뜬다
+   cf) 근데 생성자의 케이스의 경우는 짜피 내부 함수... 라기보단 메서드를 this.메서드명 = function(){} 혹은 this.메서드명 = ()=>{}으로 해줘야 에러가 안난다. 무엇이던 생성되는 인스턴스의 것이라고 지정을 때려박아야 함
+   cf) 그리고 이벤트리스너가 아닌 정확히는 이벤트리스너의 콜백이 this가 e.currentTarget이기에 여기에 그냥 Arrow Function 쓰면 재정의가 안되서 Window가 나옴
+
+
+
+Exercise 문제 참조)
+
+setTimeout(callback, ms); >> 두번째 파라미터 ms 시간 뒤에 callback함수 실행
+참고로 당빠 이미 있는 함수명을 세팅하고프면 ()을 제외하고 setTimeout(함수명, ms)임
+
+★☆★ JS에서의 Object
+
+JS에서 오브젝트는 초기화 할때 key:value들을 할당한 이후에도 자유롭게
+
+object.key = value; 로 내용을 추가할 수 있따. (ㄷㄷㄷ)
+
+따라서 예제2에서
+
+const refer = {
+    data: [1,2,3,4,5]
+}
+에서 직접 중괄호를 수정하지 않아도
+
+refer.name = 'kim'; 으로 새로운 key에 데이터를 넣을 수 있고
+
+refer.addAll = function() {
+    let sum = 0;
+    this.data.forEach((e) => {
+        sum += e;
+    });
+
+    console.log(sum);
+}
+
+으로 함수명 = function(){} 선언법과 함께 오브젝트의 메서드를 뒤에 추가할 수 있다.
+
+그리고 당연히 이 경우는 메서드로 처리되기에 this로 오브젝트를 지정할 수 있고 Arrow Function을 이용하면 bind()등을 쓰지 않아도 바로 this를 사용할 수 있따.
+(만약 forEach 콜백으로 그냥 function을 이용했다면 this가 재정의되어 Window가 나온다. 근데 위 문제에서는 forEach의 콜백 안에 this가 쓰이진 않으니...)
+
+Arrow Function이 없던 시절 3번째 예제 처리하는 가장 간단한 방법
+
+document.getElementById('btn').addEventListener('click', function() {
+    const that = this;
+    setTimeout(function() {
+        console.log(that.innerHTML);
+    }, 1000);
+});
+
+
+===========================================================================================================================
+===========================================================================================================================
+
+변수 var / let / const
+
+변수 = 자료의 내용 or (메모리)주소를 대입하여 임시로 저장 | Number, String, Object, Array, function 다 담을 수 있다.
+    >> 선언, 할당, 범위
+
+    let 변수명; : 선언 (메모리 주소 할당)
+
+    변수명 = 대입값; : 할당 (해당 주소에 값 대입)
+
+    let 변수명 = 대입값; : 선언 + 할당
+
+========================================================
+
+var : 재선언 가능 (같은 변수명으로 선언이 가능 << 문제터지기 쉬움) / 재할당 가능 / 범위는 function = 쉽게말해 지역({}) 범위을 넘을 수 있다.
+
+function 범위의 예:
+
+function 함수() {
+    for(var i = 0; i < 10; i++) {
+
+    }
+    console.log(i); >> 변수 i가 유효함
+}
+console.log(i); >> 선언된 함수 밖이므로 i가 유효하지 않음
+
+========================================================
+
+let : 재선언 불가 / 재할당 가능 (대입 값 변경) / 지역변수
+
+function 범위의 예:
+
+for(var i = 0; i < 10; i++) {
+
+}
+console.log(i); >> 변수 i가 유효함
+
+지역변수 범위
+
+for(let i = 0; i < 10; i++) {
+
+}
+console.log(i); >> for문의 지역({}) 안에서만 유효하기에 not defined된다
+
+========================================================
+
+const : 재선언 불가 / 재할당 불가 (상수 constant, final) (Object나 Array 등 주소값이 대입되는 경우 해당 주소가 변경이 안된다면 재할당이 이뤄진게 아님 내부 요소 변경은 가능) / 지역 상수
+
+만약 JS에서 아예 내부변경이 불가능한 immortal Object를 만들려면?
+Object.freeze(오브젝트변수명); 을 사용 >> 에러는 'use strict';를 해야 보이지만 일단 뭐가되었든 내부 요소 변경 불가능
+
+대신 .freeze()는 마찬가지로 해당 오브젝트 내 데이터들을 고정시키는 거라 (swallow) Object 내부의 Object는 변경을 감지하지 못하고 허용한다.
+
+
+========================================================
+
+변수 Hoisting : JS는 변수를 생성할 때 '변수의 선언부분'을 변수 유효범위의 최상단으로 끌어올린다.
+
+Java의 경우에는
+
+System.out.println(num); <= 이 부분은 변수가 선언되기 전이기 때문에 당근 컴파일에러가 발생하지만
+
+int num = 3;
+
+System.out.println(num);
+
+JS의 경우에는
+
+console.log(num); // 변수 선언 자체는 되서 undefined(일종의 미정을 나타내는 자료형?, null은 아님)가 되는 것으로 뜸 (만약 변수가 선언이 안되어 있다면 error로 not defined로 뜬다)
+
+let num = 3;
+
+console.log(num); // 여긴 3
+
+왜냐하면 JS가 컴파일 시 해당 파트를 이런 식으로 해석하기 때문이다.
+
+let num;
+
+console.log(num);
+
+num = 3;
+
+console.log(num);
+
+
+cf) 함수 또한 호이스팅이 발생하기에 정의된 function 함수명(){}은 상단으로 올라간다.
+
+========================================================
+
+Java에서 int num1 = 3, int num2 = 4; 이런식으로 늘이는게 가능한 것처럼
+
+JS도 let num1 = 3, num2 = 4; 이런식으로 선언 할당을 늘어뜨리는게 가능하다 (참고로 그냥 변수타입을 한번에 통일하는 것도 가능)
+
+
+========================================================
+
+전역변수 : 전역에서 사용 가능한 변수  <> 지역변수 (물론 지역내 같은 변수명이 있으면 당연히 재선언된 지역변수의 우선순위가 그 지역에선 더 높다)
+
+변수야 머 본인이 선언된 범위 내 지역에서 사용 가능함 > 당연히 하위영역에서도(바깥 변수는 안에서도 closure) 유효 > 그럼 최상단 영역에서 선언된 변수는 당빠 그냥 전역변수로 활용가능
+
+or
+
+같은 원리 상 window.변수명 로 선언 할당하면 무조건 전역변수가 된다. (사용도 window.변수명 으로 해줘야하지만) (node.js에서는 window.를 대체하는 global. 이 있다)
+
+function func4() {
+    window.globalVar = 'global test';
+}
+
+console.log(window.globalVar); // 선언이 이뤄진건 함수 내부지만 window.로 선언된 전역변수라 not defined가 아닌 undefined가 된다 (할당이 이뤄진 func4가 실행되지 않아 값은 없다)
+
+func4();
+
+console.log(window.globalVar);
+
+window. 을 이용하는 것이 확실히 눈에 들어오기에 전역변수 생성 권장 방법임
+
+========================================================
+
+exercise Tip들
+
+func(); >> 우선 정의된 함수는 호이스팅 되므로 호출실행은 문제가 없음
+
+function func() {
+    console.log(hi); >> 문제는 여기 변수 호이스팅 성격상 왜 안 될까?
+    let hi = 'hello';
+}
+
+>> let과 const는 마찬가지로 호이스팅은 되지만 var와 달리 undefined가 자동 할당이 되지 않는다. temporal deadzone(선언과 할당사이) 혹은 uninitialized 되었다고 한다.
+>> 따라서 let const는 이런 호이스팅으로 인한 실수를 방지시켜 줄 수 있음 (Java처럼 초기화!!(선언 + 할당) 되어야 사용 가능하게 한다.)
+
+
+func();
+
+var func = function() {
+    console.log(hi);
+    var hi = 'hello'; >> 여기서는 var로 했기에 위에서 undefined가 되겠지만...
+}
+
+문제는 이경우 위에 func() 에서 실행이 되지 않는다.
+왜냐하면 함수 호이스팅 이전에 var func;의 호이스팅이 먼저 일어나고 변수의 호이스팅은 선언부만 상단에 재배치되기에 할당이 일어난 함수 정의 부분은 아래에 남게 된다.
+따라서 func(); 함수 실행을 하면 아직 정의된 함수가 할당이 되는 게 아니기 때문에 함수가 아닌 것으로 에러가 난다.
+
+let a = 1;
+var b = 2;
+
+window.a = 3;
+window.b = 4;
+
+console.log(a + b);
+
+위 콘솔 결과가 7이 아닌 5가 되는 이유는,
+var의 경우 최상단에 선언하는 경우 window. 전역 변수로 선언하는 것과 똑같기 때문에 window.b로 var b가 재할당 되지만,
+let, const의 경우 같이 최상단에 선언하는 경우 쓰임은 비슷하더라도 실제로는 window 전역 변수라기 보다는 전역에서 사용 가능한 지역변수가 된다.
+
+Java나 JS나 유효범위의 변수 중 좀더 작은 범위의 변수를 우선시해 적용하므로 window.a가 아니라 a라고 하면 지역변수 let a를 적용시켜 1된다.
+
+어떻게 보면 함수 호이스팅에 의한 호출 순서 문제를 변수 할당 함수를 이용하면 역으로 해결할 수도 있는것
+
+setTimeout은 변수로 저장한 뒤 clearTimeout(변수);로 종료가 가능하듯
+setInterval도 변수 저장 뒤 clearInterval(변수);로 종료가 가능하다. 참고로 이 함수는 setInterval 함수 본인 내부에서도 사용 가능하다.
+
+for(var i=0; i<5; i++) {
+    setTimeout(()=>{console.log(i);}, i * 1000);
+}
+을 하면 왜 1초마다 6값이 나올까?
+
+setTimeout은 비동기함수로 내부 콜백이 병렬실행된다. + var 변수는 for문 밖으로 호이스팅 되기에 그 값이 for문 밖에서 유지된다.
+따라서 각 밀리초는 반복문을 도는 동안 i값을 받아 1초, 2초... 잘 배정이 되지만,
+이제 각 시간에 맞춰 실행되는 콜백함수의 코드는 i를 참조할 때 var로 선언되어 외부에서 초기화되지 않고 남아있는 i = 6을 참조하게 된다.
+
+따라서 이를 해결하려면 setInterval을 사용하던 아니면 var i가 아닌 for문내에서 유지가 되는 지역변수 let i를 이용하면 된다.
+
+var buttons = document.querySelectorAll('button');
+var modals = document.querySelectorAll('div');
+
+for(var i=0; i<3; i++) {
+    buttons[i].addEventListener('click', function(){
+        modals[i].style.display = 'block';
+    });
+}
+
+이 경우도 마찬가지로 이벤트리스너 내부 콜백함수는 해당 이벤트가 발생할 때마다 코드가 실행된다.
+그리고 마찬가지로 let아니 var로 선언되어 for문 밖에 초기화되지 않고 공유되는 i값을 modals[i]에 인덱싱하기에 의도치 않은 결과가 나온다.
+
+따라서 위에서처럼 let변수로 선언해 해결하면 된다.
+
+
+===========================================================================================================================
+===========================================================================================================================
+
+template literal >> es6 이후로 backtick`` 을 이용한 문자열
+
+let lit1 = '문자';
+let lit2 = `문자`;
+
+>> 이런 backtick으로 만든 문자의 장점은 다음과 같음.
+
+1. 문자열 내부에 엔터를 넣을 수 있다. 심지어 이 엔터가 실제 개행문자로 사용된다.
+
+2. 문자열 중간에 변수를 넣을 수 있다. let lit = `문자열 중간에 ${변수}를 넣을 수 있음`; // 기존 : Java처럼 '문자열' + 변수 + '문자열';
+
+1,2 의 장점을 가지고 JS로 HTML 템플릿을 짤 때
+
+let template = 
+`<div>
+    <div>${변수}</div>
+</div>`; 이런식으로 짤 수가 있다.
+
+
+3. tagged literal
+
+let name = 'chin';
+let intro = `안녕하세요 ${name}입니다.`;
+
+function func() {
+    return 10;
+}
+
+console.log(func`안녕하세요 ${name}입니다.`);
+
+tagged literal : es6에서는 함수 실행 시 함수명() 말고도 뒤에 backtick문자열을 붙여서 함수명`문자열`;로 실행가능
+
+이는 이런식으로 사용이 가능함 >> 단어 순서 변경, 단어 제거, 변수 위치 변경 등을 쉽게
+
+function analyze(params, vals1, vals2) {
+    console.log(params);
+    console.log(vals1);
+    console.log(vals2);
+}
+
+analyze.`안녕하세요 ${name}입니다. 나이는 ${age}입니다.`;
+
+>> 첫번째 파라미터는 변수를 기준으로 자른 문자열들을 배열로 저장
+>> 두번째 이상의 파라미터는 변수들을 저장 (변수가 3개면 2번째, 3번째, 4번째)
+
+function change(params, vals1, vals2, vals3) {
+    let temp = `${params[0] + params[2] + vals3}를 추가`;
+    console.log(temp);
+}
+changeWord`안녕하세요 ${name}입니다.${""}나이는 ${age}입니다.`;
+
+이렇게 변경을 시켜나갈 수 있다. (참고로 ${""} 빈거 할땐 이런식으로)
+
+이런식으로 단어들의 위치 변경 등을 처리하거나 
+
+let pants = 0;
+let socks = 100;
+
+function func(params, vals1, vals2) {
+    let tmp = params[0] + vals1 + params[1] + vals2;
+    if(vals1 === 0) {
+        tmp = params[0] + "다 팔림" + parmas[1] + vals[2];
+    }
+    console.log(tmp);
+}
+func`바지 ${pants} 양말 ${socks}`;
+
+이런 조건에 따른 문자열 변경들도 함수처리 됨
+
+참고로 위의 변수 파라미터를 한번에 적고 싶으면 하단에서 설명할 spread operator 사용
+
+function func(params, ...vals) {
+
+}
+
+===========================================================================================================================
+===========================================================================================================================
+
+spread operator : ... >> Array와 Object의 [], {}을 없앨 수 있음 (따라서 (), {}, [] 안에서만 사용이 가능하다. )
+
+var arr = ['hello', 'world'];
+
+console.log(...arr); 을 하면 console.log('hello', 'world');을 하는 것과 같은 결과가 나온다.
+
+만약 문자열에 spread operator를 쓴다면 각각의 문자로 쪼갠다. (아마 JS도 Java처럼 문자열의 구현이 문자의 배열처럼 되어있다. 엄밀히 Array는 아니지만. 참고로 JS에서는 아예 문자열[index]도 가능하다.)
+
+var text = 'hello';
+
+console.log(...text); 는 console.log('h', 'e', 'l', 'l', 'o');
+console.log(text[0]);
+
+spread operator의 사용법
+
+1. Array, Object의 deep copy 그리고 합치기
+
+var origin = [1,2,3]; 
+var copy = origin; 이러면 Java처럼 주소값을 복제하기에 같은걸 가리키는 swallow copy가 발생 JS에서도 Array. Object는 Reference Data Type
+
+Java는 deep copy를 하려고 귀찮은 세팅을 하거나 관련 메서드를 사용하지만,
+JS에는 es6부터 spread operator를 활용하여
+
+var origin = [1,2,3];
+var copy = [...origin]; 을 하면 한번 내부 요소들이 전부 풀린 뒤 다시 배열의[](or 오브젝트의{})로 감싸이기 때문에 새로운 배열과 Object로 deep copy가 일어난다.
+
+var a = [1,2,3];
+var b = [4,5,6];
+var c = [...a, ...b]; 이렇게 직관적이고 간편히 합치기 가능
+
+아님 var b = [...a, 4, ,5, 6];
+
+Object의 경우에도
+
+var origin = {name: 'chin', age: 29};
+var copy = {...origin};
+
+var a = {name: 'chin'};
+var b = {age: 29};
+var c = {...a, ...b}; 로 가능하다.
+
+아님 var b = {...a, age: 29}
+
++ Tip) 참고로 이렇게 Object의 복사나 합치는 과정에서 특정 key의 value를 변경하고자 한다면,
+예를 들어 위에서 name의 key를 합치거나 복사하는 중 고치고자 한다면 다음과 같이 하면 된다.
+
+c = {...a, ...b, name:'cho'}; 이러면 key는 식별자이기 때문에 해당 key의 value가 덧씌워진다. 뭐 c.key = 'cho'; 해도 되지만
+이렇게 JS의 오브젝트는 {} 내부에서 key가 중복될 때 가장 뒤의 key의 value로 덧씌워진다.
+
+이게 유용한건 key를 변수로 하여 할때,
+var key = 'name';
+c = {...a, ...b, [key]: 'cho'} 이런식도 가능한데 이건 c.[key] = 'cho'이런게 불가능하기에 편리하다.
+

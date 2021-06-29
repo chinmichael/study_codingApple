@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        'use strict';
+
+        function func1() {
+            for (var i = 0; i < 2;) {
+                console.log(`var i = ${++i}`);
+            }
+            console.log(`for밖의 var i = ${i}`);
+        }
+        func1();
+
+        function func2() {
+            for (let i = 0; i < 2;) {
+                console.log(`let i = ${++i}`);
+            }
+            //console.log(`for밖의 let i = ${i}`); // not defined error
+        }
+        func2();
+
+        const retest = 1;
+        // retest = 2; //error
+
+        const retest2 = { name: 'chin' };
+        retest2.name = 'cho';
+
+        Object.freeze(retest2);
+        // retest2.name = 'chin'; // error
+
+        function func3() {
+            console.log(num);
+
+            var num = 3;
+
+            console.log(num);
+        }
+        func3();
+
+        function func4() {
+            window.globalVar = 'global test';
+        }
+        console.log(window.globalVar);
+
+        func4();
+
+        console.log(window.globalVar);
+
+
+        ///////////////////////////////////////// Exercise
+
+        if (true) {
+            let a = 1;
+            var b = 2;
+
+            if (true) {
+                let b = 3;
+            }
+
+            console.log(b); // 2 >> let으로 선언된 변수 b의 유효범위는 2번째 if문이므로 
+        }
+
+        // func5(); // 함수도 호이스팅 되므로 아래 정의된 함수코드가 실행됨
+        // function func5() {
+        //     console.log(hi); // hi가 호이스팅 되지만 var와 달리 let과 const는 undefined 설정이 자동으로 되지 않는다. >> Java처럼 변수 초기화가 되어야 사용 가능
+        //     let hi = 'Hello';
+        // }
+
+        // func6();
+        // var func6 = function () {
+        //     console.log(hi);
+        //     var hi = 'Hello';
+        // }
+
+        let a = 1;
+        var func7 = function () {
+            a = 2;
+        }
+        console.log(a); // 1; 재할당을 하는 함수가 아직 실행이 되지 않았으므로
+
+        let bt = 1;
+        var ct = 2;
+        window.bt = 3;
+        window.ct = 4;
+
+        console.log(bt + ct); // 7; 전역에서 선언 할당이 이뤄졌으므로라고 생각하기 쉽지만 답은 5다.
+        // 전역 부분에서 선언한 var 변수는 실제 전역변수 window.변수와 동일하지만
+        // let, const는 전역에서 선언해도 사용은 전역처럼 되나 실제는 전역에서 선언된 지역변수이다. window.과 궤를 달리한다.
+        // 따라서 JAVA처럼 JS도 유효범위의 변수중 좀 더 작은 범위의 변수를 우선사용하므로 let bt가 쓰인다.
+
+        // for (var i = 1; i < 6; i++) {
+        //     setTimeout(function () { console.log(i); }, i * 1000);
+        // }
+        //이건 setTimeout이 비동기 함수로 내부 callback이 움직이기 때문에 병렬실행으로 인해 반복문이 먼저 돌아간다.
+        //이후 배정된 i 값들로 setTimeout이 돌아가야가야 하지만, var i의 유효범위는 for 밖으로 이어진다. 밀리초 값은 반복문때 배정된 i를 써도 내부 callback은 따라서 최종적으로 이미 반복이 돌아간 i = 6값으로
+        //이런 일정 시간마다 실행하는 케이스는
+
+        for (let i3 = 1; i3 < 6; i3++) {
+            setTimeout(function () { console.log(i3); }, i3 * 1000);
+        }
+
+        // 혹은 아래처럼 setInterval을 사용한다.
+
+        let i = 1; // 여기 지정이 되야 초기화가 매번 안 이뤄지지
+        const timer = setInterval(() => {
+            console.log(i);
+            i++;
+
+            if (i > 5) {
+                clearInterval(timer);
+                console.log('timeout');
+            }
+        }, 1000);
+
+
+
+    </script>
+
+    <div style="display : none">모달창0</div>
+    <div style="display : none">모달창1</div>
+    <div style="display : none">모달창2</div>
+
+    <button>버튼0</button>
+    <button>버튼1</button>
+    <button>버튼2</button>
+
+    <script>
+        var buttons = document.querySelectorAll('button');
+        var modals = document.querySelectorAll('div');
+
+        // for (var i2 = 0; i2 < 3; i2++) {
+        //     buttons[i2].addEventListener('click', function () {
+        //         modals[i2].style.display = 'block';
+        //     });
+        // }
+        // 위에서 문제상황은 for문 내의 변수타입이 var이므로 유효범위가 함수(여기서는 전역)이 된다.
+        // 마찬가지로 buttons[]의 인덱싱은 i2로 이뤄지지만 이벤트리스너의 콜백은 이벤트 실행시 실행된다.
+        // 그리고 var i2의 선언이 for문 밖으로 호이스팅되며 for문이 끝나도 3가 대입된 상태로 메모리에 유지되 이벤트가 일어날 때마다 이 공통된 i2 = 3를 참조하게 된다.
+
+
+        for (let i2 = 0; i2 < 3; i2++) {
+            console.log(i2);
+            buttons[i2].addEventListener('click', function () {
+                console.log(i2);
+                modals[i2].style.display = 'block';
+            });
+        }
+    </script>
+
+</body>
+
+</html>
