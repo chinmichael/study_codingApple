@@ -605,7 +605,7 @@ Java는 deep copy를 하려고 귀찮은 세팅을 하거나 관련 메서드를
 JS에는 es6부터 spread operator를 활용하여
 
 var origin = [1,2,3];
-var copy = [...origin]; 을 하면 한번 내부 요소들이 전부 풀린 뒤 다시 배열의[](or 오브젝트의{})로 감싸이기 때문에 새로운 배열과 Object로 deep copy가 일어난다.
+var copy = [...origin]; 을 하면 한번 내부 요소들이 전부 풀린 뒤 다시 배열의[](or 오브젝트의{})로 감싸이기 때문에 새로운 배열로 deep copy가 일어난다.
 
 var a = [1,2,3];
 var b = [4,5,6];
@@ -616,7 +616,7 @@ var c = [...a, ...b]; 이렇게 직관적이고 간편히 합치기 가능
 Object의 경우에도
 
 var origin = {name: 'chin', age: 29};
-var copy = {...origin};
+var copy = {...origin}; >> 근데 여기서는 swallow copy다 왜냐하면 object 내부의 object까지 재귀적으로 deep copy가 되지 않기 때문이다.
 
 var a = {name: 'chin'};
 var b = {age: 29};
@@ -634,3 +634,70 @@ c = {...a, ...b, name:'cho'}; 이러면 key는 식별자이기 때문에 해당 
 var key = 'name';
 c = {...a, ...b, [key]: 'cho'} 이런식도 가능한데 이건 c.[key] = 'cho'이런게 불가능하기에 편리하다.
 
+★☆★ 저번 spread operator할때 오브젝트 내에 변수로 특정 key에 변수를 지정할 때 {[key]: value}을 이야기했지만
+
+추가적으로 할당 이후에도 변수로 key를 지정할 수 있음
+기존 object.key = value; 였다면 key를 변수로 사용할 때는 Array처럼 object[key] = value;을 하면 됨. 물론 object['key'] = value;도 됨
+
+
+===========================================================================================================================
+
+2. 함수에 파라미터를 넣을 때도 사용 (여러 파라미터를 배열로 한번에 처리하게 될 때 or 배열 요소를 개별적으로 파라미터로 받아야할때)
+
+function funcSum(a,b,c) {
+    console.log(a+b+c);
+}
+
+funcSum(1,2,3);
+
+이런 상황에서 const arr = [1,2,3];을 하고
+
+funcSum(...arr);로 처리가 됨
+
+기존에는 만약 한다고 하면 가장 기본적으로 funcSum(arr[0],arr[1],arr[2])을 하거나
+apply() 함수 사용 : funcSum.apply(undefined, arr);
+
+
++ Tip) apply(), call() 함수 > 함수.apply(오브젝트, [파라미터]);
+
+const person = {
+    name: 'cho',
+    greeting: function() {
+        console.log(`Hello ${this.name}`);
+    },
+    buy: function(goods) {
+        console.log(`${this.name} buy ${goods}`);
+    }
+}
+
+person.greeting();
+
+const person2 = {
+    name: 'chin'
+}
+
+새로 만든 오브젝인 person2에서 person의 greeting 메서드를 사용하게 한다면? (직접 수정이 안되는 상황에서)
+
+person.greeting.apply(person2); >> 함수.apply(사용처); >> 사용처에 해당 함수를 사용하게 함.
+
+만약 파라미터가 있다고 하면 apply로 다른 요소에서 사용시 person.buy(goods) << 본래 함수에 적지 않고 person.buy.apply(person2, [goods]); apply()의 두번째 파라미터에 적는다.
+
+근데 여기 파라미터를 입력하는 것에서 call()과 차이가 나는데,
+apply는 여러 파라미터를 Array로 하여(Array만 됨) 한번에 두번째 파라미터로 넣는다면 call은 두번째부터 적어나가야 한다.
+
+person.greeting.call(person2);
+person.greeting.apply(person2);
+
+person.buy.call(person2, 'cake');
+person.buy.apply(person2, [cake]);
+
+
+이제 다시 위에서
+
+function funcSum(a,b,c) {
+    console.log(a+b+c);
+}
+
+var arr = [1,2,3];
+
+이걸 funcSum.apply(undefined, arr);로 하면 arr 배열을 파라미터로 함수를 적용하는데 적용 object가 undefined이므로 그냥 funcSum이 해당 배열 파라미터를 가지고 실행된다.
