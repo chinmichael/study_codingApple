@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let name1 = 'chin';
+        let name2 = name1;
+
+        name1 = 'cho';
+
+        console.log(name1);
+        console.log(name2);
+
+        let origin = { name: 'chin' };
+        let swallow = origin;
+
+        origin.name = 'cho';
+
+        console.log(origin.name);
+        console.log(swallow.name);
+
+        let obj1 = { name: 'chin' };
+        let obj2 = { name: 'chin' };
+        // obj1 != obj2
+        obj1.name = 'cho';
+        console.log(obj1.name);
+        console.log(obj2.name);
+
+        function objChange(obj) {
+            obj.name = 'park'; // 이경우는 파라미터로 받은 오브젝트의 주소로 찾아가 해당 키의 값을 바꾸는 것이므로 잘 됨
+        }
+        objChange(obj1);
+        console.log(obj1.name);
+
+        function objCannotChange(obj) {
+            obj = { name: 'kim' }; // 이 경우는 파라미터 변수에 새로운 오브젝트 주소를 재할당 한 것이므로 파라미터로 받아온 오브젝트는 이제 노 상관이 됨
+        }
+        objCannotChange(obj1);
+        console.log(obj1.name);
+
+        let originArr = [1, 2, { name: 'chin' }, ['a', 'b', 'c']];
+        let copyArr = [...originArr];
+
+        originArr[2].name = 'cho';
+        let tmpArr = originArr[3];
+        tmpArr[0] = 'e';
+
+        console.log(copyArr[2].name);
+        tmpArr = copyArr[3];
+        console.log(tmpArr[0]);
+
+        function create2DArray(row, column) {
+            let arr = new Array(row);
+            for (let i = 0; i < arr.length; i++) {
+                arr[i] = new Array(column);
+
+                let inner = arr[i];
+                for (let j = 0; j < inner.length; j++) {
+                    inner[j] = 0;
+                }
+            }
+
+            return arr;
+        }
+        const arr2D = create2DArray(3, 4);
+        console.log(arr2D);
+
+        const arr2D_2 = Array.from(new Array(3), e => e = new Array(4).fill(0));
+        console.log(arr2D_2);
+
+
+    </script>
+</body>
+
+</html>

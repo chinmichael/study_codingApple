@@ -616,13 +616,17 @@ var c = [...a, ...b]; 이렇게 직관적이고 간편히 합치기 가능
 Object의 경우에도
 
 var origin = {name: 'chin', age: 29};
-var copy = {...origin}; >> 근데 여기서는 swallow copy다 왜냐하면 object 내부의 object까지 재귀적으로 deep copy가 되지 않기 때문이다.
+var copy = {...origin};
 
 var a = {name: 'chin'};
 var b = {age: 29};
 var c = {...a, ...b}; 로 가능하다.
 
 아님 var b = {...a, age: 29}
+
+근데 정확히는 여기서는 deep copy지만,
+Object나 Array내부에 또 참조형가 있으면 swallow copy가 된다. 왜냐하면 object 내부의 object까지 재귀적으로 deep copy가 되지 않기 때문이다.
+즉 ...로 풀어져서 다시 묶인다해도 거기에 저장되는 요소는 주소값이기 때문에.
 
 + Tip) 참고로 이렇게 Object의 복사나 합치는 과정에서 특정 key의 value를 변경하고자 한다면,
 예를 들어 위에서 name의 key를 합치거나 복사하는 중 고치고자 한다면 다음과 같이 하면 된다.

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        function Person(name = 'hong', age = 24) {
+            this.name = name;
+            this.age = age;
+
+            this.school = 'university';
+            this.greeting = function () {
+                console.log(`Hi! I'm ${this.name}!`);
+            }
+        }
+
+        const person1 = new Person('chin', 29);
+        const person2 = new Person('cho', 25);
+        const person3 = new Person();
+
+        console.log(person1);
+        console.log(person2.name, person2.school);
+        person1.greeting();
+        person3.greeting();
+
+
+        function Product(name, price) {
+            this.name = name;
+            this.price = price;
+
+            this.tax = function () {
+                const tax = this.price / 10;
+                console.log(tax);
+                return tax;
+            }
+        }
+
+        const product1 = new Product('shirts', 50000);
+        const product2 = new Product('pants', 60000);
+
+        console.log(product1);
+        console.log(product2);
+        product1.tax();
+
+        Product.prototype.color = 'red';
+
+        const product3 = new Product('socks', 5000);
+        console.log(product1.color);
+        console.log(product3.color);
+
+        const product4 = new Product('ring', 500000);
+        product3.color = 'green';
+        console.log(product3.color);
+        console.log(product4.color);
+    </script>
+</body>
+
+</html>

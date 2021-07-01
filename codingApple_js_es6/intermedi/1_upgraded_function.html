@@ -97,18 +97,20 @@
         function charSort(char) {
             let arr = [...char];
             arr.sort();
+            // let char2 = arr.sort().join();
             console.log(...arr);
         }
         charSort('bear');
 
         function charCnt(char) {
-            let obj = {};
+            const obj = {};
             const arr = [...char];
             arr.sort();
 
             arr.forEach(e => {
-                if (obj[e] == null) {
+                if (obj[e] == null) { // 오브젝트 내에 암것도 없으면 null
                     obj[e] = 1;
+                    //console.log(e);
                 } else {
                     obj[e]++;
                 }
