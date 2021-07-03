@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        // es5 Object.create()
+
+        const parent = {
+            name: 'kim',
+            age: 50
+        }
+
+        const child = Object.create(parent);
+        child.age = 14;
+
+        console.log(child.name);
+        console.log(child.age);
+        console.log(parent.age);
+
+        const grandchild = Object.create(child);
+
+        console.log(grandchild.age);
+
+
+        // es6 class >> Java의 OOP 개발방식 생각하면서 하면 괜찮음
+        // 위에꺼는 그냥 prototype 지정 함수라면 (생성자조차 아님 이건 ㄹㅇ 클래스 제작)
+
+        class Parent {
+            constructor(name = 'Hong', age = 20) {
+                this.name = name;
+                this.age = age;
+
+                this.greeting = function () {
+                    console.log(`안녕 나는 ${this.name}라고 함`);
+                }
+            }
+
+            introduce() {
+                console.log(`이름 : ${this.name}`);
+            }
+        }
+
+        const par1 = new Parent();
+        const par2 = new Parent('kim', 30);
+
+        console.log(par1);
+        console.log(par2);
+
+        par1.greeting();
+        par2.introduce();
+
+        class Person {
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+
+            introduce() {
+                console.log(`이름 : ${this.name} 나이 : ${this.age}`);
+            }
+        }
+
+        class Student extends Person {
+            constructor(name, age, major) {
+                super(name, age); // 상속한 class의 생성자
+                this.major = major; // this는 super() 이후 지정 가능
+            }
+
+            introduce() {
+                console.log(`이름 : ${this.name} 나이 : ${this.age} 직업: 학생`); // 당연히 오버라이딩도 가능
+            }
+
+            study() {
+                super.introduce(); // 상속한 class, prototype 의미
+                console.log(`${this.name}는 ${this.major}를 공부한다.`);
+            }
+        }
+
+        const stu1 = new Student('cho', 21, 'art');
+        stu1.introduce();
+        stu1.study();
+
+
+        const he = {
+            name: 'Park',
+            getName: function () {
+                return this.name;
+            },
+            setName: function (name) {
+                if (typeof name == "string") {
+                    this.name = name;
+                } else {
+                    this.name = 'default';
+                }
+            }
+        }
+
+        console.log(he.getName());
+        he.setName('Seo');
+        console.log(he.getName());
+        he.setName(123);
+        console.log(he.getName());
+
+        class Developer extends Person {
+            constructor(name, age) {
+                super(name, age);
+                this.skill = [];
+            }
+            set addSkill(skill) {
+                if (Array.isArray(skill)) {
+                    // skill.forEach(e => {
+                    //     this.skill.push(e);
+                    // });
+                    this.skill = [...this.skill, ...skill];
+                } else {
+                    console.log('skill을 배열로 입력해주세요')
+                }
+            }
+            get getSkill() {
+                return `이 사람의 스킬은 ${this.skill.toString()}입니다.`;
+            }
+        }
+
+        const dev = new Developer('kim', 35);
+        dev.addSkill = ['Javascript', 'HTML/CSS', 'React', 'Vue'];
+        dev.addSkill = ['Springboot', 'Java']
+        dev.addSkill = 1;
+        console.log(dev.getSkill);
+
+
+        ////////////////////////////////////////////////////////////////// Exercise
+
+        // 1.
+
+        class Animal {
+            constructor(type, color) {
+                this.type = type;
+                this.color = color;
+            }
+
+            addAge() {
+                if (typeof this.age == 'undefined') {
+                    console.log('강아지 객체에는 나이항목을 만들어야 함')
+                } else {
+                    this.age++;
+                }
+            }
+        }
+
+        class Dog extends Animal {
+            constructor(type, color) {
+                super(type, color);
+            }
+        }
+
+        class Cat extends Animal {
+            constructor(type, color, age) {
+                super(type, color);
+                this.age = age;
+            }
+        }
+
+        const dog = new Dog('말티즈', '브라운');
+        const cat = new Cat('브숏', '크림베이지', 1);
+
+        dog.addAge();
+        cat.addAge();
+        console.log(cat.age);
+
+
+        class Unit {
+            constructor(ap = 5, hp = 100) {
+                if (typeof ap == 'number' && typeof hp == 'number') {
+                    this.ap = ap;
+                    this.hp = hp;
+                } else {
+                    this.ap = 5;
+                    this.hp = 100;
+                    console.log('Unit ap와 hp는 Number로 지정');
+                }
+            }
+
+            get battlePoint() {
+                return this.ap + this.hp;
+            }
+
+            set heal(heal) {
+                if (typeof heal == 'number') {
+                    this.hp += heal;
+                } else {
+                    console.log('힐 수치는 Number로 입력하시오');
+                }
+            }
+        }
+
+        const unit1 = new Unit(10, 200);
+        const unit2 = new Unit();
+
+        console.log(unit1.battlePoint);
+        console.log(unit2.battlePoint);
+
+        unit1.heal = 50;
+        console.log(unit1.battlePoint);
+
+
+        var data = {
+            odd: [],
+            even: [],
+
+            setter(...rest) {
+                rest.forEach(e => { // 여기서 arrow function을 써야 메서드가 가리키는 인스턴스임을 그대로 지정함
+                    if (typeof e == 'number') {
+                        if (e % 2 === 0) {
+                            this.even.push(e);
+                        } else {
+                            this.odd.push(e);
+                        }
+                    }
+                });
+            },
+
+            get getter() {
+                return `odd : ${this.odd.sort((a, b) => { // 주의 JS 정렬은 기본이 문자정렬이다.
+                    return b - a;
+                }).toString()} & even : ${this.even.sort((a, b) => {
+                    return b - a;
+                }).toString()}`;
+            }
+        }
+
+        data.setter(1, 2, 3, 4, 5, 6);
+        console.log(data.getter);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        const arr = [1, 2, 3, 4, 5];
+        const [a, b, c] = arr;
+
+        const arr2 = [6, 7];
+        const [e, f, g = 10] = arr2;
+
+        console.log(a, e, g);
+
+        const obj = {
+            name: 'chin',
+            age: 29,
+            greeting: function () {
+                console.log('hi!');
+            }
+        }
+
+        const { name, age = 30, greeting: sayHi } = obj;
+        sayHi();
+        console.log(name);
+
+
+        function func({ name, age }) {
+            console.log(name, age);
+        }
+        func(obj);
+
+        // Exercise
+
+        let info = {
+            body: {
+                height: 190,
+                weight: 70
+            },
+            size: ['상의 L', '바지 30']
+        }
+
+        const { height, weight } = info.body;
+        const [shirts, pants] = info.size;
+
+        /*  한번에 처리하는 방법
+
+        const {
+            body: {
+                height, weight
+            },
+            size: [shirts, pants]
+        } = info;
+
+        */
+
+        console.log(height, weight, shirts, pants);
+    </script>
+</body>
+
+</html>
