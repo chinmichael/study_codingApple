@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script type='module'>
+//        import a from './2_export.js'
+//
+//        console.log(a);
+//        console.log(a.ex2);
+        
+//        import {ex1, ex2, exObj as obj} from './2_export.js'
+//        console.log(ex1);
+//        console.log(ex2);
+//        console.log(obj.ex1);
+        
+        import a, * as all from './2_export.js';
+        console.log(a);
+        console.log(all.ex1);
+    </script>
+</body>
+
+</html>
