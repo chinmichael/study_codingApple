@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <img id='test' src='https://codingapple1.github.io/kona.jpg'>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+
+        const promise1 = new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                const result = 1 + 1;
+                resolve(result);
+                // const err = '에러';
+                // reject(err);
+            }, 2000);
+        });
+
+        console.log(promise1);
+
+        promise1.then(function (e) {
+            console.log('성공', e);
+            console.log(promise1);
+        }).catch(function (err) {
+            console.error('실패', err);
+        }).finally(function () {
+            console.log('finally');
+        });
+
+        /////////////////////////////////////////////////// Exercise
+
+        const exPromise1 = new Promise(function (resolve, reject) {
+            const img = document.getElementById('test');
+
+            img.addEventListener('load', function () {
+                resolve();
+            });
+            img.addEventListener('error', function () {
+                reject();
+            });
+        });
+
+        exPromise1.then(() => {
+            console.log('성공');
+        }).catch(() => {
+            console.error('실패');
+        });
+
+        fetch('https://codingapple1.github.io/hello.txt')
+            //.then(res => res.json()) // 이거 문제 터지는게 저 파일은 JSON 형태의 데이터가 아니다
+            .then(resJson => {
+                console.log(resJson)
+            })
+            .catch(_ => console.error('fail'));
+
+        $.get('https://codingapple1.github.io/hello.txt').done(function (response) {
+            console.log(response);
+        });
+        $.ajax({
+            type: 'GET',
+            url: 'https://codingapple1.github.io/hello.txt'
+        }).done(function (response) {
+            console.log(response);
+        });
+
+        // Promise를 굳이 생성하여 GET요청 해보기
+
+        const exPromise2 = new Promise((resolve, reject) => {
+            $.get('https://codingapple1.github.io/hello.txt')
+                .done((res) => { resolve(res); });
+        });
+
+        const exPromise3 = new Promise((resolve, reject) => {
+            $.ajax({
+                type: 'GET',
+                url: 'https://codingapple1.github.io/hello2.txt'
+            }).done((res) => {
+                resolve(res);
+            })
+        });
+
+        exPromise2.then(res => {
+            console.log(res + "1번째");
+            return exPromise3
+        }).then(res => {
+            console.log(res + "2번째");
+        });
+
+
+
+    </script>
+</body>
+
+</html>

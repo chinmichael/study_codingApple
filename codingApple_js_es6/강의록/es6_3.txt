@@ -302,3 +302,360 @@ first(()=>{
 뭐 Java같은 것만 해도
 메서드.메서드.메서드 이렇게 하면 우측부터 스택에서 반환값을 받아 순차 실행되는데
 이런것들이 잘 안먹힐 때가 있는 JS에서 고육지책으로 하는것도 콜백이긴 하다. 그래서 좀 더 직관적으로 사용하기 위한 것이 Promise
+
+
+
+=========================================================================================================================
+=========================================================================================================================
+
+
+5. Promise >> 디자인패턴
+
+const 변수 = new Promise();
+
+변수.then(function(){
+
+}).then(function(){ 
+
+}); // Promise가 성공했을때 실행되는 코드 >> 콜백함수보다 기능적으로 좀 더 다양
+
+>> then으로 순차 실행될 코드를 좀 더 직관적으로 이어갈 수 있음
+
+>> catch함수로 promise 실행이 실패할 경우 실행할 코드를 입력 가능
+
+>> finally함수로 무조건 실행할 코드도 지정 가능
+
+>> 머 이거 완죤 무슨 예외인지 지정하는 것만 아니지 콜백함수 + 자바의 예외처리 임
+
+변수.then(fucntion(){
+
+}).catch(function(){
+
+}).finally(function(){
+
+});
+
+
+>> 그리고 결국 판단조건이 되는 Promise는 성공/실패 판정을 위한 객체라고 볼 수 있다.
+
+const promise = new Promise(function(resolve, reject) {
+    resolve(result); // 첫번째 파라미터 함수 실행시 성공판정 >> then, 마지막으로 finally 실행
+    reject(err); // 두번째 파라미터 함수 실행시 실패판정 >> catch, finally 실행
+
+    >> 참고로 resolve 혹은 reject 함수에서 끝나기 때문에 둘을 동시에 실행시키는건 안됨 (위에서처럼 resolve가 먼저 나옴 then과 finally만 실행되고 catch는 실행되지 않는다.)
+});
+
+promise.then(function(res){
+    console.log(res); // resolve에 담긴 result를 전달받아 사용할 수 있다.
+}).catch(err=>{
+    console.error('',err); // reject의 담긴 파라미터를 사용 가능
+})
+
+>> 보통 비동기함수들, 어려운 연산들이 끝난 뒤 특정 코드를 실행하고 싶을때 사용한다.
+
+
+Promise의 특징
+: 당근 일종의 Object
+
+: Promise의 3가지 상태 : pending>판정대기 resolved>성공 reject>실패 (성공이나 실패에서 다른 상태로 되돌리순 없음)
+
+
+
+>> Promise가 적용된 것들
+ex jQuery의 $.ajax.done(callback).fail(callback)
+ex 바닐라의 fetch() >> 항상 Promise를 리턴 >> fetch().then().catch() 사용 가능
+
+
+Ex Tip)
+
+<img> 등이 로드 되었는지 확인할 때는 이벤트리스너를 load와 error를 붙여 체크가 가능하다.
+
+
+fetch() 기본 사용법 >> fetch는 기본 반환이 Promise다
+
+default인 GET 메서드일때
+
+fetch('경로')
+    .then(res => res.json()) // axios가 알아서 해주던 것 | 정확히는 res => {return res.json()}을 해줘야하나 {return }은 생략이 가능하다
+    .then(resJson => {
+        // data를 받은 후의 로직
+    });
+
+이때 중요한 것은 res.json() >> res의 body는 스트림이고 동시에 문자열로 받아와짐
+>> res객체의 json() 메서드를 사용함으로서 res(response)의 스트림 완료까지 읽은 후 body(다른 데이터들 말고 body만)의 텍스트를 'Promsie객체(object)'로 반환한다.
+>> 또 중요한건 저건 JSON 형태의 객체 데이터에만 따려오는 메서드이므로 그 외 데이터타입에서는 사용 못한다.
+
+GET외의 메서드의 경우(예시 POST)
+
+fetch('경로', {
+    method: 'post',
+    body: JSON.stringify()
+})
+.then(res => res.json())
+.then(resJson => {
+    // 결과 (resJson.succss 변수에 결과를 담는다던가...)
+});
+
+JSON.stringify(value, replacer, space) // 보통 value만 넣게됨
+
+>> value는 JSON문자열(통신은 문자열로 되므로)로 변환할 값들 (보통 Object형으로 보낸다)
+>> space는 가독성을 위한 공백 (문자열을 입력하거나 숫자로 공백크기를 결정)
+
+>> replacer는 stringify의 문자열화 프로세스를 커스텀하는 함수이다. 다음과 같이 지정이 된다.
+function replacer(key, value) {
+    if(typeof value === 'string') {
+        return undefined;
+    }
+    return value;
+}
+
+JSON.stringify({name:'chin', age: 29}, replacer); 로 하면 replacer가 문자열이 아닌 value만 스트링으로 반환하는 것으로 바뀌었으므로 반환이 {"age":29}만 남는다.
+
+
+fetch는 여러모로 .json()이 통하는 JSON 이외에는 잘 안먹힐 수 있기에
+react때 배운 axios를 쓰거나
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> jQuer의 ajax 함수를 사용
+
+GET요청의 경우
+
+$.get('경로').done(function(res){}).fail(function(err){});
+
+$.ajax({
+    type: 'GET',
+    url: '경로'
+}).done(function(res){
+
+}).fail(function(err){
+
+});
+
+
+Ex Tip2)
+
+then()을 여러개 붙이려면 >> then은 Promise에만 붙일 수 있으므로
+
+promise1.then(()=>{}).then()을 하기 위해서는
+promise1.then(()=>{return promise2}).then()으로 return 타입이 Promise이 되게 처리를 하여 then()을 이어갈 수 있따.
+
+
+
+=========================================================================================================================
+=========================================================================================================================
+
+5 + ) async / await (2017년 이후 es8문법)
+
+Promise >> 순차실행을(그렇다고 비동기처리를 해주거나 하는건 절대 아님) 위해(+성공 실패 판가름) 콜백함수 대신 사용하는 코딩 패턴
+
+function sumFunc(callback) {
+    1 + 1;
+    callback();
+}
+
+sumFunc(callback); 혹은
+
+const sumFunc = new Promise((resovle,reject)=>{});
+sumFunc.then();
+
+>> 이렇게 사용하지 않고 async keyword 사용
+
+async function sumFunc(){
+    return 1 + 1;
+}
+
+sumFunc().then()
+
+을 하면 Promise로 다시 만들지 않아도 자체적으로 function의 반환값으로 Promise가 남는다.
+>> Promise를 디자인하지 않아도 판별문제가 아닌(성공판정만 가능하기에) 순차실행 디자인을 위한 Promise 사용은 가능하다
+
+>> 참고로 return 값이 resolve()에 파라미터로 넘어가는 결과값이 되며
+>> 주의할 점으로 Promise가 아니기에 sumFunc() >> ()을 붙여 실행을 처리해야함
+
+>> 사실 만약 async function에서 실패판정을 내리려면
+
+async function func() {
+    if(~) {
+        return result;
+    } else {
+        return Promise.reject('실패메시지');
+    }
+}
+
+>> 이렇게 실패 판정을 보낼수는 있지만... 정확히는 catch()로 받는게 아닌 아예 저 시점에서 실패판정과 메시지를 보내고 종료된다.
+
+
+await 키워드는 async내부에서 사용됨
+
+async function func() {
+
+    const promise = new Promise((resolve, reject)=>{
+        if(~) {
+            resolve(result);
+        } else {
+            reject(err);
+        }
+    });
+
+    promise.then((res)=>{
+        console.log('success', res);
+    }).catch((err)=>{
+        console.error(err)
+    });
+}
+
+이런 async function 내부에도 Promise 생성 및 실행이 있을 경우
+
+async function func() {
+
+    const promise = new Promise((resolve, reject) => {
+        if(true) {
+            resolve(res);
+        } else {
+            reject(error);
+        }
+    });
+
+    const result = await promise;
+
+    console.log(result);
+}
+
+await 키워드는 해당 promise가 해결될 때까지 말그대로 대기하란 소리임 >> 다른 비동기, 동기로 꼬이는 상황에서 유용함
+
+다음과 같은 상황에서
+
+async function func() {
+
+    const promise = new Promise((resolve, reject) => {
+        setTimeout(()=>{
+            console.log('a');
+            resolve();
+        }, 1000);
+
+        console.log('b');
+    });
+
+    //const result = promise;
+    const result = await promise; // 참고로 이 자리에 반환되는 값은 resolve() 함수의 파라미터 값이다.
+    console.log('c');
+}
+
+func().then(()=>{console.log('d')});
+
+를 하면 기존처리에선 비동기함수의 setTimeout의 콜백함수 결과가 Web API > Queue를 거쳐 빈 Stack으로 오는 처리에 따라 로그에는 b > c > d > a가 떴겠지만
+(심지어 Promise나 callback이나 순서만 지정되는 것이고 위에서 func()의 then은 내부 promise의 resolve에서 끝나는게 아니라 func()자체 Promise 결과에서 then이기에 무조건 c 뒤에만 가면 되므로 a보다 앞선다)
+
+const result = await promise; 로 await 키워드를 붙이면 해당 promise가 끝날때까지 대기하게 되고,
+내부 promise의 resolve는 setTimeout의 콜백함수 내부 코드에 있으므로 b > a > c > d 의 순서를 갖는다
+
+
+추가적을 await의 경우 해당 내부 promise에 reject() 함수 결과를 갖게 되는 경우 에러가 발생함과 동시에 프로그램 '실행이 멈춘다'
+>> Java에서 이런 예외 상황을 피하기 위해 쓰는 try-catch를 여기서도 JS try-catch 구문을 사용한다.
+
+async function func() {
+
+    const promise = new Promise((resolve, reject) => {
+        setTimeout(()=>{
+            reject();
+        }, 1000);
+    });
+
+    try {
+        const result = await promise;
+        console.log('정상실행')
+    } catch { // ()에 Exception이 무엇인지 입력하는 자바와 달리 바로 catch {}
+        console.log('에러발생')
+    }
+}
+
+func().then(()=>{console.log('중간에 안 멈춤')});
+
+try-catch를 쓰지 않는다면 reject() 부분부터 오류발생으로 실행이 멈추기에 '정상실행'이 로그에 뜨긴 커녕 '중간에 안 멈춤'로그도 뜨지 않는다.
+
+
+
+=========================================================================================================================
+=========================================================================================================================
+
+반복문 : 코드 반복 실행 or Array Object 등 자료형에서 요소를 뽑아쓸때
+
+JS의 반복문  
+
+기본 사용법 Java랑 유사
+
+Java for
+
+for(초기화;조건;증감) {
+
+};
+
+for(요소 : 컬렉션) {
+
+};
+
+JS의 경우
+
+for(초기호; 조건; 증감) {
+
+};
+
+for(let key in 오브젝트) {
+
+}; // for in 반복문 >> Object만 가능
+
+const obj = {name:'chin', age:29};
+for(let key in obj) {
+    console.log(obj[key]);
+}
+
+obj 요소 뽑는 방법 obj.key or obj['key']
+
+배열.forEach(callback); // Array만 가능
+
+
+
+
+
+기존 for in 반복문은 Object... 정확히는 enumerable한 자료형만 반복할 수 있다.
+
+enumerable : 
+Object에는 Object.getOwnPropertyDescriptor(오브젝트명, 'key'); 로 해당 Object의 속성의 정보를 보면
+value 외에도 writable(재작성 가능), enumerable((반복문 등에서)셀 수 있는가), configuralbe 속성이 같이 있음을 볼 수 있다 (Object 자료형이 비교적 무거운 이유)
+
+왠만한 Object의 내부 데이터 자료형들은 enumerable로 저장됨 (바꾸려면 해당 JS내장함수가 있다)
+
+class Parent {
+
+}
+
+Parent.prototype.name = 'Park';
+
+const parent = new Parent();
+
+for in의 경우는 이런 상위의 prototpye도 출력됨 따라서 부모의 prototype을 제외하려면
+for(let key in obj) {
+    if(obj.hasOwnProperty(key)) { // 이렇게 검사를 해줘야함
+        console.log(obj[key]);
+    }
+} 
+
+
+신문법 : for of 반복문 (iterable 반복)
+
+iterable 자료형 : Array, Set, Map, String, arguments(얘는 Array가 아녔짘), NodeList 이런 반복 데이터 타입
+
+>> Java의 컬렉션 프레임워크처럼 JS의 해당 자료형들도
+
+arr[Symbol.iterator]();
+str[Symbol.iterator](); 를 출력해보면 해당 자료형에 iterator(반복자)가 심어져 있음을 알 수 있다. iterator.next() 이런것도 다 먹히는거지 (그래서 공통적인 요소를 뽑는 패턴을 만들수 있는거고)
+
+>> 쉽게말해 Java의 향상된 for문에 해당하는 문법이 JS의 for of 반복문이다.
+
+const arr = [1,2,3,4,5];
+
+for(let element of arr) {
+    console.log(element);
+}
+
+
+추가적으로 document.getElementsByClassName() 이나 document.querySeletorAll() 은 배열과 비슷한 형태로 선택이 가능 >> [] 의 각 요소에 HTML요소가 들어감 >> 이게 바로 NodeList
