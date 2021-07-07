@@ -577,7 +577,7 @@ try-catch를 쓰지 않는다면 reject() 부분부터 오류발생으로 실행
 =========================================================================================================================
 =========================================================================================================================
 
-반복문 : 코드 반복 실행 or Array Object 등 자료형에서 요소를 뽑아쓸때
+6. 반복문 : 코드 반복 실행 or Array Object 등 자료형에서 요소를 뽑아쓸때
 
 JS의 반복문  
 
@@ -659,3 +659,151 @@ for(let element of arr) {
 
 
 추가적으로 document.getElementsByClassName() 이나 document.querySeletorAll() 은 배열과 비슷한 형태로 선택이 가능 >> [] 의 각 요소에 HTML요소가 들어감 >> 이게 바로 NodeList
+
+
+=========================================================================================================================
+=========================================================================================================================
+
+
+7. Symbol 자료형 >> es6부터 생긴 데이터 타입
+
+생성은 간단
+const symbol = Symbol('설명');
+
+Object의 비공개 key로 쓰일 수 있음
+
+const person = {name: 'chin'};
+
+예를들어 여기서 person 오브젝트에서 weight 항목의 접근을 제한할 때 (반복문 등으로 쉽게 추출이 불가능하게)
+
+const weight = Symbol('몸무게');
+
+원래 JS Object의 key는 문자열만 되었지만 es6부터는 Symbol도 가능해짐에 따라
+
+person.weight = 60; 이건 문자열 key를 지정해 주는 것이고, 변수의 key로 저장혀려면
+
+person[weight] = 60; 이렇게 저장한다.
+
+즉 object[symbol] = value;로 저장 물론 기존처럼 오브젝트 지정시 obj = {[symbol]: value}도 된다.
+
+이런 symbol로 저장된 요소들은 반복문으로 추출이 되지 않는다(enumerable하지 않음). Object.getOwnPropertyDescriptor(obj[key]); 로도 추출이 불가능함
+
+
+
+++ 또한 import한 파일 / 라이브러리 사용시 해당 파일 내부 Object에 수정을 가할 때 영향을 최소화 하는데에 Symbol이 유용하다.
+
+
+++ 심볼 특징
+
+1) 생성 파라미터 내부 설명(주석)부가 같다고 같은 Symbol이 아니다. >> 즉 모든 Symbol은 unique함
+
+const a = Symbol('1'); const b = Symbol('2'); a != b; 당빠 머 당연한 소릴...
+
+
+2) 전역 Symbol 생성 >> Symbol.for()로 생성
+
+const symbol = Symbol.for('설명');
+
+const a = Symbol.for('설명'); >> 이 경우는 설명이 같으면 같은 Symbol를 가리킨다 즉 symbol == a 가 된다.
+
+
+3) 기본 내장 Symbol
+
+iterable 자료형들에 내장
+
+const arr = [];
+
+arr[Symbol.iterator]; >> obj[symbol]처럼 저장된 해당 자료형 객체에 있는 기본 Symbol
+iterable 자료형들은 각 iterator가 심볼로 저장되어 있다.
+
+
+>> 개인적으로 간단하게 생각해서 구현해본 iterable의 iterator 추출 (이건 자바 컬렉션 프레임워크의 iterator 패턴 구현이 더 잘된듯... hasNext 덕에..)
+
+const arr = [1,2,3,4,5];
+
+const iterator = arr[Symbol.iterator](); // 이걸 하면 iterator(); 메서드가 저장
+
+console.log(iterator); // 이를 하면 Array의 iterator가 저장된걸 확인할 수 있다. Array의 프로토타입으로 저장된 iterator의 next 함수 확인
+
+// console.log(iterator.next()); // 이를 하면 자바처럼 이동 및 추출을 하면서 여기서는 오브젝트로 value와 done 값이 남는걸 확인할 수 있다.
+
+for(;;) { //무한 반복문은 for문 기준 자바처럼 구현 가능
+
+    let next = iterator.next().value; // next()의 반환값이 Object고 value key의 값을 추출하므로
+
+    if(typeof next != 'undefined') { // 추출할 것이 끝나면 iterator.next()가 null을 반환하는 것이 아닌 내부 value key의 값이 undefined인 오브젝트를 계속 추출함
+        console.log
+    } else {
+        break;
+    }
+}
+
+주의할 점은 Java처럼 hasNext()가 있는 것도 아니고, iterator.next()가 추출을 끝내도 계속 undefined value로 무한히 Object를 뽑아내기에 typeof로 체크를 잘 해줘야함.
+
+
+
+=========================================================================================================================
+=========================================================================================================================
+
+
+8. Map Set
+
+1) Map
+
+Map은 Java처럼 JS도 key:value의 데이터타입. 오브젝트와 매우 유사
+
+const person = new Map();
+
+person.set('key', 'value'); 이렇게 저장 (진짜 Java랑 거의 유사하다)
+
+만약 직접 지정을 하는 경우는
+
+const map = new Map([
+    ['name','chin'],
+    ['age', 29]
+]);
+
+이렇게 {}가 아닌 []을 이용
+
+이게 진짜 해시테이블 구조로 만들어지는 데이터타입 >> 따라서 key => value의 '''''연관성'''''(중요 key:value 라기 보다는 Mapping의 의미)으로 표현된다.
+
+참고로 Object는 key에 문자열, Symbol만 가능하지만 / Map은 key-value를 매핑하는 것이므로 key에 온갖 데이터 타입이 전부 가능하다
+arr = [1,2,3];
+person.set(arr, [3,4,5]); // 물론 참조변수로 엮기에 get, delete등에서 사용하기 위해서는 key가 문자열이 아닌 참조형들일 경우 당근 변수로 저장하고 써야한다.
+
+
+사용도 Java처럼 person.get(key); 로 꺼낼 수 있다. (만약 value삭제의 경우 person.delete(key) / 자료개수 반환은 person.size)
+
+
+Java와 달리 JS는 이미 Object가 있고 잘 사용하기에 (Java에선 보통 JSON 보내기를 할때 HashMap을 쓰게 되지) 보통 자료간 연관성, 매핑 연산을 위해 사용
+
+iterable이기에 반복문은 for of를 사용 for(let key of person.keys()) {} 혹은 for(let value of person.values()) // 그냥도 되지만 keys()를 해서 반환받은 key값들이나 values()로 반환받은 value들을 뽑아냄
+
+
+=========================================================================================================================
+
+2) Set : Java처럼 마찬가지 얘도 / Array(자바에선 List)와 유사하나 얘들은 값의 중복을 허용하지 않음
+
+const arr = [1,1,2,2,3,4]; 이렇게 순서가 있는대신(index) 중복값 허용하는 반면
+
+const set = new Set([1,1,2,2,3,4]); 로 초기화 하는 경우
+
+중복값이 제거된 상태로 {} 안에 저장한다.
+
+대신 이렇게 Set은 정확히는 배열과 다르기에 Java의 List와 다른것처럼 JS의 Set도 데이터관리가 다르다.
+
+set.add(data); 데이터 추가 (중복값은 안들어감)
+set.delete(data); 데이터 삭제
+
+set.has(data); 해당 값이 있는지 bool 반환
+set.size; 중복값이 제거된 자료 개수
+
+Array > Set > Array 이런식으로 중복 제거등에 탁월
+
+const arr = [1,1,2,3,4];
+const set = new Set(arr); 로 이렇게 한다쳐도 그럼 다시 arr전환은? >> spread 사용
+
+const arr2 = [...set];
+
+
+Set도 iterable이기에 iterator사용이나 for of는 Array와 똑같이 적용하면된다. (forEach도 먹힌다.)

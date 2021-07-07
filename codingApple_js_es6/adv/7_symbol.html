@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const weight = Symbol('몸무게');
+        const height = Symbol('키');
+
+        const person = { name: 'chin', [height]: 175 };
+
+        //person.weight = 60;
+        person[weight] = 60;
+        console.log(person);
+
+        console.log(Object.getOwnPropertyDescriptor(person[weight]));
+
+        for (key in person) {
+            console.log(person[key]);
+        }
+
+        const a = Symbol('1');
+        const b = Symbol('1');
+
+        const c = Symbol.for('2');
+        const d = Symbol.for('2');
+
+        console.log(a === b);
+        console.log(c === d);
+
+        const arr = [1, 2, 3, 4, 5, 6, 7, 8];
+        const iterator = arr[Symbol.iterator]();
+        console.log(iterator);
+
+        for (; ;) {
+            let next = iterator.next().value;
+            if (typeof next != 'undefined') {
+                console.log(next);
+            } else {
+                break;
+            }
+        }
+
+    </script>
+</body>
+
+</html>
